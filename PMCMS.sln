@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29728.190
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PMCMS.PL", "PMCMS.PL\PMCMS.PL.csproj", "{136824D9-2196-4432-A555-319CA10931AA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PMCMS.BLL", "PMCMS.BLL\PMCMS.BLL.csproj", "{0C3CEB2C-9DB3-4B81-8901-3AD298282F1F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PMCMS.BSL", "PMCMS.BSL\PMCMS.BSL.csproj", "{BB0FD302-2A10-41FD-9D0D-5D9F5E908AF3}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{136824D9-2196-4432-A555-319CA10931AA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{136824D9-2196-4432-A555-319CA10931AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{136824D9-2196-4432-A555-319CA10931AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{136824D9-2196-4432-A555-319CA10931AA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0C3CEB2C-9DB3-4B81-8901-3AD298282F1F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0C3CEB2C-9DB3-4B81-8901-3AD298282F1F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0C3CEB2C-9DB3-4B81-8901-3AD298282F1F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0C3CEB2C-9DB3-4B81-8901-3AD298282F1F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BB0FD302-2A10-41FD-9D0D-5D9F5E908AF3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BB0FD302-2A10-41FD-9D0D-5D9F5E908AF3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BB0FD302-2A10-41FD-9D0D-5D9F5E908AF3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BB0FD302-2A10-41FD-9D0D-5D9F5E908AF3}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {055CAE66-2B1C-4434-890B-736AFE6E7C66}
+	EndGlobalSection
+EndGlobal
