@@ -18,5 +18,9 @@ namespace PMCMS.PL.Controllers
         {
             return View();
         }
+        public ActionResult NotFound()
+        {
+            return View();
+        }
     }
 }
