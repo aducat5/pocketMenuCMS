@@ -277,6 +277,10 @@ button.bg-warning:focus {
     background-color: #d92550 !important;
 }
 
+.bg-appcolor {
+    background-color: #FF5733 !important;
+}
+
 a.bg-danger:hover,
 a.bg-danger:focus,
 button.bg-danger:hover,
@@ -3131,6 +3135,43 @@ fieldset:disabled a.btn {
             box-shadow: 0 0 0 0 rgba(223, 70, 106, 0.5);
         }
 
+.btn-appcolor {
+    color: #fff;
+    background-color: #FF5733;
+    border-color: #FF5733;
+}
+
+    .btn-appcolor:hover {
+        color: #fff;
+        background-color: #FF5733;
+        border-color: #ad1e40;
+    }
+
+    .btn-appcolor:focus,
+    .btn-appcolor.focus {
+        box-shadow: 0 0 0 0 rgba(223, 70, 106, 0.5);
+    }
+
+    .btn-appcolor.disabled,
+    .btn-appcolor:disabled {
+        color: #fff;
+        background-color: #FF5733;
+        border-color: #FF5733;
+    }
+
+    .btn-appcolor:not(:disabled):not(.disabled):active,
+    .btn-appcolor:not(:disabled):not(.disabled).active,
+    .show > .btn-appcolor.dropdown-toggle {
+        color: #fff;
+        background-color: #FF5733;
+        border-color: #a31c3c;
+    }
+
+        .btn-appcolor:not(:disabled):not(.disabled):active:focus,
+        .btn-appcolor:not(:disabled):not(.disabled).active:focus,
+        .show > .btn-appcolor.dropdown-toggle:focus {
+            box-shadow: 0 0 0 0 rgba(223, 70, 106, 0.5);
+        }
 .btn-light {
     color: #212529;
     background-color: #eee;
@@ -11335,7 +11376,7 @@ button,
     font-size: 0.8rem;
     margin: 0.75rem 0;
     font-weight: bold;
-    color: #3f6ad8;
+    color: #FF5733;
     white-space: nowrap;
     position: relative;
 }
@@ -15638,6 +15679,57 @@ body {
         }
 
         .btn-outline-danger.btn-shadow:hover {
+            box-shadow: 0px 5px 15px 2px rgba(217, 37, 80, 0.19);
+        }
+
+.btn-outline-appcolor {
+    color: #FF5733;
+    border-color: #FF5733;
+}
+
+    .btn-outline-appcolor:hover {
+        color: #fff;
+        background-color: #FF5733;
+        border-color: #FF5733;
+    }
+
+    .btn-outline-appcolor:focus,
+    .btn-outline-appcolor.focus {
+        box-shadow: 0 0 0 0 rgba(217, 37, 80, 0.5);
+    }
+
+    .btn-outline-appcolor.disabled,
+    .btn-outline-appcolor:disabled {
+        color: #d92550;
+        background-color: transparent;
+    }
+
+    .btn-outline-appcolor:not(:disabled):not(.disabled):active,
+    .btn-outline-appcolor:not(:disabled):not(.disabled).active,
+    .show > .btn-outline-appcolor.dropdown-toggle {
+        color: #fff;
+        background-color: #FF5733;
+        border-color: #FF5733;
+    }
+
+        .btn-outline-appcolor:not(:disabled):not(.disabled):active:focus,
+        .btn-outline-appcolor:not(:disabled):not(.disabled).active:focus,
+        .show > .btn-outline-appcolor.dropdown-toggle:focus {
+            box-shadow: 0 0 0 0 rgba(217, 37, 80, 0.5);
+        }
+
+    .btn-outline-appcolor.btn-shadow {
+        box-shadow: 0 0.125rem 0.625rem rgba(217, 37, 80, 0.4), 0 0.0625rem 0.125rem rgba(217, 37, 80, 0.5);
+    }
+
+        .btn-outline-appcolor.btn-shadow.active:hover,
+        .btn-outline-appcolor.btn-shadow.disabled:hover,
+        .btn-outline-appcolor.btn-shadow:active:hover,
+        .btn-outline-appcolor.btn-shadow:disabled:hover {
+            box-shadow: 0 0.125rem 0.625rem rgba(217, 37, 80, 0.5), 0 0.0625rem 0.125rem rgba(217, 37, 80, 0.6);
+        }
+
+        .btn-outline-appcolor.btn-shadow:hover {
             box-shadow: 0px 5px 15px 2px rgba(217, 37, 80, 0.19);
         }
 
@@ -23433,7 +23525,7 @@ legend {
     .hamburger.is-active .hamburger-inner,
     .hamburger.is-active .hamburger-inner::before,
     .hamburger.is-active .hamburger-inner::after {
-        background-color: #3f6ad8;
+        background-color: #FF5733;
     }
 
 .hamburger-box {
@@ -23454,7 +23546,7 @@ legend {
     .hamburger-inner::after {
         width: 24px;
         height: 2px;
-        background-color: #3f6ad8;
+        background-color: #FF5733;
         border-radius: 10px;
         position: absolute;
         transition-property: transform;
