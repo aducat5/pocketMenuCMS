@@ -45,6 +45,7 @@
     <Compile Include="CustomExceptions\LogoutRequiredException.cs" />
     <Compile Include="CustomExceptions\PageNotFoundException.cs" />
     <Compile Include="Models\EventLog.cs" />
+    <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utility\Enums.cs" />
     <Compile Include="Utility\GenFunx.cs" />

@@ -1,6 +1,6 @@
-﻿namespace PMCMS.PL.Controllers
+﻿namespace PMCMS.BLL.Models
 {
-    internal class User
+    public class User
     {
         public User()
         {

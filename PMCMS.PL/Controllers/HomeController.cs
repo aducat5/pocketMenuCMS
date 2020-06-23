@@ -10,17 +10,8 @@ namespace PMCMS.PL.Controllers
     public class HomeController : Controller
     {
         [UserAuth]
-        public ActionResult Dashboard()
-        {
-            return View();
-        }
-        public ActionResult Landing()
-        {
-            return View();
-        }
-        public ActionResult NotFound()
-        {
-            return View();
-        }
+        public ActionResult Dashboard() => View();
+        public ActionResult Landing() => View();
+        public ActionResult NotFound() => View();
     }
 }

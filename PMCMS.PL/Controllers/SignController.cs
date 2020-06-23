@@ -1,4 +1,5 @@
-﻿using PMCMS.BSL.Authorization;
+﻿using PMCMS.BLL.Models;
+using PMCMS.BSL.Authorization;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,7 +14,16 @@ namespace PMCMS.PL.Controllers
         public ActionResult Up() => View();
 
         [NonUserAuth, HttpPost]
-        public ActionResult Up(string email, string password)
+        public ActionResult Up(User user)
+        {
+            return View();
+        }
+
+        [NonUserAuth]
+        public ActionResult In() => View();
+
+        [NonUserAuth, HttpPost]
+        public ActionResult In(string email, string password)
         {
             try
             {
@@ -27,12 +37,12 @@ namespace PMCMS.PL.Controllers
                 if (user != null)
                 {
                     Session["user"] = user;
-                    ViewBag["LoginNote"] = "Welcome, " + user.FirstName + " " + user.LastName;
-                    return RedirectToAction("Dashoard", "Home");
+                    ViewBag.LoginNote = "Welcome, " + user.FirstName + " " + user.LastName;
+                    return RedirectToAction("Dashboard", "Home");
                 }
                 else
                 {
-                    ViewBag["LoginNote"] = requesResult;
+                    ViewBag.LoginNote = requesResult;
                     return View();
                 }
             }
@@ -41,14 +51,16 @@ namespace PMCMS.PL.Controllers
                 throw;
             }
         }
-        
-        public ActionResult In()
+
+        [NonUserAuth]
+        public ActionResult Recover() => View();
+
+        [UserAuth]
+        public void LogOut()
         {
-            return View();
-        }
-        public ActionResult Recover()
-        {
-            return View();
+            //TODO: Say drop session to api
+            Session["user"] = null;
+            RedirectToAction("Landing", "Home");
         }
 
     }
