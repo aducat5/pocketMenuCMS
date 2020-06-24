@@ -85,7 +85,7 @@
                                 <div class="widget-content-left">
                                     <div class="btn-group">
                                         <a data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="p-0 btn">
-                                            <img width="42" class="rounded-circle" src="assets/images/avatars/1.jpg" alt="">
+                                            <img width="42" class="rounded-circle" src="" alt="">
                                             <i class="fa fa-angle-down ml-2 opacity-8"></i>
                                         </a>
                                         <div tabindex="-1" role="menu" aria-hidden="true" class="dropdown-menu dropdown-menu-right">
@@ -161,7 +161,7 @@
                                 </a>
                                 <ul>
                                     <li>
-                                        <a href="components-tabs.html">
+                                        <a href="@Url.Action("All", "Menu")">
                                             <i class="metismenu-icon"></i>
                                             Menus
                                         </a>
@@ -176,13 +176,13 @@
                                 </a>
                                 <ul>
                                     <li>
-                                        <a href="elements-buttons-standard.html">
+                                        <a href="@Url.Action("Edit", "Restaurant")">
                                             <i class="metismenu-icon"></i>
                                             Edit Restaurant
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="elements-dropdowns.html">
+                                        <a href="@Url.Action("GetQr", "Restaurant")">
                                             <i class="metismenu-icon"></i>
                                             Generate QR Code
                                         </a>
@@ -288,7 +288,7 @@
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
 
-    <script src="http://maps.google.com/maps/api/js?sensor=true"></script>
+    @*<script src="http://maps.google.com/maps/api/js?sensor=true"></script>*@
     <script type="text/javascript" src="~/Content/src/assets/scripts/main.js"></script>
 </body>
 </html>

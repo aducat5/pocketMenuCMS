@@ -123,6 +123,8 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\MenuController.cs" />
+    <Compile Include="Controllers\RestaurantController.cs" />
     <Compile Include="Controllers\SignController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -147,6 +149,7 @@
     <Content Include="Content\src\assets\images\city.jpg" />
     <Content Include="Content\src\assets\images\logo-inverse.png" />
     <Content Include="Content\src\assets\images\logo.png" />
+    <Content Include="Content\src\assets\scripts\jquery-3.5.1.min.js" />
     <Content Include="Content\src\assets\scripts\main.js" />
     <Content Include="Content\src\assets\scripts\main.pro.js" />
     <Content Include="Content\src\main.css" />
@@ -169,6 +172,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
+    <Folder Include="Views\Shared\Components\MenuView\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\src\assets\fonts\fa-solid-900.eot" />
@@ -185,6 +189,15 @@
     <Content Include="Views\Home\Dashboard.cshtml" />
     <Content Include="Views\Home\Landing.cshtml" />
     <Content Include="Views\Home\NotFound.cshtml" />
+    <Content Include="Views\Restaurant\Edit.cshtml" />
+    <Content Include="Views\Restaurant\New.cshtml" />
+    <Content Include="Views\Restaurant\Display.cshtml" />
+    <Content Include="Views\Restaurant\GetQr.cshtml" />
+    <Content Include="Views\Restaurant\All.cshtml" />
+    <Content Include="Views\Menu\All.cshtml" />
+    <Content Include="Views\Menu\Display.cshtml" />
+    <Content Include="Views\Menu\Edit.cshtml" />
+    <Content Include="Views\Menu\New.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />

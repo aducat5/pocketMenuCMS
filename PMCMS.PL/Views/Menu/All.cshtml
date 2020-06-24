@@ -1,0 +1,98 @@
+﻿
+@{
+    ViewBag.Title = "All";
+}
+
+<h2>All</h2>
+
+<hr />
+
+<div class="row">
+
+    <div class="col-md-4">
+        <div class="main-card mb-3 card">
+            <div class="card-body">
+                <h3>
+                    Section Header
+                    <a href="@Url.Action("Edit", "Menu", new { id = 1 })"><em class="fa fa-edit text-warning pull-right edit-button" style="cursor:pointer" id="1"></em></a>
+                </h3>
+                <ul class="list-group">
+                    <li class="list-group-item">
+                        <h5 class="list-group-item-heading">
+                            List group item heading
+                            <em class="fa fa-chevron-right pull-right list-arrow" style="margin-top:5px; color:#FF5733"></em>
+                        </h5>
+                        <div class="card" style="display:none;">
+                            <img src="~/Content/src/assets/images/city.jpg" style="object-fit:cover; width:100%; height:200px; margin-top:5px;" />
+                        </div>
+                    </li>
+                    <li class="list-group-item">
+                        <h5 class="list-group-item-heading">
+                            List group item heading
+                            <em class="fa fa-chevron-right pull-right list-arrow" style="margin-top:5px; color:#FF5733"></em>
+                        </h5>
+                        <div class="card" style="display:none;">
+                            <img src="~/Content/src/assets/images/city.jpg" style="object-fit:cover; width:100%; height:200px; margin-top:5px;" />
+                        </div>
+                    </li>
+                    <li class="list-group-item">
+                        <h5 class="list-group-item-heading">
+                            List group item heading
+                            <em class="fa fa-chevron-right pull-right list-arrow" style="margin-top:5px; color:#FF5733"></em>
+                        </h5>
+                        <div class="card" style="display:none;">
+                            <img src="~/Content/src/assets/images/city.jpg" style="object-fit:cover; width:100%; height:200px; margin-top:5px;" />
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    <script>
+        function bindListItems() {
+
+            var items = document.getElementsByClassName("list-group-item");
+
+            for (var i = 0; i < items.length; i++) {
+                var item = items[i];
+                item.addEventListener("click", function () {
+                    //toggle image card
+                    var card = this.querySelector(".card");
+                    var listArrow = this.querySelector(".list-arrow");
+
+                    if (card.style.display === "none") {
+                        listArrow.style.color = "#6c757d";
+                        listArrow.classList.remove("fa-chevron-right");
+                        listArrow.classList.add("fa-chevron-down");
+                        card.style.display = "block";
+                    } else {
+                        listArrow.style.color = "#FF5733";
+                        listArrow.classList.add("fa-chevron-right");
+                        listArrow.classList.remove("fa-chevron-down");
+                        card.style.display = "none";
+                    }
+                    //console.log(item);
+                });
+            }
+
+        }
+
+        function bindEditButtons() {
+            items = document.getElementsByClassName("edit-button");
+
+            for (var i = 0; i < items.length; i++) {
+                var item = items[i];
+                item.addEventListener("click", function () {
+
+                });
+            }
+        }
+
+        bindEditButtons();
+
+        bindListItems();
+    </script>
+}
