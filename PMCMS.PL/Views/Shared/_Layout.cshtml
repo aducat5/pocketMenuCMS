@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <title>@ViewBag.Title - Pocket Menu CMS</title>
 
     <link href="~/Content/src/main.css" rel="stylesheet">
 </head>
@@ -155,6 +155,21 @@
                             <li class="app-sidebar__heading">Restaurant</li>
                             <li>
                                 <a href="#">
+                                    <i class="metismenu-icon pe-7s-note2"></i>
+                                    Menu Management
+                                    <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
+                                </a>
+                                <ul>
+                                    <li>
+                                        <a href="components-tabs.html">
+                                            <i class="metismenu-icon"></i>
+                                            Menus
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="#">
                                     <i class="metismenu-icon pe-7s-diamond"></i>
                                     Restaurant Management
                                     <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
@@ -163,40 +178,13 @@
                                     <li>
                                         <a href="elements-buttons-standard.html">
                                             <i class="metismenu-icon"></i>
-                                            Manage Restaurants
+                                            Edit Restaurant
                                         </a>
                                     </li>
                                     <li>
                                         <a href="elements-dropdowns.html">
                                             <i class="metismenu-icon"></i>
-                                            Manage Employees
-                                        </a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <i class="metismenu-icon pe-7s-note2"></i>
-                                    Menu Management
-                                    <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
-                                </a>
-                                <ul>
-                                    <li>
-                                        <a href="components-tabs.html">
-                                            <i class="metismenu-icon">
-                                            </i>Manage Menus
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="components-accordions.html">
-                                            <i class="metismenu-icon">
-                                            </i>Generate QR Code
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="components-notifications.html">
-                                            <i class="metismenu-icon">
-                                            </i>Preview Content
+                                            Generate QR Code
                                         </a>
                                     </li>
                                 </ul>
@@ -242,62 +230,14 @@
                                     </i>
                                 </div>
                                 <div>
-                                    Analytics Dashboard
+                                    @ViewBag.Title
                                     <div class="page-title-subheading">
-                                        This is an example dashboard created using build-in elements and components.
+                                        @ViewBag.PageDesc
                                     </div>
                                 </div>
                             </div>
                             <div class="page-title-actions">
-                                <button type="button" data-toggle="tooltip" title="Example Tooltip" data-placement="bottom" class="btn-shadow mr-3 btn btn-dark">
-                                    <i class="fa fa-star"></i>
-                                </button>
-                                <div class="d-inline-block dropdown">
-                                    <button type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="btn-shadow dropdown-toggle btn btn-info">
-                                        <span class="btn-icon-wrapper pr-2 opacity-7">
-                                            <i class="fa fa-business-time fa-w-20"></i>
-                                        </span>
-                                        Buttons
-                                    </button>
-                                    <div tabindex="-1" role="menu" aria-hidden="true" class="dropdown-menu dropdown-menu-right">
-                                        <ul class="nav flex-column">
-                                            <li class="nav-item">
-                                                <a href="javascript:void(0);" class="nav-link">
-                                                    <i class="nav-link-icon lnr-inbox"></i>
-                                                    <span>
-                                                        Inbox
-                                                    </span>
-                                                    <div class="ml-auto badge badge-pill badge-secondary">86</div>
-                                                </a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a href="javascript:void(0);" class="nav-link">
-                                                    <i class="nav-link-icon lnr-book"></i>
-                                                    <span>
-                                                        Book
-                                                    </span>
-                                                    <div class="ml-auto badge badge-pill badge-danger">5</div>
-                                                </a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a href="javascript:void(0);" class="nav-link">
-                                                    <i class="nav-link-icon lnr-picture"></i>
-                                                    <span>
-                                                        Picture
-                                                    </span>
-                                                </a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a disabled href="javascript:void(0);" class="nav-link disabled">
-                                                    <i class="nav-link-icon lnr-file-empty"></i>
-                                                    <span>
-                                                        File Disabled
-                                                    </span>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
+
                             </div>
                         </div>
                     </div>
@@ -319,13 +259,8 @@
                             <div class="app-footer-left">
                                 <ul class="nav">
                                     <li class="nav-item">
-                                        <a href="javascript:void(0);" class="nav-link">
-                                            Footer Link 1
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="javascript:void(0);" class="nav-link">
-                                            Footer Link 2
+                                        <a href="javascript:void(0);" class="text-black-50">
+                                            Pocket Menu Content Management System
                                         </a>
                                     </li>
                                 </ul>
@@ -333,16 +268,8 @@
                             <div class="app-footer-right">
                                 <ul class="nav">
                                     <li class="nav-item">
-                                        <a href="javascript:void(0);" class="nav-link">
-                                            Footer Link 3
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="javascript:void(0);" class="nav-link">
-                                            <div class="badge badge-success mr-1 ml-0">
-                                                <small>NEW</small>
-                                            </div>
-                                            Footer Link 4
+                                        <a href="javascript:void(0);" class="text-black-50">
+                                            Sloth Development @DateTime.Now.Year
                                         </a>
                                     </li>
                                 </ul>

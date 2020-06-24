@@ -9,9 +9,21 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>NotFound</title>
+    <link href="~/Content/src/assets/error-page-style.css" rel="stylesheet" />
 </head>
 <body>
-    <div> 
-    </div>
+    <section id="not-found">
+        <div id="title">Pocket Menu &bull; 404 Error Page</div>
+        <div id="title">You can go back to the @Html.ActionLink("home", "Dashboard", "Home", null, new { @class = "link" }) page from here.</div>
+        <div class="circles">
+            <p>
+                404<br>
+                <small>We couldn't find the page you are looking for. Maybe there is no such a page. Maybe there is. We will never know.</small>
+            </p>
+            <span class="circle big"></span>
+            <span class="circle med"></span>
+            <span class="circle small"></span>
+        </div>
+    </section>
 </body>
 </html>

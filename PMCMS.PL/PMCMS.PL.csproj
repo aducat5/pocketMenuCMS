@@ -131,6 +131,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\src\assets\error-page-style.css" />
     <Content Include="Content\src\assets\fonts\fa-solid-900.svg" />
     <Content Include="Content\src\assets\fonts\Pe-icon-7-stroke.svg" />
     <Content Include="Content\src\assets\images\avatars\1.jpg" />
@@ -143,6 +144,7 @@
     <Content Include="Content\src\assets\images\avatars\5.jpg" />
     <Content Include="Content\src\assets\images\avatars\8.jpg" />
     <Content Include="Content\src\assets\images\avatars\9.jpg" />
+    <Content Include="Content\src\assets\images\city.jpg" />
     <Content Include="Content\src\assets\images\logo-inverse.png" />
     <Content Include="Content\src\assets\images\logo.png" />
     <Content Include="Content\src\assets\scripts\main.js" />

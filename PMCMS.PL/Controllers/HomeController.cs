@@ -11,7 +11,7 @@ namespace PMCMS.PL.Controllers
     {
         [UserAuth]
         public ActionResult Dashboard() => View();
-        public ActionResult Landing() => View();
+        public ActionResult Landing() => View(); 
         public ActionResult NotFound() => View();
     }
 }
