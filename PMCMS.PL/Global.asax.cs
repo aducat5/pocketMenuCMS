@@ -1,5 +1,5 @@
-﻿using PMCMS.BLL.Models;
-using PMCMS.BLL.Utility;
+﻿using PMCMS.BLL.Utility;
+using PMCMS.DAL;
 using System;
 using System.Web.Mvc;
 using System.Web.Optimization;
@@ -26,13 +26,15 @@ namespace PMCMS.PL
             {
                 EventLog errorLog = new EventLog()
                 {
-                    LogType = logTypeID,
+                    LogType = logTypeID.ToString(),
                     CreateDate = DateTime.Now,
-                    LogMessage = exception.Message,
-                    LogDetail = exception.InnerException + " - " + exception.StackTrace,
-                    Machine = Server.MachineName
+                    Message = exception.Message,
+                    Detail = exception.InnerException + " - " + exception.StackTrace,
+                    Source = "Global.asax"
+                    //TraceId = exception.StackTrace
                 };
 
+                Logger.Log(errorLog);
 
                 switch (exception.GetType().Name)
                 {
@@ -59,12 +61,14 @@ namespace PMCMS.PL
             {
                 EventLog errorLog = new EventLog()
                 {
-                    LogType = logTypeID,
+                    LogType = "Error",
                     CreateDate = DateTime.Now,
-                    LogMessage = "Bilinmeyen Hata",
-                    Machine = Server.MachineName,
-                    LogDetail = "Bilinmeyen Hata"
+                    Message = "Bilinmeyen Hata",
+                    Source = "Global.asax",
+                    Detail = "Bilinmeyen Hata"
                 };
+                Logger.Log(errorLog);
+
                 Response.Redirect("/Home/NotFound/");
             }
         }

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="dbf2099c13e548aa98ea77d2243ef594" Name="Diagram1">
+        <EntityTypeShape EntityType="PocketMenuDBModel.Credentials_NotFinished_" Width="1.5" PointX="3" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PocketMenuDBModel.Employee" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PocketMenuDBModel.EventLog" Width="1.5" PointX="5.75" PointY="2.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="PocketMenuDBModel.Menu" Width="1.5" PointX="3" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PocketMenuDBModel.Seller" Width="1.5" PointX="0.75" PointY="7.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="PocketMenuDBModel.sysdiagram" Width="1.5" PointX="5.75" PointY="6.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="PocketMenuDBModel.User" Width="1.5" PointX="0.75" PointY="3.25" IsExpanded="true" />
+        <AssociationConnector Association="PocketMenuDBModel.FK_Credentials_NotFinished__Users" ManuallyRouted="false" />
+        <AssociationConnector Association="PocketMenuDBModel.FK_Employees_Sellers" ManuallyRouted="false" />
+        <AssociationConnector Association="PocketMenuDBModel.FK_Employees_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="PocketMenuDBModel.FK_Menus_Sellers" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,4 +1,4 @@
-﻿using PMCMS.BLL.Models;
+﻿using PMCMS.DAL;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,9 +9,11 @@ namespace PMCMS.BLL.Utility
 {
     public static class Logger
     {
+        private static readonly PocketMenuDBEntities db = DBTool.GetInstance();
         public static void Log(EventLog log) 
         {
-            //reach to log api
+            db.EventLogs.Add(log);
+            db.SaveChangesAsync();
         }
     }
 }

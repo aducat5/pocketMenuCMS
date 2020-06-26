@@ -1,4 +1,4 @@
-﻿
+﻿@model User
 @{
     Layout = null;
 }
@@ -11,7 +11,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta http-equiv="Content-Language" content="en">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Register - ArchitectUI HTML Bootstrap 4 Dashboard Template</title>
+    <title>Register - PocketMenu</title>
     <meta name="viewport"
           content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no" />
     <meta name="description" content="ArchitectUI HTML Bootstrap 4 Dashboard Template">
@@ -35,30 +35,31 @@
                                 <span>It only takes a <span class="text-success">few seconds</span> to create your account</span>
                             </h4>
                             <div>
-                                <form class="">
+                                @using (Html.BeginForm("SignUp", "Sign", FormMethod.Post, new { @class = "form-signin" }))
+                                {
                                     <div class="form-row">
                                         <div class="col-md-6">
                                             <div class="position-relative form-group">
                                                 <label for="exampleEmail" class=""><span class="text-danger">*</span> Email</label>
-                                                <input name="email" id="exampleEmail" placeholder="Email here..." type="email" class="form-control">
+                                                @Html.TextBoxFor(m => m.Email, new { placeholder = "Email here...", type = "email", @class = "form-control", required = "", autofocus="", id = "inputEmail"})
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="position-relative form-group">
                                                 <label for="exampleName" class="">Name</label>
-                                                <input name="text" id="exampleName" placeholder="Name here..." type="text" class="form-control">
+                                                @Html.TextBoxFor(m => m.FirstName, new { placeholder = "Your name...", type = "text", @class = "form-control", required = "", autofocus = "", id = "inputName" })
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="position-relative form-group">
                                                 <label for="examplePassword" class=""><span class="text-danger">*</span> Password</label>
-                                                <input name="password" id="examplePassword" placeholder="Password here..." type="password" class="form-control">
+                                                @Html.PasswordFor(m => m.Email, new { placeholder = "Password...", type = "password", @class = "form-control", required = "", autofocus = "", id = "inputPassword" })
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="position-relative form-group">
                                                 <label for="examplePasswordRep" class=""><span class="text-danger">*</span> Repeat Password</label>
-                                                <input name="passwordrep" id="examplePasswordRep" placeholder="Repeat Password here..." type="password" class="form-control">
+                                                @Html.PasswordFor(m => m.Email, new { placeholder = "Repeat Password...", type = "password", @class = "form-control", required = "", autofocus = "", id = "inputRPassword" })
                                             </div>
                                         </div>
                                     </div>
@@ -75,7 +76,7 @@
                                             <button class="btn-wide btn-pill btn-shadow btn-hover-shine btn btn-primary btn-lg">Create Account </button>
                                         </div>
                                     </div>
-                                </form>
+                                }
                             </div>
                         </div>
                     </div>

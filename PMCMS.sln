@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PMCMS.BLL", "PMCMS.BLL\PMCM
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PMCMS.BSL", "PMCMS.BSL\PMCMS.BSL.csproj", "{BB0FD302-2A10-41FD-9D0D-5D9F5E908AF3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PMCMS.DAL", "PMCMS.DAL\PMCMS.DAL.csproj", "{F8ABA506-4315-4CF0-9DEF-6A42AAC138CD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{BB0FD302-2A10-41FD-9D0D-5D9F5E908AF3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BB0FD302-2A10-41FD-9D0D-5D9F5E908AF3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BB0FD302-2A10-41FD-9D0D-5D9F5E908AF3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F8ABA506-4315-4CF0-9DEF-6A42AAC138CD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F8ABA506-4315-4CF0-9DEF-6A42AAC138CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F8ABA506-4315-4CF0-9DEF-6A42AAC138CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F8ABA506-4315-4CF0-9DEF-6A42AAC138CD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

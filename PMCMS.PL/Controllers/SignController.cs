@@ -1,5 +1,6 @@
-﻿using PMCMS.BLL.Models;
+﻿using PMCMS.BLL.Repos;
 using PMCMS.BSL.Authorization;
+using PMCMS.DAL;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,13 +11,25 @@ namespace PMCMS.PL.Controllers
 {
     public class SignController : Controller
     {
+        private readonly UserRepo ur = new UserRepo();
+
         [NonUserAuth]
         public ActionResult Up() => View();
 
         [NonUserAuth, HttpPost]
         public ActionResult Up(User user)
         {
-            return View();
+            bool sonuc = ur.InsertUser(user, out string islemSonucu);
+            if (sonuc)
+            {
+                return RedirectToAction("In", new { regState = "suc" });
+            }
+            else
+            {
+                ViewBag.RegState = islemSonucu;
+                ViewBag.AlertState = "alert alert-danger";
+                return View();
+            }
         }
 
         [NonUserAuth]
@@ -27,11 +40,8 @@ namespace PMCMS.PL.Controllers
         {
             try
             {
-                //TODO: Validate email and password
-                //TODO: Do login on api here
-                //If successfull
-
-                User user = new User();
+                User user = ur.GetUser(email, password);
+                
                 string requesResult = "Username or password is wrong. Please try again.";
 
                 if (user != null)

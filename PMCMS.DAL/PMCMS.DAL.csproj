@@ -5,11 +5,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{0C3CEB2C-9DB3-4B81-8901-3AD298282F1F}</ProjectGuid>
+    <ProjectGuid>{F8ABA506-4315-4CF0-9DEF-6A42AAC138CD}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>PMCMS.BLL</RootNamespace>
-    <AssemblyName>PMCMS.BLL</AssemblyName>
+    <RootNamespace>PMCMS.DAL</RootNamespace>
+    <AssemblyName>PMCMS.DAL</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -43,6 +43,8 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -51,26 +53,70 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CustomExceptions\LoginRequiredException.cs" />
-    <Compile Include="CustomExceptions\LogoutRequiredException.cs" />
-    <Compile Include="CustomExceptions\PageNotFoundException.cs" />
+    <Compile Include="Credentials_NotFinished_.cs">
+      <DependentUpon>PocketMenuDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBTool.cs" />
+    <Compile Include="Employee.cs">
+      <DependentUpon>PocketMenuDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EventLog.cs">
+      <DependentUpon>PocketMenuDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Menu.cs">
+      <DependentUpon>PocketMenuDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PocketMenuDBModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PocketMenuDBModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PocketMenuDBModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PocketMenuDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PocketMenuDBModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PocketMenuDBModel.edmx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repos\MenuRepo.cs" />
-    <Compile Include="Repos\SellerRepo.cs" />
-    <Compile Include="Repos\UserRepo.cs" />
-    <Compile Include="Utility\Enums.cs" />
-    <Compile Include="Utility\GenFunx.cs" />
-    <Compile Include="Utility\Logger.cs" />
+    <Compile Include="Seller.cs">
+      <DependentUpon>PocketMenuDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sysdiagram.cs">
+      <DependentUpon>PocketMenuDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="User.cs">
+      <DependentUpon>PocketMenuDBModel.tt</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\PMCMS.DAL\PMCMS.DAL.csproj">
-      <Project>{F8ABA506-4315-4CF0-9DEF-6A42AAC138CD}</Project>
-      <Name>PMCMS.DAL</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.Config" />
+    <EntityDeploy Include="PocketMenuDBModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>PocketMenuDBModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
     <None Include="packages.config" />
+    <None Include="PocketMenuDBModel.edmx.diagram">
+      <DependentUpon>PocketMenuDBModel.edmx</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="PocketMenuDBModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>PocketMenuDBModel.edmx</DependentUpon>
+      <LastGenOutput>PocketMenuDBModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="PocketMenuDBModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>PocketMenuDBModel.edmx</DependentUpon>
+      <LastGenOutput>PocketMenuDBModel.cs</LastGenOutput>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
