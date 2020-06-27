@@ -23,9 +23,7 @@ namespace PMCMS.DAL
     
         public int SellerID { get; set; }
         public string SellerName { get; set; }
-        public string Description { get; set; }
-        public string SellerLogo { get; set; }
-        public string Location { get; set; }
+        public string SellerJSON { get; set; }
         public System.DateTime CreateDate { get; set; }
         public System.DateTime UpdateDate { get; set; }
         public bool IsDeleted { get; set; }

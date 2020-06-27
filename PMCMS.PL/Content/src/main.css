@@ -8,6 +8,25 @@
  =========================================================
  * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
  */
+
+.section-header-bottomline {
+    border-bottom-color: #FF5733;
+    border-bottom-width: 2px;
+    border-bottom-style: solid;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    margin-bottom:10px;
+}
+
+.menu-product {
+    border-left: none !important;
+    border-right: none !important;
+    border-bottom: none !important;
+    border-top-left-radius: 0px !important;
+    border-top-right-radius: 0px !important;
+    background-color: #fdfdfd !important;
+}
+
 .border-primary {
     border-color: #3f6ad8;
 }

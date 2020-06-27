@@ -54,68 +54,68 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Credentials_NotFinished_.cs">
-      <DependentUpon>PocketMenuDBModel.tt</DependentUpon>
+      <DependentUpon>PocketMenuDBEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="DBTool.cs" />
     <Compile Include="Employee.cs">
-      <DependentUpon>PocketMenuDBModel.tt</DependentUpon>
+      <DependentUpon>PocketMenuDBEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="EventLog.cs">
-      <DependentUpon>PocketMenuDBModel.tt</DependentUpon>
+      <DependentUpon>PocketMenuDBEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Menu.cs">
-      <DependentUpon>PocketMenuDBModel.tt</DependentUpon>
+      <DependentUpon>PocketMenuDBEntities.tt</DependentUpon>
     </Compile>
-    <Compile Include="PocketMenuDBModel.Context.cs">
+    <Compile Include="PocketMenuDBEntities.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>PocketMenuDBModel.Context.tt</DependentUpon>
+      <DependentUpon>PocketMenuDBEntities.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="PocketMenuDBModel.cs">
+    <Compile Include="PocketMenuDBEntities.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>PocketMenuDBModel.tt</DependentUpon>
+      <DependentUpon>PocketMenuDBEntities.tt</DependentUpon>
     </Compile>
-    <Compile Include="PocketMenuDBModel.Designer.cs">
+    <Compile Include="PocketMenuDBEntities.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>PocketMenuDBModel.edmx</DependentUpon>
+      <DependentUpon>PocketMenuDBEntities.edmx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Seller.cs">
-      <DependentUpon>PocketMenuDBModel.tt</DependentUpon>
+      <DependentUpon>PocketMenuDBEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="sysdiagram.cs">
-      <DependentUpon>PocketMenuDBModel.tt</DependentUpon>
+      <DependentUpon>PocketMenuDBEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="User.cs">
-      <DependentUpon>PocketMenuDBModel.tt</DependentUpon>
+      <DependentUpon>PocketMenuDBEntities.tt</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.Config" />
-    <EntityDeploy Include="PocketMenuDBModel.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>PocketMenuDBModel.Designer.cs</LastGenOutput>
-    </EntityDeploy>
     <None Include="packages.config" />
-    <None Include="PocketMenuDBModel.edmx.diagram">
-      <DependentUpon>PocketMenuDBModel.edmx</DependentUpon>
+    <EntityDeploy Include="PocketMenuDBEntities.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>PocketMenuDBEntities.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="PocketMenuDBEntities.edmx.diagram">
+      <DependentUpon>PocketMenuDBEntities.edmx</DependentUpon>
     </None>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="PocketMenuDBModel.Context.tt">
+    <Content Include="PocketMenuDBEntities.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>PocketMenuDBModel.edmx</DependentUpon>
-      <LastGenOutput>PocketMenuDBModel.Context.cs</LastGenOutput>
+      <DependentUpon>PocketMenuDBEntities.edmx</DependentUpon>
+      <LastGenOutput>PocketMenuDBEntities.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="PocketMenuDBModel.tt">
+    <Content Include="PocketMenuDBEntities.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>PocketMenuDBModel.edmx</DependentUpon>
-      <LastGenOutput>PocketMenuDBModel.cs</LastGenOutput>
+      <DependentUpon>PocketMenuDBEntities.edmx</DependentUpon>
+      <LastGenOutput>PocketMenuDBEntities.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
