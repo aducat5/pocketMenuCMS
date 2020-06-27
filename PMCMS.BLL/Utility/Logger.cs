@@ -10,10 +10,10 @@ namespace PMCMS.BLL.Utility
     public static class Logger
     {
         private static readonly PocketMenuDBEntities db = DBTool.GetInstance();
-        public static void Log(EventLog log) 
+        public static async Task LogAsync(EventLog log) 
         {
             db.EventLogs.Add(log);
-            db.SaveChangesAsync();
+            await db.SaveChangesAsync();
         }
     }
 }

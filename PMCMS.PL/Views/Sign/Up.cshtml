@@ -35,36 +35,42 @@
                                 <span>It only takes a <span class="text-success">few seconds</span> to create your account</span>
                             </h4>
                             <div>
-                                @using (Html.BeginForm("SignUp", "Sign", FormMethod.Post, new { @class = "form-signin" }))
+                                @using (Html.BeginForm("Up", "Sign", FormMethod.Post, new { @class = "form-signin" }))
                                 {
-                                    <div class="form-row">
-                                        <div class="col-md-6">
-                                            <div class="position-relative form-group">
-                                                <label for="exampleEmail" class=""><span class="text-danger">*</span> Email</label>
-                                                @Html.TextBoxFor(m => m.Email, new { placeholder = "Email here...", type = "email", @class = "form-control", required = "", autofocus="", id = "inputEmail"})
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="position-relative form-group">
-                                                <label for="exampleName" class="">Name</label>
-                                                @Html.TextBoxFor(m => m.FirstName, new { placeholder = "Your name...", type = "text", @class = "form-control", required = "", autofocus = "", id = "inputName" })
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="position-relative form-group">
-                                                <label for="examplePassword" class=""><span class="text-danger">*</span> Password</label>
-                                                @Html.PasswordFor(m => m.Email, new { placeholder = "Password...", type = "password", @class = "form-control", required = "", autofocus = "", id = "inputPassword" })
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="position-relative form-group">
-                                                <label for="examplePasswordRep" class=""><span class="text-danger">*</span> Repeat Password</label>
-                                                @Html.PasswordFor(m => m.Email, new { placeholder = "Repeat Password...", type = "password", @class = "form-control", required = "", autofocus = "", id = "inputRPassword" })
-                                            </div>
+                                <div class="form-row">
+                                    <div class="col-md-6">
+                                        <div class="position-relative form-group">
+                                            <label for="inputEmail" class=""><span class="text-danger">*</span> Email</label>
+                                            @Html.TextBoxFor(m => m.Email, new { placeholder = "Email here...", type = "email", @class = "form-control", required = "", autofocus = "", id = "inputEmail" })
                                         </div>
                                     </div>
+                                    <div class="col-md-3">
+                                        <div class="position-relative form-group">
+                                            <label for="inputName" class=""><span class="text-danger">*</span>First Name</label>
+                                            @Html.TextBoxFor(m => m.FirstName, new { placeholder = "Your first name...", type = "text", @class = "form-control", required = "", autofocus = "", id = "inputFirstName" })
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="position-relative form-group">
+                                            <label for="inputName" class=""><span class="text-danger">*</span>Last Name</label>
+                                            @Html.TextBoxFor(m => m.LastName, new { placeholder = "Your last name...", type = "text", @class = "form-control", required = "", autofocus = "", id = "inputLastName" })
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="position-relative form-group">
+                                            <label for="inputPassword" class=""><span class="text-danger">*</span> Password</label>
+                                            @Html.PasswordFor(m => m.Password, new { placeholder = "Password...", type = "password", @class = "form-control", required = "", autofocus = "", id = "inputPassword" })
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="position-relative form-group">
+                                            <label for="inputRPasswordAgain" class=""><span class="text-danger">*</span> Repeat Password</label>
+                                            @Html.PasswordFor(m => m.Password, new { placeholder = "Repeat Password...", type = "password", @class = "form-control", required = "", autofocus = "", id = "inputRPasswordAgain" })
+                                        </div>
+                                    </div>
+                                </div>
                                     <div class="mt-3 position-relative form-check">
-                                        <input name="check" id="exampleCheck" type="checkbox" class="form-check-input">
+                                        <input name="check" required id="termsCheck" type="checkbox" class="form-check-input">
                                         <label for="exampleCheck" class="form-check-label">Accept our <a href="javascript:void(0);">Terms and Conditions</a>.</label>
                                     </div>
                                     <div class="mt-4 d-flex align-items-center">
@@ -108,3 +114,4 @@
 </body>
 
 </html>
+

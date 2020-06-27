@@ -1,5 +1,4 @@
-﻿using PMCMS.BLL.Utility;
-using PMCMS.DAL;
+﻿using PMCMS.DAL;
 using System;
 using System.Linq;
 
@@ -7,7 +6,7 @@ namespace PMCMS.BLL.Repos
 {
     public class UserRepo
     {
-        private static PocketMenuDBEntities db = DBTool.GetInstance();
+        private static readonly PocketMenuDBEntities db = DBTool.GetInstance();
         public bool CheckUser(int id) => db.Users.Any(u => u.UserID == id);
         public bool CheckUser(string email) => db.Users.Any(u => u.Email == email);
         public User GetUser(int id)
@@ -18,8 +17,12 @@ namespace PMCMS.BLL.Repos
         }
         public User GetUser(string email, string password)
         {
-            if (db.Users.Any(u => u.Email == email && u.Password == password)) return db.Users.Where(u => u.Email == email && u.Password == password).FirstOrDefault();
-            else return null;
+            User user = db.Users.Where(u => u.Email == email).FirstOrDefault();
+
+            if (BCrypt.Net.BCrypt.Verify(password, user.Password))
+                return user;
+            else
+                return null;
         }
         public bool InsertUser(User newUser, out string islemSonucu)
         {
@@ -35,6 +38,7 @@ namespace PMCMS.BLL.Repos
                 }
                 else
                 {
+                    newUser.Password = BCrypt.Net.BCrypt.HashPassword(newUser.Password); 
                     db.Users.Add(newUser);
                     if (db.SaveChanges() > 0)
                     {
@@ -82,14 +86,19 @@ namespace PMCMS.BLL.Repos
             {
                 if (CheckUser(user.UserID))
                 {
+                    user.Password = BCrypt.Net.BCrypt.HashPassword(user.Password);
                     user.UpdateDate = DateTime.Now;
                     db.Entry(GetUser(user.UserID)).CurrentValues.SetValues(user);
-                    if (db.SaveChanges() > 0) islemSonucu = "Güncelleme başarılı";
-                    else islemSonucu = "Bir hata oluştu";
+                    if (db.SaveChanges() > 0) 
+                        islemSonucu = "Güncelleme başarılı";
+                    else 
+                        islemSonucu = "Bir hata oluştu";
                 }
-                else islemSonucu = "Kullanıcı Bulunamadı.";
+                else 
+                    islemSonucu = "Kullanıcı Bulunamadı.";
             }
-            else islemSonucu = "Kullanıcı nesnesi boş olamaz";
+            else 
+                islemSonucu = "Kullanıcı nesnesi boş olamaz";
             return sonuc;
         }
 

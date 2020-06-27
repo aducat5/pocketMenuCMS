@@ -31,10 +31,7 @@ namespace PMCMS.PL
                     Message = exception.Message,
                     Detail = exception.InnerException + " - " + exception.StackTrace,
                     Source = "Global.asax"
-                    //TraceId = exception.StackTrace
                 };
-
-                Logger.Log(errorLog);
 
                 switch (exception.GetType().Name)
                 {
@@ -55,7 +52,8 @@ namespace PMCMS.PL
                         break;
                 }
 
-                if (logNeeded) Logger.Log(errorLog); ;
+                if (logNeeded) 
+                    Logger.LogAsync(errorLog);
             }
             else
             {
@@ -67,7 +65,8 @@ namespace PMCMS.PL
                     Source = "Global.asax",
                     Detail = "Bilinmeyen Hata"
                 };
-                Logger.Log(errorLog);
+
+                Logger.LogAsync(errorLog);
 
                 Response.Redirect("/Home/NotFound/");
             }

@@ -1,5 +1,6 @@
 ﻿using PMCMS.DAL;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace PMCMS.BLL.Repos
@@ -89,6 +90,14 @@ namespace PMCMS.BLL.Repos
             else result = "Seller object cannot be null";
             return sonuc;
         }
-        
+        public List<Seller> GetSellersOfUser(int userId)
+        {
+            return (from s in db.Sellers
+                    join e in db.Employees on s.SellerID equals e.SellerID
+                    join u in db.Users on e.UserID equals u.UserID
+                    where u.UserID == userId
+                    orderby s.CreateDate descending
+                    select s).ToList();
+        }
     }
 }
