@@ -1,8 +1,5 @@
-﻿using System;
+﻿using PMCMS.DAL;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
 namespace PMCMS.PL.Models
 {
     public class SellerPackage
@@ -10,5 +7,6 @@ namespace PMCMS.PL.Models
         public string SellerName { get; set; }
         public string SellerJSON { get; set; }
         public List<string> MenuJSONs { get; set; }
+        public List<Menu> Menus { get; set; }
     }
 }

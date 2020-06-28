@@ -9,7 +9,7 @@ namespace PMCMS.BLL.Utility
     public class ApiResponse
     {
         public bool Status { get; set; }
-        public string Result { get; set; }
+        public object Result { get; set; }
         public Exception Exception { get; set; }
     }
 }
