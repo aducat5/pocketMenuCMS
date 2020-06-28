@@ -17,7 +17,7 @@ namespace PMCMS.BLL.Repos
                 seller = db.Sellers.Find(id);
             return seller;
         }
-        public bool InsertSeller(Seller newSeller, out string result)
+        public Seller InsertSeller(Seller newSeller, out string result)
         {
             newSeller.CreateDate = DateTime.Now;
             newSeller.UpdateDate = DateTime.Now;
@@ -27,7 +27,7 @@ namespace PMCMS.BLL.Repos
                 if (CheckSeller(newSeller.SellerName))
                 {
                     result = "This name is already in use.";
-                    return false;
+                    return null;
                 }
                 else
                 {
@@ -35,19 +35,19 @@ namespace PMCMS.BLL.Repos
                     if (db.SaveChanges() > 0)
                     {
                         result = "A new restaurant created.";
-                        return true;
+                        return newSeller;
                     }
                     else
                     {
                         result = "There is a problem with the save process.";
-                        return false;
+                        return null;
                     }
                 }
             }
             catch (Exception ex)
             {
                 result = "there is an unknown error" + ex.Message;
-                return false;
+                return null;
             }
         }
         public bool DeleteSeller(int id, out string result)
@@ -71,24 +71,36 @@ namespace PMCMS.BLL.Repos
             else result = "The seller does not exists.";
             return sonuc;
         }
-        public bool UpdateSeller(Seller seller, out string result)
+        public Seller UpdateSeller(Seller seller, out string result)
         {
-            bool sonuc = false;
             if (seller != null)
             {
                 if (CheckSeller(seller.SellerID) && !CheckSeller(seller.SellerName))
                 {
                     seller.UpdateDate = DateTime.Now;
                     db.Entry(GetSeller(seller.SellerID)).CurrentValues.SetValues(seller);
-                    if (db.SaveChanges() > 0) 
+                    if (db.SaveChanges() > 0)
+                    {
                         result = "Update succeeded.";
-                    else 
+                        return seller;
+                    }
+                    else
+                    {
                         result = "There is an unknown exception";
+                        return seller;
+                    }
                 }
-                else result = "Seller does not exists.";
+                else
+                {
+                    result = "Seller does not exists.";
+                    return null;
+                }
             }
-            else result = "Seller object cannot be null";
-            return sonuc;
+            else
+            {
+                result = "Seller object cannot be null";
+                return null;
+            }
         }
         public List<Seller> GetSellersOfUser(int userId)
         {
