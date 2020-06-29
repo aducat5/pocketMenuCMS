@@ -66,11 +66,11 @@ namespace PMCMS.PL.Controllers
         public ActionResult Recover() => View();
 
         [UserAuth]
-        public void LogOut()
+        public ActionResult LogOut()
         {
             //TODO: Say drop session to api
             Session["user"] = null;
-            RedirectToAction("Landing", "Home");
+            return RedirectToAction("In");
         }
 
     }
