@@ -9,10 +9,119 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>Display</title>
+    <link href="~/Content/src/main.css" rel="stylesheet" />
+    <script src="~/Content/src/assets/scripts/main.js"></script>
 </head>
 <body>
-    <div> 
-        @Model.SellerName
+    <div class="container">
+        <h3 id="restNamePrev" style="border-bottom:2px solid #EEEEEE; margin-bottom:20px; line-height:2">
+            @Model.SellerName
+        </h3>
+        @foreach (Menu item in Model.Menus)
+        {
+            <div id="menu-container">
+
+            </div>
+        }
+
     </div>
 </body>
 </html>
+
+<script>
+    var sellerJSON = @Html.Raw(Model.SellerJSON);
+    var menus = [];
+
+    @foreach (Menu item in Model.Menus)
+    {
+        <text>
+    var menuItem = @Html.Raw(item.ContentJSON);
+    menus.push(menuItem);
+
+        </text>
+    }
+    
+    var generateProduct = function (itemName, price, description, imageUrl) {
+        var image = "";
+        if (imageUrl != "") {
+            image = '<img src="'+ imageUrl +'" style="object-fit:cover; width:100%; height:200px; margin-top:5px;" /><br />';
+        }
+
+        var product = `<li class="list-group-item menu-product">
+                            <div class="row">
+                                <div class="" style="width:90%; margin-left:15px;">
+                                    <h5 class="list-group-item-heading" style="font-size:18px">
+                                        `+ itemName +`
+                                        <br />
+                                        <sub>`+ price +`</sub>
+                                    </h5>
+                                </div>
+                                <div class="">
+                                    <em class="fa fa-chevron-right pull-right list-arrow" style="position:relative; top: 35%; color:`+ sellerJSON.accentColor +`; font-size:24px"></em>
+                                </div>
+                            </div>
+                            <div class="details" style="display:none;">
+                                `+ image + `
+                                `+ description +`
+                                
+                            </div>
+                        </li>`;
+        return product
+    };
+
+    var generateMenu = function (title, products) {
+        
+        var menu = `<div class="menu-section">
+                    <div class="section-header-bottomline" style="border-bottom-color:`+ sellerJSON.accentColor +`;">
+                        <h4>`+ title +`</h4>
+                    </div>
+                    <ul class="list-group">
+                        `;
+
+        for (var i = 0; i < products.length; i++) {
+            var product = products[i];
+            menu += generateProduct(product.productName, product.price, product.description, product.imageUrl);
+        }
+
+        menu += "</ul></div>";
+        return menu;
+    };
+
+    var menuContainer = document.getElementById("menu-container");
+
+    for (var i = 0; i < menus.length; i++) {
+        var menu = menus[i];
+        menuContainer.innerHTML += generateMenu(menu.title, menu.data);
+    }
+
+    
+    function bindListItems() {
+
+        var items = document.getElementsByClassName("list-group-item");
+        for (var i = 0; i < items.length; i++) {
+            var item = items[i];
+            item.addEventListener("click", function () {
+                //toggle image card
+                var card = this.querySelector(".details");
+                var listArrow = this.querySelector(".list-arrow");
+
+                if (card.style.display === "none") {
+                    listArrow.style.color = "#6c757d";
+                    listArrow.classList.remove("fa-chevron-right");
+                    listArrow.classList.add("fa-chevron-down");
+                    card.style.display = "block";
+                } else {
+                    listArrow.style.color = sellerJSON.accentColor;
+                    listArrow.classList.add("fa-chevron-right");
+                    listArrow.classList.remove("fa-chevron-down");
+                    card.style.display = "none";
+                }
+                //console.log(item);
+            });
+        }
+
+    }
+            
+    bindListItems();
+
+</script>
