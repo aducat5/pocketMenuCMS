@@ -14,9 +14,9 @@ namespace PMCMS.PL.Controllers
             return View();
         }
 
-        public ActionResult Display()
+        public ActionResult Display(int id)
         {
-            return View();
+            return View(id);
         }
 
         public ActionResult Edit()

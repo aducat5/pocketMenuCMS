@@ -15,6 +15,12 @@ namespace PMCMS.PL
             //routes.IgnoreRoute("api/");
 
             routes.MapRoute(
+                name: "Menu",
+                url: "menu-{id}",
+                defaults: new { controller = "Menu", action = "Display" }
+            );
+
+            routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Dashboard", id = UrlParameter.Optional }

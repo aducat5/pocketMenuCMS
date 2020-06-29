@@ -98,7 +98,7 @@ namespace PMCMS.Api
 
             package.SellerName = seller.SellerName;
             package.SellerJSON = seller.SellerJSON;
-            package.MenuJSONs = new List<string>();
+            package.Data = new List<string>();
 
             if (seller.Menus.Count < 1)
                 return Json(package);
@@ -108,7 +108,7 @@ namespace PMCMS.Api
                 if (menu.IsDeleted)
                     continue;
 
-                package.MenuJSONs.Add(menu.ContentJSON);
+                package.Data.Add(menu.ContentJSON);
             }
 
             return Json(package);

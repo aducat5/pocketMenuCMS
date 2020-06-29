@@ -1,7 +1,58 @@
-﻿
+﻿@model List<Seller>
 @{
     ViewBag.Title = "GetQr";
 }
 
-<h2>GetQr</h2>
+<h2>Get QrCode for your restaurants</h2>
+<hr />
+<div class="row">
 
+    @foreach (Seller seller in Model)
+    {
+        <button id="get-qr-for-@seller.SellerID" class="btn btn-outline-appcolor" onclick="btnGenerateClick(@seller.SellerID)">Get QR for @seller.SellerName</button>
+    }
+
+</div>
+<hr />
+<div class="row">
+    <div class="card">
+        <div class="card-header">Qr Code</div>
+        <div class="card-body" id="qrcode">
+
+        </div>
+    </div>
+</div>
+
+@section scripts{
+
+    <script src="~/Content/src/assets/scripts/qrcode.min.js"></script>
+    <script>
+        var qrcode = new QRCode(document.getElementById("qrcode"), {
+            width: 500,
+            height: 500
+        });
+
+        var btnGenerateClick = function (id) {
+            var menuAdress = "https://pma.ist/menu-" + id;
+            console.log(menuAdress);
+            qrcode.makeCode(menuAdress);
+        };
+
+
+        function makeCode() {
+            var elText = document.getElementById("text");
+
+            if (!elText.value) {
+                alert("Input a text");
+                elText.focus();
+                return;
+            }
+
+            qrcode.makeCode(elText.value);
+        }
+
+        makeCode();
+
+    </script>
+
+}

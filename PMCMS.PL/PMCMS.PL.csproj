@@ -179,6 +179,7 @@
     <Content Include="Content\src\assets\scripts\jquery-3.5.1.min.js" />
     <Content Include="Content\src\assets\scripts\main.js" />
     <Content Include="Content\src\assets\scripts\main.pro.js" />
+    <Content Include="Content\src\assets\scripts\qrcode.min.js" />
     <Content Include="Content\src\main.css" />
     <Content Include="Content\src\main.pro.css" />
     <Content Include="favicon.ico" />
@@ -223,10 +224,10 @@
     <Content Include="Views\Restaurant\GetQr.cshtml" />
     <Content Include="Views\Restaurant\All.cshtml" />
     <Content Include="Views\Menu\All.cshtml" />
-    <Content Include="Views\Menu\Display.cshtml" />
     <Content Include="Views\Menu\Edit.cshtml" />
     <Content Include="Views\Menu\New.cshtml" />
     <Content Include="Views\Tries\Index.cshtml" />
+    <Content Include="Views\Menu\Display.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
