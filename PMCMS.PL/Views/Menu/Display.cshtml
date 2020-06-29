@@ -16,6 +16,9 @@
     <div class="container">
         <h3 id="restNamePrev" style="border-bottom:2px solid #EEEEEE; margin-bottom:20px; line-height:2">
             @Model.SellerName
+            <div class="pull-right">
+                @*<button class="btn btn-outline-dark" onclick="toggleDarkMode()">Dark Mode</button>*@
+            </div>
         </h3>
         @foreach (Menu item in Model.Menus)
         {
@@ -45,7 +48,7 @@
 
         </text>
     }
-    
+
     var generateProduct = function (itemName, price, description, imageUrl) {
         var image = "";
         if (imageUrl != "") {
@@ -68,27 +71,28 @@
                             <div class="details" style="display:none;">
                                 `+ image + `
                                 `+ description +`
-                                
+
                             </div>
                         </li>`;
         return product
     };
 
     var generateMenu = function (title, products) {
-        
-        var menu = `<div class="menu-section">
-                    <div class="section-header-bottomline" style="border-bottom-color:`+ sellerJSON.accentColor +`;">
-                        <h4>`+ title +`</h4>
-                    </div>
-                    <ul class="list-group">
-                        `;
+        var prodcutsSection = "";
 
         for (var i = 0; i < products.length; i++) {
             var product = products[i];
-            menu += generateProduct(product.productName, product.price, product.description, product.imageUrl);
+            prodcutsSection += generateProduct(product.productName, product.price, product.description, product.imageUrl);
         }
 
-        menu += "</ul></div>";
+        var menu = `<div class="menu-section">
+                    <div class="section-header-bottomline" style="border-bottom-color:`+ sellerJSON.accentColor +`;">
+                        <h5>`+ title +`</h5>
+                    </div>
+                    <ul class="list-group">
+                        `+ prodcutsSection +`
+                    </ul></div>`;
+
         return menu;
     };
 
@@ -99,7 +103,7 @@
         menuContainer.innerHTML += generateMenu(menu.title, menu.data);
     }
 
-    
+
     function bindListItems() {
 
         var items = document.getElementsByClassName("list-group-item");
@@ -126,7 +130,12 @@
         }
 
     }
-            
+
+    var toggleDarkMode = function () {
+
+    };
+
+
     bindListItems();
 
 </script>

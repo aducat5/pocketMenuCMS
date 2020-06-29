@@ -180,6 +180,7 @@
     <Content Include="Content\src\assets\scripts\main.js" />
     <Content Include="Content\src\assets\scripts\main.pro.js" />
     <Content Include="Content\src\assets\scripts\qrcode.min.js" />
+    <Content Include="Content\src\assets\switch.css" />
     <Content Include="Content\src\main.css" />
     <Content Include="Content\src\main.pro.css" />
     <Content Include="favicon.ico" />
