@@ -1,0 +1,15 @@
+﻿@model Menu
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+@using (Html.BeginForm("Index", "Tries", FormMethod.Post, new { @class = "form-signin" }))
+{
+    <p>restid</p>
+    @Html.TextBoxFor(m => m.SellerID, new { @class = "form-control" });
+    <p>content</p>
+    @Html.TextBoxFor(m => m.ContentJSON, new { @class = "form-control" });
+    <button class="btn btn-success" type="submit">Kaydet</button>
+}

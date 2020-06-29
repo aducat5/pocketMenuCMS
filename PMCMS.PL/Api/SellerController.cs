@@ -3,6 +3,7 @@ using PMCMS.BLL.Utility;
 using PMCMS.DAL;
 using PMCMS.PL.Models;
 using System;
+using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
 using System.Web;
@@ -97,13 +98,17 @@ namespace PMCMS.Api
 
             package.SellerName = seller.SellerName;
             package.SellerJSON = seller.SellerJSON;
+            package.MenuJSONs = new List<string>();
 
             if (seller.Menus.Count < 1)
                 return Json(package);
 
-            foreach (Menu menu in seller.Menus)
+            foreach (DAL.Menu menu in seller.Menus)
             {
-                package.Menus.Add(menu);
+                if (menu.IsDeleted)
+                    continue;
+
+                package.MenuJSONs.Add(menu.ContentJSON);
             }
 
             return Json(package);

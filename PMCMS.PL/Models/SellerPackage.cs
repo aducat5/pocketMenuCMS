@@ -6,7 +6,6 @@ namespace PMCMS.PL.Models
     {
         public string SellerName { get; set; }
         public string SellerJSON { get; set; }
-        public List<string> MenuJSONs { get; set; }
-        public List<Menu> Menus { get; set; }
+        public List<string> Data { get; set; }
     }
 }
