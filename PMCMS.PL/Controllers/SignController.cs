@@ -66,7 +66,7 @@ namespace PMCMS.PL.Controllers
         public ActionResult Recover() => View();
 
         [UserAuth]
-        public ActionResult LogOut()
+        public ActionResult Out()
         {
             //TODO: Say drop session to api
             Session["user"] = null;

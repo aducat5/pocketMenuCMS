@@ -94,12 +94,12 @@
                                         <div tabindex="-1" role="menu" aria-hidden="true" class="dropdown-menu dropdown-menu-right">
                                             <button type="button" tabindex="0" class="dropdown-item">User Account</button>
                                             <div tabindex="-1" class="dropdown-divider"></div>
-                                            <a href="Sign/LogOut" tabindex="0" class="dropdown-item">Sign Out</a>
+                                            <a href="@Url.Action("Out", "Sign")" tabindex="0" class="dropdown-item">Sign Out</a>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="widget-content-right header-user-info ml-3">
-                                    <a href="/Sign/LogOut" class="mb-2 mr-2 btn-transition btn btn-appcolor btn-sm">
+                                    <a href="@Url.Action("Out", "Sign")" class="mb-2 mr-2 btn-transition btn btn-appcolor btn-sm">
                                         <i class="pe-7s-power pr-1 pl-1"></i>
                                     </a>
                                 </div>
