@@ -230,6 +230,7 @@
     <Content Include="Views\Tries\Index.cshtml" />
     <Content Include="Views\Menu\Display.cshtml" />
     <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
+    <Content Include="Views\Sign\InDev.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />

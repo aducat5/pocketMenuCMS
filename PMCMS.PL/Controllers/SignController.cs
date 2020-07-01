@@ -33,7 +33,11 @@ namespace PMCMS.PL.Controllers
         }
 
         [NonUserAuth]
-        public ActionResult In() => View();
+        public ActionResult In()
+        {
+            return RedirectToAction("InDev");
+            return View();
+        }
 
         [NonUserAuth, HttpPost]
         public ActionResult In(string email, string password)
@@ -72,6 +76,10 @@ namespace PMCMS.PL.Controllers
             Session["user"] = null;
             return RedirectToAction("In");
         }
+
+        [NonUserAuth]
+        public ActionResult InDev() => View();
+
 
     }
 }
