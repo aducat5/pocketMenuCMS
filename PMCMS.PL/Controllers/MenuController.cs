@@ -23,7 +23,7 @@ namespace PMCMS.PL.Controllers
             string machine = HttpContext.Request.UserAgent;
             string ip = HttpContext.Request.UserHostAddress;
             string logMessage = string.Format("{0}|{1}", machine, ip);
-            Logger.LogAsync(logMessage);
+            //Logger.LogAsync(logMessage);
 
             SellerRepo sr = new SellerRepo();
             Seller seller = sr.GetSeller(id);
