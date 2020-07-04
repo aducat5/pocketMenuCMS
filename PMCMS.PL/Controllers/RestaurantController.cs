@@ -18,8 +18,20 @@ namespace PMCMS.PL.Controllers
         public ActionResult All() => View();
 
         [UserAuth]
-        public ActionResult Edit() => View();
-        
+        public ActionResult Edit()
+        {
+            User current = Session["user"] as User;
+            List<Seller> sellersOfUser = sr.GetSellersOfUser(current.UserID);
+            if (sellersOfUser.Count > 0)
+            {
+                return View(sellersOfUser);
+            }
+            else
+            {
+                return RedirectToAction("New");
+            }
+        }
+
         [UserAuth]
         public ActionResult New() => View();
 
