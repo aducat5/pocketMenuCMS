@@ -7,8 +7,19 @@ namespace PMCMS.BLL.Repos
     public class UserRepo
     {
         private static readonly PocketMenuDBEntities db = DBTool.GetInstance();
-        public bool CheckUser(int id) => db.Users.Any(u => u.UserID == id);
-        public bool CheckUser(string email) => db.Users.Any(u => u.Email == email);
+        public bool CheckUser(int id)
+        {
+            using (db)
+            {
+                return db.Users.Any(u => u.UserID == id);
+            }
+        }
+
+        public bool CheckUser(string email)
+        {
+            return db.Users.Any(u => u.Email == email);
+        }
+
         public User GetUser(int id)
         {
             User user = null;
@@ -24,7 +35,7 @@ namespace PMCMS.BLL.Repos
             else
                 return null;
         }
-        public bool InsertUser(User newUser, out string islemSonucu)
+        public bool InsertUser(User newUser, out string result)
         {
             newUser.CreateDate = DateTime.Now;
             newUser.UpdateDate = DateTime.Now;
@@ -33,32 +44,32 @@ namespace PMCMS.BLL.Repos
             {
                 if (CheckUser(newUser.Email))
                 {
-                    islemSonucu = "Bu email zaten kullanımda.";
+                    result = "This email is already in use.";
                     return false;
                 }
                 else
                 {
-                    newUser.Password = BCrypt.Net.BCrypt.HashPassword(newUser.Password); 
+                    newUser.Password = BCrypt.Net.BCrypt.HashPassword(newUser.Password);
                     db.Users.Add(newUser);
                     if (db.SaveChanges() > 0)
                     {
-                        islemSonucu = "Başarılı";
+                        result = "Insert is successful.";
                         return true;
                     }
                     else
                     {
-                        islemSonucu = "Kayıt sırasında bir hata oluştu.";
+                        result = "Something went wrong, please call the support team.";
                         return false;
                     }
                 }
             }
             catch (Exception ex)
             {
-                islemSonucu = "Bilinmeyen bir hata oluştu" + ex.Message;
+                result = "Unhandled exception: " + ex.Message;
                 return false;
             }
         }
-        public bool DeleteUser(int id, out string islemSonucu)
+        public bool DeleteUser(int id, out string result)
         {
             bool sonuc = false;
             if (CheckUser(id))
@@ -67,19 +78,25 @@ namespace PMCMS.BLL.Repos
                 user.IsDeleted = true;
                 try
                 {
-                    sonuc = db.SaveChanges() > 0;
-                    if (sonuc) islemSonucu = "Silme işlemi başarılı.";
-                    else islemSonucu = "Bir hata oluştu.";
+                    using (var db = DBTool.GetNewInstance())
+                    {
+                        sonuc = db.SaveChanges() > 0;
+                    }
+
+                    if (sonuc) 
+                        result = "Delete is successful.";
+                    else
+                        result = "Something went wrong, please call the support team.";
                 }
                 catch (Exception ex)
                 {
-                    islemSonucu = ex.Message;
+                    result = ex.Message;
                 }
             }
-            else islemSonucu = "Silinmek istenen kullancı bulunamadı.";
+            else result = "The user you are trying to delete could not be found.";
             return sonuc;
         }
-        public bool UpdateUser(User user, out string islemSonucu)
+        public bool UpdateUser(User user, out string result)
         {
             bool sonuc = false;
             if (user != null)
@@ -88,17 +105,18 @@ namespace PMCMS.BLL.Repos
                 {
                     user.Password = BCrypt.Net.BCrypt.HashPassword(user.Password);
                     user.UpdateDate = DateTime.Now;
+
                     db.Entry(GetUser(user.UserID)).CurrentValues.SetValues(user);
-                    if (db.SaveChanges() > 0) 
-                        islemSonucu = "Güncelleme başarılı";
-                    else 
-                        islemSonucu = "Bir hata oluştu";
+                    if (db.SaveChanges() > 0)
+                        result = "Update is successful";
+                    else
+                        result = "Something went wrong, please call the support team.";
                 }
                 else 
-                    islemSonucu = "Kullanıcı Bulunamadı.";
+                    result = "Kullanıcı Bulunamadı.";
             }
             else 
-                islemSonucu = "Kullanıcı nesnesi boş olamaz";
+                result = "Kullanıcı nesnesi boş olamaz";
             return sonuc;
         }
 

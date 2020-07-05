@@ -1,6 +1,7 @@
 ﻿
 @{
     Layout = null;
+    string regState = Request.Params["regState"];
 }
 
 <!DOCTYPE html>
@@ -64,6 +65,18 @@
                     </div>
                     <div class="h-100 d-flex bg-white justify-content-center align-items-center col-md-12 col-lg-8">
                         <div class="mx-auto app-login-box col-sm-12 col-md-10 col-lg-9">
+                            @{
+                                if (regState == "suc")
+                                {
+                                    <div class="row">
+                                        <div class="col-md-8">
+                                            <div class="alert alert-success">
+                                                <h5>Congratulations!</h5> Your account is ready to use! You can login and start using PocketMenu application.
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                            }
                             <div class="app-logo"></div>
                             <h4 class="mb-0">
                                 <span class="d-block">Welcome back,</span>

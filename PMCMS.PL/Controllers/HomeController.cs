@@ -11,7 +11,7 @@ namespace PMCMS.PL.Controllers
 {
     public class HomeController : Controller
     {
-        SellerRepo sr = new SellerRepo();
+        private readonly SellerRepo sr = new SellerRepo();
         [UserAuth]
         public ActionResult Dashboard()
         {
