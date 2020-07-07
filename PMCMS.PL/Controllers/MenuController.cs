@@ -15,7 +15,7 @@ namespace PMCMS.PL.Controllers
     {
         private readonly SellerRepo sr = new SellerRepo();
         // GET: Menu
-        [UserAuth]
+        //[UserAuth]
         public ActionResult All()
         {
             return View();

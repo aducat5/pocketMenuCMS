@@ -8,90 +8,256 @@
 <hr />
 
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-5">
         <div class="main-card mb-3 card">
             <div class="card-body">
-                <h3>
-                    Section Header
-                    <a href="@Url.Action("Edit", "Menu", new { id = 1 })"><em class="fa fa-edit text-warning pull-right edit-button" style="cursor:pointer" id="1"></em></a>
-                </h3>
-                <ul class="list-group">
-                    <li class="list-group-item">
-                        <h5 class="list-group-item-heading">
-                            List group item heading
-                            <em class="fa fa-chevron-right pull-right list-arrow" style="margin-top:5px; color:#FF5733"></em>
-                        </h5>
-                        <div class="card" style="display:none;">
-                            <img src="~/Content/src/assets/images/city.jpg" style="object-fit:cover; width:100%; height:200px; margin-top:5px;" />
+                <div class="list-container">
+                    <div class="list">
+                        <br class="disabled" />
+                        <div class="item disabled">
+                            <button class="btn btn-outline-success btn-sm pull-right" id="add-section">New Section <em class="fa fa-plus"></em></button>
+                            <button class="btn btn-success btn-sm">Save Menu <em class="fa fa-check"></em></button>
                         </div>
-                    </li>
-                    <li class="list-group-item">
-                        <h5 class="list-group-item-heading">
-                            List group item heading
-                            <em class="fa fa-chevron-right pull-right list-arrow" style="margin-top:5px; color:#FF5733"></em>
-                        </h5>
-                        <div class="card" style="display:none;">
-                            <img src="~/Content/src/assets/images/city.jpg" style="object-fit:cover; width:100%; height:200px; margin-top:5px;" />
-                        </div>
-                    </li>
-                    <li class="list-group-item">
-                        <h5 class="list-group-item-heading">
-                            List group item heading
-                            <em class="fa fa-chevron-right pull-right list-arrow" style="margin-top:5px; color:#FF5733"></em>
-                        </h5>
-                        <div class="card" style="display:none;">
-                            <img src="~/Content/src/assets/images/city.jpg" style="object-fit:cover; width:100%; height:200px; margin-top:5px;" />
-                        </div>
-                    </li>
-                </ul>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </div>
 
+<!-- Modals -->
+@section modals{
+    <div id="modal-container"></div>
+}
+
 @section scripts{
+    <script src="~/Content/src/assets/scripts/jquery-3.5.1.min.js"></script>
+    <script src="~/Content/src/assets/scripts/html5sortable.js"></script>
     <script>
-        function bindListItems() {
 
-            var items = document.getElementsByClassName("list-group-item");
+        var generateSection = function (sectionName, sectionNo) {
+            var $sectionTemp = $(`
+                            <div class="item">
+                                <div class="section-header-bottomline h4" data-toggle="collapse" href="#section`+ sectionNo +`" aria-expanded="false">
+                                    <em class="pe-7s-pen text-sm-left edit-section"></em>
+                                    <label class="section-name">`+ sectionName +`</label>
+                                    <em class="pe-7s-angle-right pull-right section-icon"></em>
+                                </div>
+                                <div class="sublist collapse" id="section`+ sectionNo +`">
+                                    <div class="subitem disabled">
+                                        <button class="btn btn-outline-success btn-sm pull-right btn-newitem">New Item <em class="fa fa-plus"></em></button>
+                                    </div>
+                                </div>
+                            </div>`);
 
-            for (var i = 0; i < items.length; i++) {
-                var item = items[i];
-                item.addEventListener("click", function () {
-                    //toggle image card
-                    var card = this.querySelector(".card");
-                    var listArrow = this.querySelector(".list-arrow");
+            //var $newItem = generateItem(sectionNo, 0);
 
-                    if (card.style.display === "none") {
-                        listArrow.style.color = "#6c757d";
-                        listArrow.classList.remove("fa-chevron-right");
-                        listArrow.classList.add("fa-chevron-down");
-                        card.style.display = "block";
-                    } else {
-                        listArrow.style.color = "#FF5733";
-                        listArrow.classList.add("fa-chevron-right");
-                        listArrow.classList.remove("fa-chevron-down");
-                        card.style.display = "none";
-                    }
-                    //console.log(item);
-                });
-            }
+            //$newItem.insertBefore($sectionTemp.find(".sublist > .disabled"));          
 
-        }
+            $sectionTemp.find(".sublist").append($brNonItem);
+            $sectionTemp.append($brNonItem);
 
-        function bindEditButtons() {
-            items = document.getElementsByClassName("edit-button");
+            return $sectionTemp;
+        };
 
-            for (var i = 0; i < items.length; i++) {
-                var item = items[i];
-                item.addEventListener("click", function () {
+        var generateItem = function (sectionNo, itemNo) {
+            $itemTemp = $(`
+                                <div class="subitem">
+                                    <h5 class="list-group-item-heading">
+                                        <label class="list-itemname">New Product</label>
+                                        <em class="pe-7s-edit pull-right fa-fw section`+ sectionNo + `item` + itemNo +`" style="color:#FF5733;" data-toggle="modal" data-target="#section`+ sectionNo + `item` + itemNo +`"></em>
+                                    </h5>
+                                </div>
+                        `);
+            return $itemTemp;
+        };
 
-                });
-            }
-        }
+        var $brNonItem = "<br class='disabled' />";
 
-        bindEditButtons();
+        var bind = function () {
+            bindItems();
+            $("#add-section").on("click", addSection);
+        };
 
-        bindListItems();
+        var bindItems = function () {
+            $(".section-header-bottomline").on("click.toggleChevron", function () {
+                $(this).find("em.section-icon").toggleClass("pe-7s-angle-right").toggleClass("pe-7s-angle-down");
+            });
+
+            $(".edit-section").off("click.editsection").on("click.editsection", function () {
+                event.stopPropagation();
+                $(this).toggleClass("text-appcolor");
+                var editableState = $(this).next().attr("contenteditable");
+                if (editableState == "true")
+                    $(this).next().attr("contenteditable", false);
+                else
+                    $(this).next().attr("contenteditable", true);
+
+                $(this).next().focus();
+            });
+
+            $("label.section-name").off('keypress.editsection').on('keypress.editsection', function (e) {
+                if (e.which == 13) {
+                    $(this).prev().click();
+                }
+            });
+
+            $("label.item-name").off('keypress.editsection').on('keypress.editsection', function (e) {
+                if (e.which == 13) {
+                    $(this).prev().click();
+                }
+            });
+
+            $(".btn-save-product").off("click.saveproduct").on("click.saveproduct", saveProduct);
+
+            sortable('.list', {
+                items: ':not(.disabled)',
+                forcePlaceholderSize: true,
+                placeholderClass: 'ph-class',
+            });
+            sortable('.sublist', {
+                items: ':not(.disabled)',
+                forcePlaceholderSize: true,
+                placeholderClass: 'ph-sub-class',
+            });
+        };
+
+        var addSection = function () {
+            var sectionCount = $(".item").length;
+            var $newSection = generateSection("New Section", sectionCount);
+            $newSection.insertBefore($(this).parent());
+            $newSection.find(".btn-newitem").off("click.newitem").on("click.newitem", addItem).click();
+            bindItems();
+        };
+
+        var addItem = function () {
+            var sectionNo = $(this).parent().parent().prev().attr("href").split("#section")[1];
+            var itemNo = $(this).parent().parent().find(".subitem").length - 1;
+            var $newItem = generateItem(sectionNo, itemNo);
+            $newItem.insertBefore($(this).parent());
+
+            var $newModal = generateModal(sectionNo, itemNo);
+            $("#modal-container").append($newModal);
+            bindItems();
+        };
+
+        var saveProduct = function () {
+            var itemName = $(this).parent().parent().find("label.item-name").text();
+            var stamp = $(this).attr("data-stamp");
+            //var sectionNo = stamp.split("section")[1].split("item")[0];
+            //var itemNo = stamp.split("item")[1];
+            $("em." + stamp).prev().text(itemName);
+            $(this).prev().click();
+        };
+
+        var generateModal = function (sectionNo, itemNo) {
+            var stamp = `section` + sectionNo + `item` + itemNo;
+            var $modalTemp = `        
+                            <div class="modal fade" id="`+ stamp + `" tabindex="-1" role="dialog" aria-labelledby="` + stamp + `" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <div class="h5 modal-title">
+                                                <em class="pe-7s-pen text-sm-left edit-section"></em>
+                                                <label class="item-name">New Product</label>
+                                            </div>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="input-group">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text">Price</span>
+                                                    </div>
+                                                    <input placeholder="25₺..." type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                            <br  />
+                                            <div class="col-md-12">
+                                                <div class="input-group">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text">Description</span>
+                                                    </div>
+                                                    <textarea class="form-control" placeholder="description..."></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <br />
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="input-group">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text" id="inputGroupFileAddon01">Product Image</span>
+                                                    </div>
+                                                    <div class="custom-file">
+                                                        <input type="file" class="custom-file-input" id="inputGroupFile01"
+                                                               aria-describedby="inputGroupFileAddon01">
+                                                        <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                            <button type="button" class="btn btn-primary btn-save-product" data-stamp="`+ stamp +`">Save changes</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            `;
+            return $modalTemp;
+        };
+
+        bind();
     </script>
+}
+
+@section styles{
+    <style>
+        label.section-name{
+            width:80%
+        }
+        .section-icon {
+            color: #FF5733;
+            font-size: 40px;
+            /*margin-top: 10px;*/
+            /*margin-right: 5px;*/
+
+        }
+
+        .ph-sub-class {
+            background-color: #EAEAEA;
+            margin: 20px;
+        }
+
+        .ph-class {
+            background-color: #EAEAEA;
+            /*margin: 20px;*/
+        }
+
+        .section-header-bottomline {
+            line-height: 40px;
+            border-bottom-width:1.5px
+        }
+
+        .item {
+        }
+
+        .sublist {
+            /*margin-left: 20px;*/
+        }
+
+        .subitem {
+            /*font-size: 11px;*/
+            margin: 20px;
+            /*border-bottom-style:solid;
+            border-bottom-width:1px;
+            border-bottom-color:#EAEAEA;*/
+        }
+    </style>
 }

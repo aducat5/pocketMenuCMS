@@ -176,6 +176,7 @@
     <Content Include="Content\src\assets\images\logo-inverse.png" />
     <Content Include="Content\src\assets\images\logo.png" />
     <Content Include="Content\src\assets\scripts\custom.js" />
+    <Content Include="Content\src\assets\scripts\html5sortable.js" />
     <Content Include="Content\src\assets\scripts\jquery-3.5.1.min.js" />
     <Content Include="Content\src\assets\scripts\main.js" />
     <Content Include="Content\src\assets\scripts\main.pro.js" />
@@ -212,6 +213,7 @@
     <Content Include="Content\src\assets\fonts\Pe-icon-7-stroke.eot" />
     <Content Include="Content\src\assets\fonts\Pe-icon-7-stroke.ttf" />
     <Content Include="Content\src\assets\fonts\Pe-icon-7-stroke.woff" />
+    <Content Include="libman.json" />
     <None Include="packages.config" />
     <Content Include="Views\Sign\Up.cshtml" />
     <Content Include="Views\Sign\In.cshtml" />
