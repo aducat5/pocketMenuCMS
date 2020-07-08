@@ -1,6 +1,7 @@
 ﻿
 @{
-    ViewBag.Title = "All";
+    ViewBag.Title = "Build Menu";
+    ViewBag.PageDesc = "Create your menu by adding sections and products under. You can use the pen icon to rename the sections and products.";
 }
 
 <h2>All</h2>
@@ -8,15 +9,33 @@
 <hr />
 
 <div class="row">
-    <div class="col-md-5">
+    <div class="col-md-6">
         <div class="main-card mb-3 card">
             <div class="card-body">
+                <div id="no-content"></div>
                 <div class="list-container">
-                    <div class="list">
-                        <br class="disabled" />
+                    <div class="list" data-count="0">
                         <div class="item disabled">
                             <button class="btn btn-outline-success btn-sm pull-right" id="add-section">New Section <em class="fa fa-plus"></em></button>
                             <button class="btn btn-success btn-sm">Save Menu <em class="fa fa-check"></em></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="main-card mb-3 card">
+            <div class="card-body bg-danger">
+                <div class="trash-container">
+                    <div class="trash-list" data-count="0">
+                        <div class="trash-item text-white text-center">
+                            Just drop the sections you want to delete to here!
+                            <br />
+                            <br />
+                        </div>
+                        <div class="trash-item disabled">
+                            <button class="btn btn-danger btn-block pull-right" id="clear-trash">Clear Trash <em class="fa fa-recycle"></em></button>
                         </div>
                     </div>
                 </div>
@@ -34,6 +53,23 @@
     <script src="~/Content/src/assets/scripts/jquery-3.5.1.min.js"></script>
     <script src="~/Content/src/assets/scripts/html5sortable.js"></script>
     <script>
+        var restData = "";
+        var $nocontent = `
+                    <div class="row" style="color:#EAEAEA; margin:50px">
+                        <div class="col-md-12 text-center">
+                            <em class="fa fa-leaf fa-6x"></em>
+                        </div>
+                        <br />
+                        <div class="col-md-12 text-center">
+                            <h4>There is no sections here.</h4>
+                        </div>
+                        <div class="col-md-12 text-center">
+                            <p>
+                                Please start by adding sections from the button below.
+                            </p>
+                        </div>
+                    </div>
+        `;
 
         var generateSection = function (sectionName, sectionNo) {
             var $sectionTemp = $(`
@@ -43,16 +79,13 @@
                                     <label class="section-name">`+ sectionName +`</label>
                                     <em class="pe-7s-angle-right pull-right section-icon"></em>
                                 </div>
-                                <div class="sublist collapse" id="section`+ sectionNo +`">
+                                <div class="sublist collapse" id="section`+ sectionNo +`" data-count="0">
                                     <div class="subitem disabled">
                                         <button class="btn btn-outline-success btn-sm pull-right btn-newitem">New Item <em class="fa fa-plus"></em></button>
                                     </div>
                                 </div>
                             </div>`);
-
-            //var $newItem = generateItem(sectionNo, 0);
-
-            //$newItem.insertBefore($sectionTemp.find(".sublist > .disabled"));          
+    
 
             $sectionTemp.find(".sublist").append($brNonItem);
             $sectionTemp.append($brNonItem);
@@ -61,13 +94,15 @@
         };
 
         var generateItem = function (sectionNo, itemNo) {
+            var stamp = `section` + sectionNo + `item` + itemNo;
             $itemTemp = $(`
-                                <div class="subitem">
-                                    <h5 class="list-group-item-heading">
-                                        <label class="list-itemname">New Product</label>
-                                        <em class="pe-7s-edit pull-right fa-fw section`+ sectionNo + `item` + itemNo +`" style="color:#FF5733;" data-toggle="modal" data-target="#section`+ sectionNo + `item` + itemNo +`"></em>
-                                    </h5>
-                                </div>
+                        <div class="subitem `+ stamp + `">
+                            <h5 class="list-group-item-heading">
+                                <em class="pe-7s-trash pull-right remove-item text-danger fa-fw `+ stamp + `"data-toggle="modal" data-target="#alert`+ stamp + `"></em>
+                                <label class="list-itemname">New Product</label>
+                                <em class="pe-7s-edit pull-right fa-fw `+ stamp + `" style="color:#FF5733;" data-toggle="modal" data-target="#`+ stamp + `"></em>
+                            </h5>
+                        </div>
                         `);
             return $itemTemp;
         };
@@ -75,12 +110,17 @@
         var $brNonItem = "<br class='disabled' />";
 
         var bind = function () {
+            if (restData == "")
+                toggleNoContent();
             bindItems();
-            $("#add-section").on("click", addSection);
+            $("#add-section").off("click").on("click", addSection);
+            $("#clear-trash").off("click").on("click", function () {
+                $(".trash-list").find(".item").remove();
+            });
         };
 
         var bindItems = function () {
-            $(".section-header-bottomline").on("click.toggleChevron", function () {
+            $(".section-header-bottomline").off("click.toggleChevron").on("click.toggleChevron", function () {
                 $(this).find("em.section-icon").toggleClass("pe-7s-angle-right").toggleClass("pe-7s-angle-down");
             });
 
@@ -109,35 +149,63 @@
             });
 
             $(".btn-save-product").off("click.saveproduct").on("click.saveproduct", saveProduct);
+            $(".btn-remove-product").off("click.deleteproduct").on("click.deleteproduct", deleteProduct);
+            $("input[type=file]").off("change").on("change", uploadFile);
 
             sortable('.list', {
                 items: ':not(.disabled)',
                 forcePlaceholderSize: true,
                 placeholderClass: 'ph-class',
+                acceptFrom: '.trash-list'
             });
             sortable('.sublist', {
                 items: ':not(.disabled)',
                 forcePlaceholderSize: true,
                 placeholderClass: 'ph-sub-class',
+                //acceptFrom: '.trash-sublist'
+            });
+
+            sortable('.trash-list', {
+                items: ':not(.disabled)',
+                forcePlaceholderSize: true,
+                placeholderClass: 'ph-class',
+                acceptFrom: '.list'
             });
         };
 
         var addSection = function () {
-            var sectionCount = $(".item").length;
+            var sectionCount = $(".list").attr("data-count");
             var $newSection = generateSection("New Section", sectionCount);
             $newSection.insertBefore($(this).parent());
             $newSection.find(".btn-newitem").off("click.newitem").on("click.newitem", addItem).click();
+            sectionCount++;
+            $(".list").attr("data-count", sectionCount);
+            //toggleNoContent();
+            $("#no-content").html("");
             bindItems();
+        };
+
+        var toggleNoContent = function () {
+            var $noContentContainer = $("#no-content");
+            if ($noContentContainer.html() == "") {
+                $noContentContainer.append($nocontent);
+            } else {
+                $noContentContainer.html("");
+            }
         };
 
         var addItem = function () {
             var sectionNo = $(this).parent().parent().prev().attr("href").split("#section")[1];
-            var itemNo = $(this).parent().parent().find(".subitem").length - 1;
+            var itemNo = $(this).parent().parent().attr("data-count");
             var $newItem = generateItem(sectionNo, itemNo);
             $newItem.insertBefore($(this).parent());
 
             var $newModal = generateModal(sectionNo, itemNo);
             $("#modal-container").append($newModal);
+
+            itemNo++;
+            $(this).parent().parent().attr("data-count", itemNo);
+
             bindItems();
         };
 
@@ -150,10 +218,17 @@
             $(this).prev().click();
         };
 
+        var deleteProduct = function () {
+            var stamp = $(this).attr("data-stamp").split("alert")[1];
+            $("div." + stamp).remove();
+            bindItems();
+            $(this).prev().click();
+        };
+
         var generateModal = function (sectionNo, itemNo) {
             var stamp = `section` + sectionNo + `item` + itemNo;
             var $modalTemp = `        
-                            <div class="modal fade" id="`+ stamp + `" tabindex="-1" role="dialog" aria-labelledby="` + stamp + `" aria-hidden="true">
+                            <div class="modal fade `+ stamp + `" id="`+ stamp + `" tabindex="-1" role="dialog" aria-labelledby="` + stamp + `" aria-hidden="true">
                                 <div class="modal-dialog" role="document">
                                     <div class="modal-content">
                                         <div class="modal-header">
@@ -177,6 +252,8 @@
                                                 </div>
                                             </div>
                                             <br  />
+                                            <br  />
+                                            <br  />
                                             <div class="col-md-12">
                                                 <div class="input-group">
                                                     <div class="input-group-prepend">
@@ -194,9 +271,11 @@
                                                         <span class="input-group-text" id="inputGroupFileAddon01">Product Image</span>
                                                     </div>
                                                     <div class="custom-file">
-                                                        <input type="file" class="custom-file-input" id="inputGroupFile01"
-                                                               aria-describedby="inputGroupFileAddon01">
-                                                        <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+                                                        <form id="form`+ stamp + `" method="post" enctype="multipart/form-data">
+                                                            <input type="file" class="custom-file-input" id="inputGroupFile01"
+                                                                   aria-describedby="inputGroupFileAddon01">
+                                                            <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+                                                        </form>
                                                     </div>
                                                 </div>
                                             </div>
@@ -209,8 +288,70 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="modal fade `+ stamp + `" id="alert`+ stamp + `" tabindex="-1" role="dialog" aria-labelledby="alert` + stamp + `" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <div class="h5 modal-title">
+                                                <label class="item-name">Warning!</label>
+                                            </div>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            You are about the delete this item. Are you sure?
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                            <button type="button" class="btn btn-primary btn-remove-product" data-stamp="alert`+ stamp +`">Delete Item</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
                             `;
+
             return $modalTemp;
+        };
+
+        var uploadFile = function () {
+            var fileName = $(this).val().split("\\");
+            fileName = fileName[fileName.length - 1];
+            $(this).next().text(fileName);
+
+            var file = $(this)[0].files[0];
+            var fileData = new FormData();
+            fileData.append(file.name, file);
+            toggleLoading();
+
+            $.ajax({  
+                url: '/Home/UploadFile',  
+                type: "POST",  
+                contentType: false, // Not to set any content header  
+                processData: false, // Not to process data  
+                data: fileData,  
+                success: function (result) {
+                    toggleLoading();
+                    console.log(result);
+                },  
+                error: function (err) {
+                    toggleLoading();
+                    console.log(err);
+                }  
+            });  
+
+            console.log(file);
+        };
+
+        var toggleLoading = function (stamp) {
+            $loadingWrapper = $("form#form" + stamp).parent().prev().find("span");
+            if ($loadingWrapper.text() == "Product Image") {
+                $loadingWrapper.text() = "";
+                $loadingWrapper.append("<em class='fa fa-spinner fa-spin' />");
+            } else {
+                $loadingWrapper.html("Product Image");
+            }
         };
 
         bind();
@@ -219,6 +360,10 @@
 
 @section styles{
     <style>
+        em:hover{
+            cursor:pointer;
+        }
+
         label.section-name{
             width:80%
         }
@@ -246,6 +391,11 @@
         }
 
         .item {
+            /*background-color: white!important;*/
+        }
+
+        .trash-list > .item{
+            color:white!important;
         }
 
         .sublist {
