@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Globalization;
+using System.Linq;
+using System.Text;
 
 namespace PMCMS.BLL.Utility
 {
@@ -46,6 +49,20 @@ namespace PMCMS.BLL.Utility
         public static bool IsUsable(this string text)
         {
             return (!string.IsNullOrEmpty(text) && !string.IsNullOrWhiteSpace(text) && !text.Contains(".") && !text.Contains(";") && !text.Contains("&") && !text.Contains("*") && !text.Contains("/") && !text.Contains("\\"));
+        }
+
+
+        /// <summary>
+        /// Returns given text as accent characters replaced with alternative english letters and trimmer.
+        /// </summary>
+        /// <param name="text"></param>
+        /// <returns></returns>
+        public static string RemoveAccent(this string text)
+        {
+            text = text.Trim(' ');
+            text = string.Join("", text.Normalize(NormalizationForm.FormD).Where(c => char.GetUnicodeCategory(c) != UnicodeCategory.NonSpacingMark));
+            text = text.Replace('ı', 'i');
+            return text;
         }
     }
 }

@@ -33,21 +33,38 @@ namespace PMCMS.PL.Controllers
             ApiResponse response = new ApiResponse();
             if (Request.Files.Count > 0)
             {
-                HttpPostedFileBase file = Request.Files[0];
-                string fileName = DateTime.Now.ToString("yyyyMMddHHmmssffff") + "_" + file.FileName;
-                string extension = fileName.Split('.').Last();
-                if (extension == "jpg" || extension == "jpeg" || extension == "png" && file.ContentType.Split('/')[0] == "image")
+                try
                 {
-                    string fullPath = Path.Combine(Server.MapPath("~/Content/src/assets/images/menu/"), fileName);
-                    file.SaveAs(fullPath);
+                    HttpPostedFileBase file = Request.Files[0];
+                    
+                    string fileName = DateTime.Now.ToString("yyyyMMddHHmmssffff") + "_" + file.FileName;
+                    fileName = fileName.ClearText();
+                    fileName = fileName.Replace(' ', '-');
+                    fileName = fileName.RemoveAccent();
 
-                    response.Result = true;
-                    response.Result = new { message = "File uploaded on: http://pma.ist/content/src/assets/images/menu/" + fileName, url = "http://pma.ist/content/src/assets/images/menu/" + fileName};
+                    string extension = fileName.Split('.').Last();
+                    if (extension == "jpg" || extension == "jpeg" || extension == "png" && file.ContentType.Split('/')[0] == "image")
+                    {
+                        string saveFolder = "~/Content/src/assets/images/menu/";
+                        _ = Directory.CreateDirectory(Server.MapPath(saveFolder));
+                        string fullPath = Path.Combine(Server.MapPath(saveFolder), fileName);
+                        file.SaveAs(fullPath);
+
+                        response.Status = true;
+                        response.Result = new { message = "File uploaded on: http://pma.ist/content/src/assets/images/menu/" + fileName, url = "http://pma.ist/content/src/assets/images/menu/" + fileName };
+                    }
+                    else
+                    {
+                        response.Status = false;
+                        response.Result = "The filetype you are trying to upload is not allowed. Please try jpg, jpeg or png.";
+                    }
                 }
-                else
+                catch (Exception ex)
                 {
+                    Logger.LogAsync(ex);
                     response.Status = false;
-                    response.Result = "The filetype you are trying to upload is not allowed. Please try jpg, jpeg or png.";
+                    response.Exception = ex;
+                    response.Result = ex.Message;
                 }
             }
             else
