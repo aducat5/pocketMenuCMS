@@ -11,13 +11,13 @@
 <div class="row">
     <div class="col-md-6">
         <div class="main-card mb-3 card">
-            <div class="card-body">
+            <div class="card-body" style="min-height:300px">
                 <div id="no-content"></div>
                 <div class="list-container">
                     <div class="list" data-count="0">
                         <div class="item disabled">
                             <button class="btn btn-outline-success btn-sm pull-right" id="add-section">New Section <em class="fa fa-plus"></em></button>
-                            <button class="btn btn-success btn-sm">Save Menu <em class="fa fa-check"></em></button>
+                            <button class="btn btn-success btn-sm" id="btn-save">Save Menu <em class="fa fa-check"></em></button>
                         </div>
                     </div>
                 </div>
@@ -55,37 +55,37 @@
     <script>
         var restData = "";
         var $nocontent = `
-                    <div class="row" style="color:#EAEAEA; margin:50px">
-                        <div class="col-md-12 text-center">
-                            <em class="fa fa-leaf fa-6x"></em>
-                        </div>
-                        <br />
-                        <div class="col-md-12 text-center">
-                            <h4>There is no sections here.</h4>
-                        </div>
-                        <div class="col-md-12 text-center">
-                            <p>
-                                Please start by adding sections from the button below.
-                            </p>
-                        </div>
-                    </div>
-        `;
+                            <div class="row" style="color:#EAEAEA; margin:50px">
+                                <div class="col-md-12 text-center">
+                                    <em class="fa fa-leaf fa-6x"></em>
+                                </div>
+                                <br />
+                                <div class="col-md-12 text-center">
+                                    <h4>There is no sections here.</h4>
+                                </div>
+                                <div class="col-md-12 text-center">
+                                    <p>
+                                        Please start by adding sections from the button below.
+                                    </p>
+                                </div>
+                            </div>
+                `;
 
         var generateSection = function (sectionName, sectionNo) {
             var $sectionTemp = $(`
-                            <div class="item">
-                                <div class="section-header-bottomline h4" data-toggle="collapse" href="#section`+ sectionNo +`" aria-expanded="false">
-                                    <em class="pe-7s-pen text-sm-left edit-section"></em>
-                                    <label class="section-name">`+ sectionName +`</label>
-                                    <em class="pe-7s-angle-right pull-right section-icon"></em>
-                                </div>
-                                <div class="sublist collapse" id="section`+ sectionNo +`" data-count="0">
-                                    <div class="subitem disabled">
-                                        <button class="btn btn-outline-success btn-sm pull-right btn-newitem">New Item <em class="fa fa-plus"></em></button>
-                                    </div>
-                                </div>
-                            </div>`);
-    
+                                    <div class="item">
+                                        <div class="section-header-bottomline h4" data-toggle="collapse" href="#section`+ sectionNo + `" aria-expanded="false">
+                                            <em class="pe-7s-pen text-sm-left edit-section"></em>
+                                            <label class="section-name">`+ sectionName + `</label>
+                                            <em class="pe-7s-angle-right pull-right section-icon"></em>
+                                        </div>
+                                        <div class="sublist collapse" id="section`+ sectionNo + `" data-count="0">
+                                            <div class="subitem disabled">
+                                                <button class="btn btn-outline-success btn-sm pull-right btn-newitem">New Item <em class="fa fa-plus"></em></button>
+                                            </div>
+                                        </div>
+                                    </div>`);
+
 
             $sectionTemp.find(".sublist").append($brNonItem);
             $sectionTemp.append($brNonItem);
@@ -96,14 +96,14 @@
         var generateItem = function (sectionNo, itemNo) {
             var stamp = `section` + sectionNo + `item` + itemNo;
             $itemTemp = $(`
-                        <div class="subitem `+ stamp + `">
-                            <h5 class="list-group-item-heading">
-                                <em class="pe-7s-trash pull-right remove-item text-danger fa-fw `+ stamp + `"data-toggle="modal" data-target="#alert`+ stamp + `"></em>
-                                <label class="list-itemname">New Product</label>
-                                <em class="pe-7s-edit pull-right fa-fw `+ stamp + `" style="color:#FF5733;" data-toggle="modal" data-target="#`+ stamp + `"></em>
-                            </h5>
-                        </div>
-                        `);
+                                <div class="subitem `+ stamp + `" data-stamp="`+ stamp + `">
+                                    <h5 class="list-group-item-heading">
+                                        <em class="pe-7s-trash pull-right remove-item text-danger fa-fw `+ stamp + `"data-toggle="modal" data-target="#alert` + stamp + `"></em>
+                                        <label class="list-itemname">New Product</label>
+                                        <em class="pe-7s-edit pull-right fa-fw `+ stamp + `" style="color:#FF5733;" data-toggle="modal" data-target="#` + stamp + `"></em>
+                                    </h5>
+                                </div>
+                                `);
             return $itemTemp;
         };
 
@@ -117,6 +117,8 @@
             $("#clear-trash").off("click").on("click", function () {
                 $(".trash-list").find(".item").remove();
             });
+
+            $("#btn-save").off("click.save").on("click.save", saveMenu);
         };
 
         var bindItems = function () {
@@ -151,6 +153,8 @@
             $(".btn-save-product").off("click.saveproduct").on("click.saveproduct", saveProduct);
             $(".btn-remove-product").off("click.deleteproduct").on("click.deleteproduct", deleteProduct);
             $("input[type=file]").off("change").on("change", uploadFile);
+
+            $(".rlabel").find("em").off("click.clearFile").on("click.clearFile", clearUploadedFile);
 
             sortable('.list', {
                 items: ':not(.disabled)',
@@ -227,90 +231,93 @@
 
         var generateModal = function (sectionNo, itemNo) {
             var stamp = `section` + sectionNo + `item` + itemNo;
-            var $modalTemp = `        
-                            <div class="modal fade `+ stamp + `" id="`+ stamp + `" tabindex="-1" role="dialog" aria-labelledby="` + stamp + `" aria-hidden="true">
-                                <div class="modal-dialog" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <div class="h5 modal-title">
-                                                <em class="pe-7s-pen text-sm-left edit-section"></em>
-                                                <label class="item-name">New Product</label>
-                                            </div>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
-                                        <div class="modal-body">
-                                            
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <div class="input-group">
-                                                    <div class="input-group-prepend">
-                                                        <span class="input-group-text">Price</span>
+            var $modalTemp = `
+                                    <div class="modal fade `+ stamp + `" id="` + stamp + `" tabindex="-1" role="dialog" aria-labelledby="` + stamp + `" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <div class="h5 modal-title">
+                                                        <em class="pe-7s-pen text-sm-left edit-section"></em>
+                                                        <label class="item-name">New Product</label>
                                                     </div>
-                                                    <input placeholder="25₺..." type="text" class="form-control">
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
                                                 </div>
-                                            </div>
-                                            <br  />
-                                            <br  />
-                                            <br  />
-                                            <div class="col-md-12">
-                                                <div class="input-group">
-                                                    <div class="input-group-prepend">
-                                                        <span class="input-group-text">Description</span>
+                                                <div class="modal-body">
+
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <div class="input-group">
+                                                            <div class="input-group-prepend">
+                                                                <span class="input-group-text">Price</span>
+                                                            </div>
+                                                            <input placeholder="25₺..." type="text" class="form-control price `+ stamp + `">
+                                                        </div>
                                                     </div>
-                                                    <textarea class="form-control" placeholder="description..."></textarea>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <br />
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <div class="input-group">
-                                                    <div class="input-group-prepend">
-                                                        <span class="input-group-text" id="inputGroupFileAddon01">Product Image</span>
-                                                    </div>
-                                                    <div class="custom-file">
-                                                        <form id="form`+ stamp + `" method="post" enctype="multipart/form-data">
-                                                            <input type="file" class="custom-file-input" id="inputGroupFile01"
-                                                                   aria-describedby="inputGroupFileAddon01">
-                                                            <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
-                                                        </form>
+                                                    <br  />
+                                                    <br  />
+                                                    <br  />
+                                                    <div class="col-md-12">
+                                                        <div class="input-group">
+                                                            <div class="input-group-prepend">
+                                                                <span class="input-group-text">Description</span>
+                                                            </div>
+                                                            <textarea class="form-control description `+ stamp + `" placeholder="description..."></textarea>
+                                                        </div>
                                                     </div>
                                                 </div>
+                                                <br />
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <div class="input-group">
+                                                            <div class="input-group-prepend">
+                                                                <span class="` + stamp + ` input-group-text plabel">Product Image</span>
+                                                                <span class="` + stamp + ` input-group-text d-none rlabel"><em data-stamp="` + stamp + `" class="fa fa-times fa-fw text-danger"></em></span>
+                                                                <span class="` + stamp + ` input-group-text d-none llabel"><em class="` + stamp + ` fa fa-spin fa-fw fa-spin text-primary"></em></span>
+                                                            </div>
+                                                            <div class="custom-file">
+                                                                <form id="form`+ stamp + `" method="post" enctype="multipart/form-data">
+                                                                    <input type="file" class="custom-file-input" id="inputGroupFile01"
+                                                                           aria-describedby="inputGroupFileAddon01" data-stamp="` + stamp + `">
+                                                                    <label class="`+ stamp + ` custom-file-label" for="inputGroupFile01">Choose file</label>
+                                                                    <input type="hidden" class="url `+ stamp + `" />
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                    <button type="button" class="btn btn-primary btn-save-product" data-stamp="`+ stamp + `">Save changes</button>
+                                                </div>
                                             </div>
-                                        </div>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                            <button type="button" class="btn btn-primary btn-save-product" data-stamp="`+ stamp +`">Save changes</button>
                                         </div>
                                     </div>
-                                </div>
-                            </div>
-                            <div class="modal fade `+ stamp + `" id="alert`+ stamp + `" tabindex="-1" role="dialog" aria-labelledby="alert` + stamp + `" aria-hidden="true">
-                                <div class="modal-dialog" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <div class="h5 modal-title">
-                                                <label class="item-name">Warning!</label>
+                                    <div class="modal fade `+ stamp + `" id="alert` + stamp + `" tabindex="-1" role="dialog" aria-labelledby="alert` + stamp + `" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <div class="h5 modal-title">
+                                                        <label class="item-name">Warning!</label>
+                                                    </div>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    You are about the delete this item. Are you sure?
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                    <button type="button" class="btn btn-primary btn-remove-product" data-stamp="alert`+ stamp + `">Delete Item</button>
+                                                </div>
                                             </div>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
-                                        <div class="modal-body">
-                                            You are about the delete this item. Are you sure?
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                            <button type="button" class="btn btn-primary btn-remove-product" data-stamp="alert`+ stamp +`">Delete Item</button>
                                         </div>
                                     </div>
-                                </div>
-                            </div>
-                            
-                            `;
+
+                                    `;
 
             return $modalTemp;
         };
@@ -323,56 +330,115 @@
             var file = $(this)[0].files[0];
             var fileData = new FormData();
             fileData.append(file.name, file);
-            toggleLoading();
 
-            $.ajax({  
-                url: '/Home/UploadFile',  
-                type: "POST",  
-                contentType: false, // Not to set any content header  
-                processData: false, // Not to process data  
-                data: fileData,  
+            var stamp = $(this).attr("data-stamp");
+            var $productLabel = $("." + stamp + ".plabel");
+            var $loadingLabel = $("." + stamp + ".llabel");
+            var $removeLabel = $("." + stamp + ".rlabel");
+            var $inputLabel = $("." + stamp + ".custom-file-label");
+
+            $productLabel.addClass("d-none");
+            $loadingLabel.removeClass("d-none");
+
+            $.ajax({
+                url: '/Home/UploadFile',
+                type: "POST",
+                contentType: false, // Not to set any content header
+                processData: false, // Not to process data
+                data: fileData,
                 success: function (result) {
-                    toggleLoading();
-                    console.log(result);
-                },  
+                    if (result.Status) {
+                        $inputLabel.text(fileName);
+                        $loadingLabel.addClass("d-none");
+                        $removeLabel.removeClass("d-none");
+                        $(".url." + stamp).val(result.Result.url);
+                    } else {
+                        $loadingLabel.addClass("d-none");
+                        $removeLabel.addClass("d-none");
+                        $productLabel.removeClass("d-none");
+                        $productLabel.text(result.Message);
+                    }
+                },
                 error: function (err) {
                     toggleLoading();
-                    console.log(err);
-                }  
-            });  
+                }
+            });
 
-            console.log(file);
         };
 
-        var toggleLoading = function (stamp) {
-            $loadingWrapper = $("form#form" + stamp).parent().prev().find("span");
-            if ($loadingWrapper.text() == "Product Image") {
-                $loadingWrapper.text() = "";
-                $loadingWrapper.append("<em class='fa fa-spinner fa-spin' />");
-            } else {
-                $loadingWrapper.html("Product Image");
+        var render = function () {
+            if (restData !== "") {
+                //render the current menu
             }
+
+            bind();
         };
 
-        bind();
+        var saveMenu = function () {
+            var menuArray = [];
+            var $menus = $(".list > .item:not(.disabled)");
+
+            $menus.each(function (menuIndex) {
+                $menu = $($menus[menuIndex]);
+
+                var menuData = {};
+                menuData.title = $menu.find(".section-name").text();
+                menuData.data = [];
+
+                var $products = $menu.find(".sublist > .subitem:not(.disabled)");
+                $products.each(function (productIndex) {
+                    var $product = $($products[productIndex]);
+                    var productStamp = $product.attr("data-stamp");
+                    var productData = {};
+                    productData.productName = $product.find("label.list-itemname").text();
+                    productData.price = $($("input.price." + productStamp)[0]).val();
+                    productData.description = $($("textarea.description." + productStamp)[0]).val();
+                    productData.imageUrl = $($("input.url." + productStamp)[0]).val();
+                    menuData.data.push(productData);
+                });
+
+                menuArray.push(menuData);
+            });
+
+            console.log(menuArray);
+
+        };
+
+        var clearUploadedFile = function () {
+            var stamp = $(this).attr("data-stamp");
+            var $productLabel = $("." + stamp + ".plabel");
+            var $removeLabel = $("." + stamp + ".rlabel");
+            var $inputLabel = $("." + stamp + ".custom-file-label");
+
+            $("input[type=hidden]." + stamp).val("");
+
+            $removeLabel.addClass("d-none");
+            $productLabel.removeClass("d-none");
+            $productLabel.text("Product Image");
+            $inputLabel.text("Choose file");
+
+        };
+
+        render();
+
     </script>
 }
 
 @section styles{
     <style>
-        em:hover{
-            cursor:pointer;
+        em:hover {
+            cursor: pointer;
         }
 
-        label.section-name{
-            width:80%
+        label.section-name {
+            width: 80%
         }
+
         .section-icon {
             color: #FF5733;
             font-size: 40px;
             /*margin-top: 10px;*/
             /*margin-right: 5px;*/
-
         }
 
         .ph-sub-class {
@@ -387,15 +453,15 @@
 
         .section-header-bottomline {
             line-height: 40px;
-            border-bottom-width:1.5px
+            border-bottom-width: 1.5px
         }
 
         .item {
             /*background-color: white!important;*/
         }
 
-        .trash-list > .item{
-            color:white!important;
+        .trash-list > .item {
+            color: white !important;
         }
 
         .sublist {
