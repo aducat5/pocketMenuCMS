@@ -14,12 +14,6 @@ namespace PMCMS.PL.Controllers
     public class MenuController : Controller
     {
         private readonly SellerRepo sr = new SellerRepo();
-        // GET: Menu
-        //[UserAuth]
-        public ActionResult All()
-        {
-            return View();
-        }
 
         public ActionResult Display(int id)
         {
@@ -35,20 +29,9 @@ namespace PMCMS.PL.Controllers
         }
 
         [UserAuth]
-        public ActionResult Edit()
+        public ActionResult Build()
         {
             return View();
-        }
-
-        public ActionResult New()
-        {
-            return View();
-            User currentUser = Session["user"] as User;
-            List<Seller> sellersOfUser = sr.GetSellersOfUser(currentUser.UserID);
-            if (sellersOfUser.Count > 0)
-                return View(sellersOfUser);
-            else
-                return RedirectToAction("New", "Restaurant");
         }
     }
 }
