@@ -28,6 +28,8 @@ namespace PMCMS.PL.Controllers
 
         public ActionResult Landing() => View(); 
         public ActionResult NotFound() => View();
+
+        [UserAuth]//TODO: put time barier here
         public JsonResult UploadFile()
         {
             ApiResponse response = new ApiResponse();
@@ -51,7 +53,7 @@ namespace PMCMS.PL.Controllers
                         file.SaveAs(fullPath);
 
                         response.Status = true;
-                        response.Result = new { message = "File uploaded on: https://pma.ist/content/src/assets/images/menu/" + fileName, url = "http://pma.ist/content/src/assets/images/menu/" + fileName };
+                        response.Result = new { message = "File uploaded on: https://pma.ist/content/src/assets/images/menu/" + fileName, url = "https://pma.ist/content/src/assets/images/menu/" + fileName };
                     }
                     else
                     {

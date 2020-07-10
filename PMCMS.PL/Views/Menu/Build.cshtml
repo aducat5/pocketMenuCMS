@@ -23,7 +23,7 @@
                     <div class="list" data-count="0">
                         <div class="item disabled">
                             <button class="btn btn-outline-success btn-sm pull-right" id="add-section">New Section <em class="fa fa-plus"></em></button>
-                            <button class="btn btn-success btn-sm" id="btn-save">Save Menu <em class="fa fa-check"></em></button>
+                            <button class="btn btn-success btn-sm" id="btn-save" data-toggle="modal" data-target="#saveSuccess">Save Menu <em class="fa fa-check"></em></button>
                         </div>
                     </div>
                 </div>
@@ -35,7 +35,7 @@
             <div class="card-body bg-danger">
                 <div class="trash-container">
                     <div class="trash-list" data-count="0">
-                        <div class="trash-item text-white text-center">
+                        <div class="trash-item disabled text-white text-center">
                             Just drop the sections you want to delete to here!
                             <br />
                             <br />
@@ -52,7 +52,25 @@
 
 <!-- Modals -->
 @section modals{
-    <div id="modal-container"></div>
+    <div id="modal-container">
+
+        <div class="modal fade" id="saveSuccess" tabindex="-1" role="dialog" aria-labelledby="saveSuccess" aria-hidden="true">
+            <div class="modal-dialog modal-sm" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Menu Saved!</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body m-auto">
+                        <em class="fa fa-check-circle fa-5x text-success" data-dismiss="modal" aria-label="Close"></em>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
 }
 
 @section scripts{
@@ -61,9 +79,12 @@
     <script>
         var restData = @Html.Raw(firstSeller.SellerJSON);
 
-        var generateSection = function (sectionName, sectionNo, oldStamp) {
+        var generateSection = function (sectionName, sectionNo, oldStamp, oldSubItemCount) {
             var sectionStamp = "section" + sectionNo;
+            var subItemCount = 0;
             if (oldStamp) sectionStamp = oldStamp;
+            if (oldSubItemCount) subItemCount = oldSubItemCount;
+
             var $sectionTemp = $(`
                                         <div class="item" data-sectionstamp="`+ sectionStamp + `">
                                             <div class="section-header-bottomline h4" data-toggle="collapse" href="#`+ sectionStamp + `" aria-expanded="false">
@@ -71,7 +92,7 @@
                                                 <label class="section-name">`+ sectionName + `</label>
                                                 <em class="pe-7s-angle-right pull-right section-icon"></em>
                                             </div>
-                                            <div class="sublist collapse" id="`+ sectionStamp + `" data-count="0">
+                                            <div class="sublist collapse" id="`+ sectionStamp + `" data-count="` + subItemCount +`">
                                                 <div class="subitem disabled">
                                                     <button class="btn btn-outline-success btn-sm pull-right btn-newitem">New Item <em class="fa fa-plus"></em></button>
                                                 </div>
@@ -91,14 +112,14 @@
             if (oldStamp) stamp = oldStamp;
             if (oldName) itemName = oldName;
             $itemTemp = $(`
-                                    <div class="subitem `+ stamp + `" data-stamp="` + stamp + `">
-                                        <h5 class="list-group-item-heading">
-                                            <em class="pe-7s-trash pull-right remove-item text-danger fa-fw `+ stamp + `"data-toggle="modal" data-target="#alert` + stamp + `"></em>
-                                            <label class="list-itemname">` + itemName + `</label>
-                                            <em class="pe-7s-edit pull-right fa-fw `+ stamp + `" style="color:#FF5733;" data-toggle="modal" data-target="#` + stamp + `"></em>
-                                        </h5>
-                                    </div>
-                                    `);
+                        <div class="subitem `+ stamp + `" data-stamp="` + stamp + `">
+                            <h5 class="list-group-item-heading">
+                                <em class="pe-7s-trash pull-right remove-item text-danger fa-fw `+ stamp + `"data-toggle="modal" data-target="#alert` + stamp + `"></em>
+                                <label class="list-itemname">` + itemName + `</label>
+                                <em class="pe-7s-edit pull-right fa-fw `+ stamp + `" style="color:#FF5733;" data-toggle="modal" data-target="#` + stamp + `"></em>
+                            </h5>
+                        </div>
+                        `);
             return $itemTemp;
         };
 
@@ -380,33 +401,51 @@
         };
 
         var render = function () {
-            console.log(restData);
+            //console.log(restData);
             if (restData.menus && restData.menus.length > 0) {
                 var sectionCount = restData.menus[restData.menus.length - 1].stamp.split("section")[1];
                 $(".list").attr("data-count", sectionCount);
 
                 for (var i = 0; i < restData.menus.length; i++) {
                     var menu = restData.menus[i];
-                    console.log(menu);
-                    var $section = generateSection(menu.title, 0, menu.stamp);
-                    //console.log($section);
 
                     var itemCount = 0;
 
-                    if (menu.data && menu.data.length > 0)
+                    if (menu.data && menu.data.length > 0) {
                         itemCount = menu.data[menu.data.length - 1].stamp.split("item")[1];
+                        itemCount++;
+                    }
 
-                    $("#" + menu.stamp).attr("data-count", itemCount);
+                    //console.log(menu);
+                    var $section = generateSection(menu.title, 0, menu.stamp, itemCount);
+                    //console.log($section);
+
+                    
+                    //$("#" + menu.stamp).attr("data-count", itemCount);
 
                     if (menu.data && menu.data.length > 0) {
                         for (var j = 0; j < menu.data.length; j++) {
                             var product = menu.data[j];
                             console.log(product);
 
-                            $product = generateItem(0, 0, product.stamp);
-                            $modal = generateModal(0, 9, product.stamp);
-                            $product.insertBefore($section.find(".btn-newitem"));
-                            $(".modal-container").append($modal);
+                            $product = $(generateItem(0, 0, product.stamp));
+                            $product.find("label.list-itemname").text(product.productName);
+
+                            $modal = $(generateModal(0, 9, product.stamp));
+                            $modal.find("label.item-name").text(product.productName);
+                            $modal.find("input.price").val(product.price);
+                            $modal.find("textarea.description").val(product.description);
+                            $modal.find("input.url").val(product.imageUrl);
+
+                            var url = product.imageUrl.split("/");
+                            url = url[url.length - 1];
+                            $modal.find("label.custom-file-label").text(url);
+                            $modal.find("span.plabel").addClass("d-none");
+                            $modal.find("span.rlabel").removeClass("d-none");
+
+
+                            $product.insertBefore($section.find(".btn-newitem").parent());
+                            $("#modal-container").append($modal);
                         }
                     }
                     
@@ -454,7 +493,7 @@
             });
 
             restData.menus = menuArray;
-
+            //console.log(restData);
             $.ajax({
                 url: '/Menu/Save',
                 type: "POST",
@@ -470,7 +509,6 @@
                     console.log(err);
                 }
             });
-
         };
 
         var clearUploadedFile = function () {
