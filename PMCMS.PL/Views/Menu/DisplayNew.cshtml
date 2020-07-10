@@ -1,0 +1,117 @@
+﻿@model Seller
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@Model.SellerName</title>
+    <link href="~/Content/src/main.css" rel="stylesheet" />
+    <script src="~/Content/src/assets/scripts/main.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h3 id="restNamePrev" style="border-bottom:2px solid #EEEEEE; margin-bottom:20px; line-height:2">
+            @Model.SellerName
+            <div class="pull-right">
+                @*<button class="btn btn-outline-dark" onclick="toggleDarkMode()">Dark Mode</button>*@
+            </div>
+        </h3>
+
+        <div id="no-content" class="d-none">
+            <div class="row" style="color:#EAEAEA; margin:50px">
+                <div class="col-md-12 text-center">
+                    <em class="fa fa-leaf fa-6x"></em>
+                </div>
+                <br />
+                <div class="col-md-12 text-center">
+                    <h4>Nothing to see here yet.</h4>
+                </div>
+                <div class="col-md-12 text-center">
+                    <p>
+                        This menu is still under contruction. Please visit later.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div id="section-container">
+
+        </div>
+    </div>
+    <div class="row fixed-bottom">
+        <div class="col-md-12 text-center">
+            <p>Now you can create your own menu too!</p>
+            <p><a href="https://pma.ist" class="btn btn-link">Pocket Menu App @DateTime.Now.Year</a></p>
+        </div>
+    </div>
+</body>
+</html>
+
+
+<script src="~/Content/src/assets/scripts/jquery-3.5.1.min.js"></script>
+<script>
+    var dev = true;
+
+    var sellerJSON = @Html.Raw(Model.SellerJSON);
+
+    var bind = function () {
+        $(".menu-product").off("click.toggleDetail").on("click.toggleDetail", toggleDetail);
+    };
+
+    var toggleDetail = function () {
+        var stamp = $(this).attr("data-stamp");
+        $(".details." + stamp).toggleClass("d-none");
+        $(this).find("em").toggleClass("fa-chevron-right");
+        $(this).find("em").toggleClass("fa-chevron-down");
+    };
+
+    var render = function () {
+        var $sectionContainer = $("#section-container");
+
+        if (sellerJSON.menus.length > 0) {
+            for (var i = 0; i < sellerJSON.menus.length; i++) {
+                var menu = sellerJSON.menus[i];
+                console.log(menu);
+                var $menu = $("<div class='section' id='" + menu.stamp + "'></div>");
+                $menu.append("<div class='section-header-bottomline' style='border-bottom-color:" + sellerJSON.accentColor + ";'><h5>" + menu.title + "</h5></div>");
+                $menu.append("<ul class='list-group'></ul>");
+
+                for (var j = 0; j < menu.data.length; j++) {
+                    var product = menu.data[j];
+                    console.log(product);
+
+                    var $item = $("<li class='list-group-item menu-product' data-stamp='" + product.stamp + "'></li>");
+                    $item.append("<div class='row product-header'></div>");
+                    $item.find("div.product-header").append("<div style='width:90%; margin-left:15px;'><h5 class='list-group-item-heading'>" + product.productName + "<br /><sub>" + product.price + "</sub><em class='fa pull-right list-arrow fa-chevron-right' style='color: " + sellerJSON.accentColor + ";' data-stamp='" + product.stamp + "'></em></h5></div>");
+
+                    $item.append("<div class='details d-none " + product.stamp + "'></div>");
+
+                    if (product.imageUrl != "") {
+                        if (dev) {
+                            product.imageUrl = product.imageUrl.replace("https://pma.ist/", "https://localhost:44353/");
+                        }
+                        $item.find(".details").append("<img src='" + product.imageUrl + "' class='img-fluid' /><div class='detail-desc desc-border'>" + product.description + "<br /><sub>" + product.price + "</sub></div>");
+                    } else {
+                        $item.find(".details").append("<div class='detail-desc' style='position: initial;background-color: white;'>" + product.description + "</div>");
+                    }
+
+                    $menu.find("ul").append($item);
+                }
+
+                $sectionContainer.append($menu);
+
+                bind();
+            }
+        } else {
+            $("#no-content").toggleClass("d-none");
+        }
+    };
+
+
+
+    render();
+</script>
