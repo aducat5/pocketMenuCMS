@@ -85,33 +85,46 @@ namespace PMCMS.Api
         [HttpPost]
         public IHttpActionResult GetSeller([FromBody]string id)
         {
-            if (id == null) 
-                return Json(new ApiResponse() { Status = false, Result = "Id cannot be null" });
+            ApiResponse response = new ApiResponse();
 
-            SellerPackage package = new SellerPackage();
-
+            if (string.IsNullOrEmpty(id))
+            {
+                response.Status = false;
+                response.Result = "Id cannot be null or empty";
+                return Json(response);
+            }
+            //SellerPackage package = new SellerPackage();
             SellerRepo sr = new SellerRepo();
             Seller seller = sr.GetSeller(id.ToInt());
 
             if (seller == null)
-                return Json(new ApiResponse() { Status = false, Result = "The restaurant you are seeking could not be found." });
-
-            package.SellerName = seller.SellerName;
-            package.SellerJSON = seller.SellerJSON;
-            package.Data = new List<string>();
-
-            if (seller.Menus.Count < 1)
-                return Json(package);
-
-            foreach (DAL.Menu menu in seller.Menus)
             {
-                if (menu.IsDeleted)
-                    continue;
-
-                package.Data.Add(menu.ContentJSON);
+                response.Status = false;
+                response.Result = "The restaurant you are seeking could not be found.";
+                return Json(response);
             }
 
-            return Json(package);
+            //package.SellerName = seller.SellerName;
+            //package.SellerJSON = seller.SellerJSON;
+            //package.Data = new List<string>();
+
+            //if (seller.Menus.Count < 1)
+            //    return Json(package);
+
+            response.Status = true;
+            response.Result = seller.SellerJSON;
+
+            return Json(response);
+
+            //foreach (DAL.Menu menu in seller.Menus)
+            //{
+            //    if (menu.IsDeleted)
+            //        continue;
+
+            //    package.Data.Add(menu.ContentJSON);
+            //}
+
+            //return Json(package);
         }
     }
 }

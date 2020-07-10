@@ -19,13 +19,22 @@
     margin-top:15px;
 }
 
-.details{
-
-    background-color: rgba(255, 255, 255, 0.83);
+.detail-desc {
+    background-color: rgba(255, 255, 255, 0.65);
     min-height: 60px;
-    padding-top: 15px;
-    vertical-align:middle;
+    position: absolute;
+    bottom: 0px;
+    width: 100%;
+    padding: 5%;
+}
+
+.desc-border {
     border-top-right-radius: 50px;
+}
+
+.details{
+    position:relative;
+    margin-top:25px;
 }
 
 .menu-product {
@@ -35,6 +44,13 @@
     border-top-left-radius: 0px !important;
     border-top-right-radius: 0px !important;
     background-color: #fdfdfd !important;
+}
+
+.list-arrow {
+    position: relative;
+    color: #129e00;
+    font-size: 25px;
+    bottom: 5px;
 }
 
 .border-primary {
