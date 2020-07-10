@@ -8,6 +8,12 @@
  =========================================================
  * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
  */
+.logo-src {
+    background-repeat: round;
+}
+.app-logo {
+    background-repeat: round;
+}
 
 .section-header-bottomline {
     border-bottom-color: #FF5733;
@@ -11154,6 +11160,7 @@ button,
         height: 23px;
         width: 97px;
         background: url(assets/images/logo-inverse.png);
+        background-repeat:round;
     }
 
 .app-header__menu,
