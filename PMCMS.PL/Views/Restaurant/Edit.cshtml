@@ -124,11 +124,12 @@
 
 @section scripts{
     <script>
+        var restaurant = @Html.Raw(firstSeller.SellerJSON);
+
         var bind = function () {
-
             var updatePreview = function () {
-                var restaurant = getRestValues();
-
+                updateRestaurant();
+                //var restaurant = getRestValues();
                 document.getElementById("restNamePrev").innerText = restaurant.restaurantName;
 
                 //update bottom border of sectionHeaders
@@ -155,7 +156,8 @@
             }
 
             document.getElementById("btn-save").addEventListener("click", function () {
-                var restaurant = getRestValues();
+                updateRestaurant();
+                //var restaurant = getRestValues();
                 var request = new XMLHttpRequest();
 
                 var formData = new FormData();
@@ -188,7 +190,8 @@
                 for (var i = 0; i < items.length; i++) {
                     var item = items[i];
                     item.addEventListener("click", function () {
-                        var restaurant = getRestValues();
+                        updateRestaurant();
+                        //var restaurant = getRestValues();
                         //toggle image card
                         var card = this.querySelector(".card");
                         var listArrow = this.querySelector(".list-arrow");
@@ -216,7 +219,6 @@
         };
         
         var render = function () {
-            var restaurant = @Html.Raw(firstSeller.SellerJSON);
             
             var restName = document.getElementById("restName");
             var restDesc = document.getElementById("restDesc");
@@ -238,6 +240,16 @@
                 "restaurantDesc": restDesc.value,
                 "accentColor": accentColor.value
             };
+        };
+
+        var updateRestaurant = function () {
+            var restName = document.getElementById("restName");
+            var restDesc = document.getElementById("restDesc");
+            var accentColor = document.getElementById("accentColor");
+
+            restaurant.restaurantName = restName.value;
+            restaurant.restaurantDesc = restDesc.value;
+            restaurant.accentColor = accentColor.value;
         };
 
         var isRestValid = function (restaurant) {

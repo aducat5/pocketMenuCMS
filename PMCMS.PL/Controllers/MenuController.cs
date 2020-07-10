@@ -31,7 +31,29 @@ namespace PMCMS.PL.Controllers
         [UserAuth]
         public ActionResult Build()
         {
-            return View();
+            User currentUser = Session["user"] as User;
+            List<Seller> sellersOfUser = sr.GetSellersOfUser(currentUser.UserID);
+            if (sellersOfUser.Count > 0)
+                return View(sellersOfUser);
+            else
+                return RedirectToAction("New", "Restaurant");
+        }
+
+        [UserAuth]
+        public JsonResult Save(string menuData)
+        {
+            ApiResponse response = new ApiResponse();
+            User currentUser = Session["user"] as User;
+            List<Seller> sellersOfUser = sr.GetSellersOfUser(currentUser.UserID);
+            Seller firstSeller = sellersOfUser[0];
+
+            firstSeller.SellerJSON = menuData;
+            firstSeller.UpdateDate = DateTime.Now;
+
+            firstSeller = sr.UpdateSeller(firstSeller, out string result);
+            response.Status = firstSeller != null;
+            response.Result = result;
+            return Json(response);
         }
     }
 }

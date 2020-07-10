@@ -93,7 +93,7 @@ namespace PMCMS.BLL.Repos
         {
             if (seller != null)
             {
-                if (CheckSeller(seller.SellerID) && !CheckSeller(seller.SellerName))
+                if (CheckSeller(seller.SellerID))
                 {
                     seller.UpdateDate = DateTime.Now;
                     //db.Entry(GetSeller(seller.SellerID)).CurrentValues.SetValues(seller);
@@ -122,6 +122,7 @@ namespace PMCMS.BLL.Repos
         }
         public List<Seller> GetSellersOfUser(int userId)
         {
+            db.Sellers.AsNoTracking();
             return (from s in db.Sellers
                     join e in db.Employees on s.SellerID equals e.SellerID
                     join u in db.Users on e.UserID equals u.UserID

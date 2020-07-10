@@ -227,7 +227,6 @@
     <Content Include="Views\Restaurant\Display.cshtml" />
     <Content Include="Views\Restaurant\GetQr.cshtml" />
     <Content Include="Views\Restaurant\All.cshtml" />
-    <Content Include="Views\Menu\All.cshtml" />
     <Content Include="Views\Tries\Index.cshtml" />
     <Content Include="Views\Menu\Display.cshtml" />
     <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
