@@ -42,12 +42,12 @@
 
         </div>
     </div>
-    <div class="row fixed-bottom">
+    <footer class="footer">
         <div class="col-md-12 text-center">
             <p>Now you can create your own menu too!</p>
             <p><a href="https://pma.ist" class="btn btn-link">Pocket Menu App @DateTime.Now.Year</a></p>
         </div>
-    </div>
+    </footer>
 </body>
 </html>
 
@@ -75,14 +75,14 @@
         if (sellerJSON.menus.length > 0) {
             for (var i = 0; i < sellerJSON.menus.length; i++) {
                 var menu = sellerJSON.menus[i];
-                console.log(menu);
+                //console.log(menu);
                 var $menu = $("<div class='section' id='" + menu.stamp + "'></div>");
                 $menu.append("<div class='section-header-bottomline' style='border-bottom-color:" + sellerJSON.accentColor + ";'><h5>" + menu.title + "</h5></div>");
                 $menu.append("<ul class='list-group'></ul>");
 
                 for (var j = 0; j < menu.data.length; j++) {
                     var product = menu.data[j];
-                    console.log(product);
+                    //console.log(product);
 
                     var $item = $("<li class='list-group-item menu-product' data-stamp='" + product.stamp + "'></li>");
                     $item.append("<div class='row product-header'></div>");
@@ -115,3 +115,18 @@
 
     render();
 </script>
+<style>
+    .footer{
+      position: fixed;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      background-color:white;
+      text-align: center;
+      padding-top:15px;
+    }
+
+    #section-container{
+        margin-bottom:100px;
+    }
+</style>

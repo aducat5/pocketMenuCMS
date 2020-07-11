@@ -4,8 +4,9 @@
     ViewBag.Title = "Dashboard";
     ViewBag.PageDesc = "This is an overview page for everything.";
 }
-
-<h3>Your menu looks like this.</h3>
+<div class="row">
+    <h3>Your menu looks like this.</h3>
+</div>
 <hr />
 <div class="row">
     <div class="col-md-5 card">
@@ -44,7 +45,7 @@
 @section scripts{
     <script src="~/Content/src/assets/scripts/jquery-3.5.1.min.js"></script>
     <script>
-    var dev = true;
+    var dev = false;
 
     var sellerJSON = @Html.Raw(firstSeller.SellerJSON);
 
