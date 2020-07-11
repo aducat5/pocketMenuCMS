@@ -203,7 +203,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Helpers\" />
-    <Folder Include="Views\Api\" />
     <Folder Include="Views\Shared\Components\MenuView\" />
   </ItemGroup>
   <ItemGroup>

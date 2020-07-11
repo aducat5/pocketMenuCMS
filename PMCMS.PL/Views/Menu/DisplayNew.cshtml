@@ -94,7 +94,7 @@
                         if (dev) {
                             product.imageUrl = product.imageUrl.replace("https://pma.ist/", "https://localhost:44353/");
                         }
-                        $item.find(".details").append("<img src='" + product.imageUrl + "' class='img-fluid' /><div class='detail-desc desc-border'>" + product.description + "<br /><sub>" + product.price + "</sub></div>");
+                        $item.find(".details").append("<img src='" + product.imageUrl + "' class='img-fluid' /><div class='detail-desc desc-border'>" + product.description + "</div>");
                     } else {
                         $item.find(".details").append("<div class='detail-desc' style='position: initial;background-color: white;'>" + product.description + "</div>");
                     }
