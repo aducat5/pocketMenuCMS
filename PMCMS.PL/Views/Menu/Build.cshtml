@@ -80,24 +80,24 @@
         var restData = @Html.Raw(firstSeller.SellerJSON);
 
         var generateSection = function (sectionName, sectionNo, oldStamp, oldSubItemCount) {
+            sectionNo++;
             var sectionStamp = "section" + sectionNo;
             var subItemCount = 0;
             if (oldStamp) sectionStamp = oldStamp;
             if (oldSubItemCount) subItemCount = oldSubItemCount;
-
             var $sectionTemp = $(`
-                                        <div class="item" data-sectionstamp="`+ sectionStamp + `">
-                                            <div class="section-header-bottomline h4" data-toggle="collapse" href="#`+ sectionStamp + `" aria-expanded="false">
-                                                <em class="pe-7s-pen text-sm-left edit-section"></em>
-                                                <label class="section-name">`+ sectionName + `</label>
-                                                <em class="pe-7s-angle-right pull-right section-icon"></em>
-                                            </div>
-                                            <div class="sublist collapse" id="`+ sectionStamp + `" data-count="` + subItemCount +`">
-                                                <div class="subitem disabled">
-                                                    <button class="btn btn-outline-success btn-sm pull-right btn-newitem">New Item <em class="fa fa-plus"></em></button>
-                                                </div>
-                                            </div>
-                                        </div>`);
+                        <div class="item" data-sectionstamp="`+ sectionStamp + `">
+                            <div class="section-header-bottomline h4" data-toggle="collapse" href="#`+ sectionStamp + `" aria-expanded="false">
+                                <em class="pe-7s-pen text-sm-left edit-section"></em>
+                                <label class="section-name">`+ sectionName + `</label>
+                                <em class="pe-7s-angle-right pull-right section-icon"></em>
+                            </div>
+                            <div class="sublist collapse" id="`+ sectionStamp + `" data-count="` + subItemCount +`">
+                                <div class="subitem disabled">
+                                    <button class="btn btn-outline-success btn-sm pull-right btn-newitem">New Item <em class="fa fa-plus"></em></button>
+                                </div>
+                            </div>
+                        </div>`);
 
 
             $sectionTemp.find(".sublist").append($brNonItem);

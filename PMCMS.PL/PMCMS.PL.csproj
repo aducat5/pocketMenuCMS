@@ -175,6 +175,7 @@
     <Content Include="Content\src\assets\images\city.jpg" />
     <Content Include="Content\src\assets\images\logo-inverse.png" />
     <Content Include="Content\src\assets\images\logo.png" />
+    <Content Include="Content\src\assets\images\menu\index.txt" />
     <Content Include="Content\src\assets\scripts\custom.js" />
     <Content Include="Content\src\assets\scripts\html5sortable.js" />
     <Content Include="Content\src\assets\scripts\jquery-3.5.1.min.js" />
@@ -201,7 +202,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Content\src\assets\images\menu\" />
     <Folder Include="Helpers\" />
     <Folder Include="Views\Api\" />
     <Folder Include="Views\Shared\Components\MenuView\" />
