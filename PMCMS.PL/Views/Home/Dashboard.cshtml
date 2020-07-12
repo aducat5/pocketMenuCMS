@@ -11,6 +11,7 @@
 <div class="row">
     <div class="col-md-5 card">
         <div class="container">
+            <br />
             <h3 id="restNamePrev" style="border-bottom:2px solid #EEEEEE; margin-bottom:20px; line-height:2">
                 @firstSeller.SellerName
                 <div class="pull-right">
@@ -106,4 +107,36 @@
 
     render();
     </script>
+}
+
+@section styles{
+
+    <style>
+        .footer {
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            background-color: white;
+            text-align: center;
+            padding-top: 15px;
+            box-shadow: 0px 10px 5px #888, 0px -2px 5px #888;
+        }
+
+        #section-container {
+            margin-bottom: 100px;
+        }
+
+        .section > div > h5 {
+            font-size: 16px;
+        }
+
+        .list-group-item-heading {
+            font-size: 14px;
+        }
+
+        .list-arrow {
+            font-size: 20px;
+        }
+    </style>
 }

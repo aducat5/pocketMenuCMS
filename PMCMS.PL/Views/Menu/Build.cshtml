@@ -87,10 +87,10 @@
             if (oldSubItemCount) subItemCount = oldSubItemCount;
             var $sectionTemp = $(`
                         <div class="item" data-sectionstamp="`+ sectionStamp + `">
-                            <div class="section-header-bottomline h4" data-toggle="collapse" href="#`+ sectionStamp + `" aria-expanded="false">
+                            <div class="section-header-bottomline h4" style="border-bottom-color:`+ restData.accentColor + `;" data-toggle="collapse" href="#` + sectionStamp + `" aria-expanded="false">
                                 <em class="pe-7s-pen text-sm-left edit-section"></em>
                                 <label class="section-name">`+ sectionName + `</label>
-                                <em class="pe-7s-angle-right pull-right section-icon"></em>
+                                <em class="pe-7s-angle-right pull-right section-icon" style="color:`+ restData.accentColor + `"></em>
                             </div>
                             <div class="sublist collapse" id="`+ sectionStamp + `" data-count="` + subItemCount +`">
                                 <div class="subitem disabled">
@@ -559,7 +559,7 @@
 
         .section-header-bottomline {
             line-height: 40px;
-            border-bottom-width: 1.5px
+            border-bottom-width: 1.5px;
         }
 
         .item {
@@ -581,5 +581,6 @@
             border-bottom-width:1px;
             border-bottom-color:#EAEAEA;*/
         }
+
     </style>
 }

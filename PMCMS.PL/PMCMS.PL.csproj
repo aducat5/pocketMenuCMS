@@ -183,6 +183,7 @@
     <Content Include="Content\src\assets\scripts\main.pro.js" />
     <Content Include="Content\src\assets\scripts\qrcode.min.js" />
     <Content Include="Content\src\assets\switch.css" />
+    <None Include="Content\src\lang\en.json" />
     <Content Include="Content\src\main.css" />
     <Content Include="Content\src\main.pro.css" />
     <Content Include="favicon.ico" />
