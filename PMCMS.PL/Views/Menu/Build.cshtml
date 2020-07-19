@@ -80,24 +80,24 @@
         var restData = @Html.Raw(firstSeller.SellerJSON);
 
         var generateSection = function (sectionName, sectionNo, oldStamp, oldSubItemCount) {
+            sectionNo++;
             var sectionStamp = "section" + sectionNo;
             var subItemCount = 0;
             if (oldStamp) sectionStamp = oldStamp;
             if (oldSubItemCount) subItemCount = oldSubItemCount;
-
             var $sectionTemp = $(`
-                                        <div class="item" data-sectionstamp="`+ sectionStamp + `">
-                                            <div class="section-header-bottomline h4" data-toggle="collapse" href="#`+ sectionStamp + `" aria-expanded="false">
-                                                <em class="pe-7s-pen text-sm-left edit-section"></em>
-                                                <label class="section-name">`+ sectionName + `</label>
-                                                <em class="pe-7s-angle-right pull-right section-icon"></em>
-                                            </div>
-                                            <div class="sublist collapse" id="`+ sectionStamp + `" data-count="` + subItemCount +`">
-                                                <div class="subitem disabled">
-                                                    <button class="btn btn-outline-success btn-sm pull-right btn-newitem">New Item <em class="fa fa-plus"></em></button>
-                                                </div>
-                                            </div>
-                                        </div>`);
+                        <div class="item" data-sectionstamp="`+ sectionStamp + `">
+                            <div class="section-header-bottomline h4" style="border-bottom-color:`+ restData.accentColor + `;" data-toggle="collapse" href="#` + sectionStamp + `" aria-expanded="false">
+                                <em class="pe-7s-pen text-sm-left edit-section"></em>
+                                <label class="section-name">`+ sectionName + `</label>
+                                <em class="pe-7s-angle-right pull-right section-icon" style="color:`+ restData.accentColor + `"></em>
+                            </div>
+                            <div class="sublist collapse" id="`+ sectionStamp + `" data-count="` + subItemCount +`">
+                                <div class="subitem disabled">
+                                    <button class="btn btn-outline-success btn-sm pull-right btn-newitem">New Item <em class="fa fa-plus"></em></button>
+                                </div>
+                            </div>
+                        </div>`);
 
 
             $sectionTemp.find(".sublist").append($brNonItem);
@@ -312,9 +312,9 @@
                                                                 </div>
                                                                 <div class="custom-file">
                                                                     <form id="form`+ stamp + `" method="post" enctype="multipart/form-data">
-                                                                        <input type="file" class="custom-file-input" id="inputGroupFile01"
-                                                                               aria-describedby="inputGroupFileAddon01" data-stamp="` + stamp + `">
-                                                                        <label class="`+ stamp + ` custom-file-label" for="inputGroupFile01">Choose file</label>
+                                                                        <input type="file" class="`+ stamp + ` fileinput" id="`+ stamp + `fileinput"
+                                                                               aria-describedby="`+ stamp + `fileinput custom-file-input" data-stamp="` + stamp + `">
+                                                                        <label class="`+ stamp + ` filelabel custom-file-label" for="`+ stamp + `fileinput">Choose file</label>
                                                                         <input type="hidden" class="url `+ stamp + `" />
                                                                     </form>
                                                                 </div>
@@ -355,21 +355,23 @@
 
             return $modalTemp;
         };
+        
+        var uploadFile = function (event) {
+            var stamp = event.target.getAttribute("data-stamp");
 
-        var uploadFile = function () {
-            var fileName = $(this).val().split("\\");
-            fileName = fileName[fileName.length - 1];
-            $(this).next().text(fileName);
-
-            var file = $(this)[0].files[0];
-            var fileData = new FormData();
-            fileData.append(file.name, file);
-
-            var stamp = $(this).attr("data-stamp");
             var $productLabel = $("." + stamp + ".plabel");
             var $loadingLabel = $("." + stamp + ".llabel");
             var $removeLabel = $("." + stamp + ".rlabel");
-            var $inputLabel = $("." + stamp + ".custom-file-label");
+            var $inputLabel = $("." + stamp + ".filelabel");
+            var $inputFile = $("." + stamp + ".fileinput");
+
+            var fileName = $inputFile.val().split("\\");
+            fileName = fileName[fileName.length - 1];
+            $inputLabel.text(fileName);
+
+            var file = $inputFile[0].files[0];
+            var fileData = new FormData();
+            fileData.append(file.name, file);
 
             $productLabel.addClass("d-none");
             $loadingLabel.removeClass("d-none");
@@ -401,7 +403,6 @@
         };
 
         var render = function () {
-            //console.log(restData);
             if (restData.menus && restData.menus.length > 0) {
                 var sectionCount = restData.menus[restData.menus.length - 1].stamp.split("section")[1];
                 $(".list").attr("data-count", sectionCount);
@@ -416,12 +417,7 @@
                         itemCount++;
                     }
 
-                    //console.log(menu);
                     var $section = generateSection(menu.title, 0, menu.stamp, itemCount);
-                    //console.log($section);
-
-                    
-                    //$("#" + menu.stamp).attr("data-count", itemCount);
 
                     if (menu.data && menu.data.length > 0) {
                         for (var j = 0; j < menu.data.length; j++) {
@@ -493,7 +489,6 @@
             });
 
             restData.menus = menuArray;
-            //console.log(restData);
             $.ajax({
                 url: '/Menu/Save',
                 type: "POST",
@@ -512,10 +507,11 @@
         };
 
         var clearUploadedFile = function () {
-            var stamp = $(this).attr("data-stamp");
+            var stamp = event.target.getAttribute("data-stamp");
+
             var $productLabel = $("." + stamp + ".plabel");
             var $removeLabel = $("." + stamp + ".rlabel");
-            var $inputLabel = $("." + stamp + ".custom-file-label");
+            var $inputLabel = $("." + stamp + ".filelabel");
 
             $("input[type=hidden]." + stamp).val("");
 
@@ -559,7 +555,7 @@
 
         .section-header-bottomline {
             line-height: 40px;
-            border-bottom-width: 1.5px
+            border-bottom-width: 1.5px;
         }
 
         .item {
@@ -581,5 +577,6 @@
             border-bottom-width:1px;
             border-bottom-color:#EAEAEA;*/
         }
+
     </style>
 }

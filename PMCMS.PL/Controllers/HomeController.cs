@@ -48,7 +48,7 @@ namespace PMCMS.PL.Controllers
                     if (extension == "jpg" || extension == "jpeg" || extension == "png" && file.ContentType.Split('/')[0] == "image")
                     {
                         string saveFolder = "~/Content/src/assets/images/menu/";
-                        _ = Directory.CreateDirectory(Server.MapPath(saveFolder));
+                        //_ = Directory.CreateDirectory(Server.MapPath(saveFolder));
                         string fullPath = Path.Combine(Server.MapPath(saveFolder), fileName);
                         file.SaveAs(fullPath);
 

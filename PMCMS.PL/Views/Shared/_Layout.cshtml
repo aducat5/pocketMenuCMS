@@ -1,10 +1,13 @@
-﻿@{ User currentUser = Session["user"] as User; }
+﻿@{ 
+    User currentUser = Session["user"] as User;
+    string activeClass = "mm-active";
+}
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - Pocket Menu CMS</title>
+    <title>@ViewBag.Title - Pocket Menu App</title>
 
     <link href="~/Content/src/main.css" rel="stylesheet">
     @RenderSection("styles", false);
@@ -93,9 +96,9 @@
                                             <i class="fa fa-angle-down ml-2 opacity-8"></i>
                                         </a>
                                         <div tabindex="-1" role="menu" aria-hidden="true" class="dropdown-menu dropdown-menu-right">
-                                            <button type="button" tabindex="0" class="dropdown-item">User Account</button>
+                                            <button type="button" tabindex="0" class="dropdown-item lang">User Account</button>
                                             <div tabindex="-1" class="dropdown-divider"></div>
-                                            <a href="@Url.Action("Out", "Sign")" tabindex="0" class="dropdown-item">Sign Out</a>
+                                            <a href="@Url.Action("Out", "Sign")" tabindex="0" class="dropdown-item lang">Sign Out</a>
                                         </div>
                                     </div>
                                 </div>
@@ -151,16 +154,16 @@
                         <ul class="vertical-nav-menu">
                             <li class="app-sidebar__heading">Home</li>
                             <li>
-                                <a href="@Url.Action("Dashboard", "Home")" class="mm-active">
+                                <a href="@Url.Action("Dashboard", "Home")" class="@{if (ViewBag.Title == "Dashboard") { @activeClass} }">
                                     <i class="metismenu-icon pe-7s-rocket"></i>
                                     Dashboard
                                 </a>
                             </li>
                             <li class="app-sidebar__heading">Restaurant</li>
                             <li>
-                                <a href="#">
+                                <a href="#" class="@{if (ViewBag.Title == "Build Menu") { @activeClass} }">
                                     <i class="metismenu-icon pe-7s-note2"></i>
-                                    Menu Management
+                                    <div class="lang" data-lang="menumanagement">Menu Management</div>
                                     <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
                                 </a>
                                 <ul>
@@ -173,7 +176,7 @@
                                 </ul>
                             </li>
                             <li>
-                                <a href="#">
+                                <a href="#"class="@{if (ViewBag.Title == "Do you need an edit?" || ViewBag.Title == "Get QrCode for your restaurant") { @activeClass} }">
                                     <i class="metismenu-icon pe-7s-diamond"></i>
                                     Restaurant Management
                                     <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
