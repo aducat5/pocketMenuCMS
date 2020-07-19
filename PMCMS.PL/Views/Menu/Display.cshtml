@@ -65,7 +65,8 @@
 
         if ($details[0].innerHTML != "")
             $details.toggleClass("d-none");
-
+        
+        //$(this).find("em").toggleClass("open");
         $(this).find("em").toggleClass("down");
     };
 
@@ -89,7 +90,7 @@
                     $item.find("div.product-header").append("<div style='width:90%; margin-left:15px;'><h5 class='list-group-item-heading'><div class='prod-name'>" + product.productName + "<br /><sub>" + product.price + "</sub></div></h5></div>");
 
                     if (product.description != "" || product.imageUrl != "")
-                        $item.find("div.product-header > div > h5").append("<em class='fa pull-right fa-chevron-right rotate' style='color: " + sellerJSON.accentColor + ";' data-stamp='" + product.stamp + "'></em>");
+                        $item.find("div.product-header > div > h5").append("<em class='fa fa-chevron-right rotate' style='color: " + sellerJSON.accentColor + ";' data-stamp='" + product.stamp + "'></em>");
 
                     $item.append("<div class='details d-none " + product.stamp + "'></div>");
 
@@ -150,6 +151,12 @@
 
     .rotate {
         font-size: 20px;
-        margin-top: -20px;
+        position: absolute;
+        top: 20px;
+        right: 15px;
+    }
+
+    .rotate.open{
+        top: 10%;
     }
 </style>
