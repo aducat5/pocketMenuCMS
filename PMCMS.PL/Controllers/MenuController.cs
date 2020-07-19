@@ -22,18 +22,6 @@ namespace PMCMS.PL.Controllers
             string logMessage = string.Format("{0}|{1}", machine, ip);
 
             SellerRepo sr = new SellerRepo();
-            Seller seller = sr.GetSeller(id); 
-            
-            Logger.Log(logMessage);
-            return View(seller);
-        }
-        public ActionResult DisplayNew(int id)
-        {
-            string machine = HttpContext.Request.UserAgent;
-            string ip = HttpContext.Request.UserHostAddress;
-            string logMessage = string.Format("{0}|{1}", machine, ip);
-
-            SellerRepo sr = new SellerRepo();
             Seller seller = sr.GetSeller(id);
 
             Logger.Log(logMessage);
