@@ -30,7 +30,7 @@
             </div>
         </div>
     </div>
-    <div class="col-md-6">
+    <div class="col-md-6" style="position:fixed; right:0; max-width:40%; z-index:4">
         <div class="main-card mb-3 card">
             <div class="card-body bg-danger">
                 <div class="trash-container">
@@ -86,18 +86,43 @@
             if (oldStamp) sectionStamp = oldStamp;
             if (oldSubItemCount) subItemCount = oldSubItemCount;
             var $sectionTemp = $(`
-                        <div class="item" data-sectionstamp="`+ sectionStamp + `">
-                            <div class="section-header-bottomline h4" style="border-bottom-color:`+ restData.accentColor + `;" data-toggle="collapse" href="#` + sectionStamp + `" aria-expanded="false">
-                                <em class="pe-7s-pen text-sm-left edit-section"></em>
-                                <label class="section-name">`+ sectionName + `</label>
-                                <em class="pe-7s-angle-right pull-right section-icon" style="color:`+ restData.accentColor + `"></em>
-                            </div>
-                            <div class="sublist collapse" id="`+ sectionStamp + `" data-count="` + subItemCount +`">
-                                <div class="subitem disabled">
-                                    <button class="btn btn-outline-success btn-sm pull-right btn-newitem">New Item <em class="fa fa-plus"></em></button>
-                                </div>
-                            </div>
-                        </div>`);
+            <div class="item" data-sectionstamp="`+ sectionStamp + `">
+                <div class="section-header-bottomline h4" style="border-bottom-color:`+ restData.accentColor + `;" data-toggle="collapse" href="#` + sectionStamp + `" aria-expanded="false">
+    
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <button class="btn btn-outline-light">
+                                <em class="pe-7s-edit pull-right fa-fw" style="color:`+ restData.accentColor + `"></em>
+                            </button>
+                        </div>
+                        <input type="text" class="form-control section-name" value="`+ sectionName +`">
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-light">
+                                <em class="pe-7s-angle-right section-icon" style="color:`+ restData.accentColor + `"></em>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="sublist collapse" id="`+ sectionStamp + `" data-count="` + subItemCount +`">
+                    <div class="subitem disabled">
+                        <button class="btn btn-outline-success btn-sm pull-right btn-newitem">New Item <em class="fa fa-plus"></em></button>
+                    </div>
+                </div>
+            </div>`);
+
+            var $oldSectionTemp = $(`
+            <div class="item" data-sectionstamp="`+ sectionStamp + `">
+                <div class="section-header-bottomline h4" style="border-bottom-color:`+ restData.accentColor + `;" data-toggle="collapse" href="#` + sectionStamp + `" aria-expanded="false">
+                    <em class="pe-7s-pen text-sm-left edit-section"></em>
+                    <label class="section-name">`+ sectionName + `</label>
+                    <em class="pe-7s-angle-right pull-right section-icon" style="color:`+ restData.accentColor + `"></em>
+                </div>
+                <div class="sublist collapse" id="`+ sectionStamp + `" data-count="` + subItemCount +`">
+                    <div class="subitem disabled">
+                        <button class="btn btn-outline-success btn-sm pull-right btn-newitem">New Item <em class="fa fa-plus"></em></button>
+                    </div>
+                </div>
+            </div>`);
 
 
             $sectionTemp.find(".sublist").append($brNonItem);
@@ -116,8 +141,8 @@
                             <h5 class="list-group-item-heading">
                                 <em class="pe-7s-trash pull-right remove-item text-danger fa-fw `+ stamp + `"data-toggle="modal" data-target="#alert` + stamp + `"></em>
                                 <label class="list-itemname">` + itemName + `</label>
-                                <em class="pe-7s-edit pull-right fa-fw `+ stamp + `" style="color:#FF5733;" data-toggle="modal" data-target="#` + stamp + `"></em>
-                            </h5>
+                                <em class="pe-7s-pen pull-right fa-fw `+ stamp + `" style="color:#FF5733;" data-toggle="modal" data-target="#` + stamp + `"></em>
+                            </h5><hr />
                         </div>
                         `);
             return $itemTemp;
@@ -152,7 +177,7 @@
                 $(this).next().focus();
             });
 
-            $("label.section-name").off('keypress.editsection').on('keypress.editsection', function (e) {
+            $("input.section-name").off('keypress.editsection').on('keypress.editsection', function (e) {
                 if (e.which == 13) {
                     $(this).prev().click();
                 }
@@ -171,6 +196,13 @@
             $("input[type=file]").off("change").on("change", uploadFile);
 
             $(".rlabel").find("em").off("click.clearFile").on("click.clearFile", clearUploadedFile);
+            
+            $("input.item-name").off("keyup.namechange").on("keyup.namechange", function (e) {
+                var stamp = e.target.getAttribute("data-stamp");
+                var $modal = $("div.modal." + stamp);
+
+                $modal.find("label.item-name").text(e.target.value);
+            });
 
             sortable('.list', {
                 items: ':not(.disabled)',
@@ -271,7 +303,6 @@
                                                 <div class="modal-content">
                                                     <div class="modal-header">
                                                         <div class="h5 modal-title">
-                                                            <em class="pe-7s-pen text-sm-left edit-section"></em>
                                                             <label class="item-name">New Product</label>
                                                         </div>
                                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -281,6 +312,17 @@
                                                     <div class="modal-body">
 
                                                     <div class="row">
+                                                        <div class="col-md-12">
+                                                            <div class="input-group">
+                                                                <div class="input-group-prepend">
+                                                                    <span class="input-group-text">Name</span>
+                                                                </div>
+                                                                <input placeholder="Pizza..." data-stamp="`+ stamp + `" type="text" class="form-control item-name `+ stamp + `">
+                                                            </div>
+                                                        </div>
+                                                        <br  />
+                                                        <br  />
+                                                        <br  />
                                                         <div class="col-md-12">
                                                             <div class="input-group">
                                                                 <div class="input-group-prepend">
@@ -430,6 +472,7 @@
                             $modal = $(generateModal(0, 9, product.stamp));
                             $modal.find("label.item-name").text(product.productName);
                             $modal.find("input.price").val(product.price);
+                            $modal.find("input.item-name").val(product.productName);
                             $modal.find("textarea.description").val(product.description);
                             $modal.find("input.url").val(product.imageUrl);
 
@@ -532,15 +575,14 @@
             cursor: pointer;
         }
 
-        label.section-name {
-            width: 80%
+        input.section-name{
+            height:auto;
         }
-
+        
         .section-icon {
             color: #FF5733;
-            font-size: 40px;
-            /*margin-top: 10px;*/
-            /*margin-right: 5px;*/
+            font-size: 35px;
+            padding:0px;
         }
 
         .ph-sub-class {
@@ -550,33 +592,23 @@
 
         .ph-class {
             background-color: #EAEAEA;
-            /*margin: 20px;*/
         }
 
         .section-header-bottomline {
-            line-height: 40px;
             border-bottom-width: 1.5px;
+            border-bottom-style:none;
         }
-
-        .item {
-            /*background-color: white!important;*/
-        }
-
+        
         .trash-list > .item {
             color: white !important;
         }
 
-        .sublist {
-            /*margin-left: 20px;*/
-        }
-
         .subitem {
-            /*font-size: 11px;*/
             margin: 20px;
-            /*border-bottom-style:solid;
-            border-bottom-width:1px;
-            border-bottom-color:#EAEAEA;*/
         }
-
+        label.list-itemname{
+            font-size:smaller;
+            max-width:80%;
+        }
     </style>
 }
