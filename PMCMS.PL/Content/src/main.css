@@ -59,6 +59,7 @@
         -moz-transform: rotate(90deg);
         -webkit-transform: rotate(90deg);
         transform: rotate(90deg);
+        /*top:10%;*/
     }
 
 .border-primary {
