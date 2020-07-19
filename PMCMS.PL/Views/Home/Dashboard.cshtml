@@ -4,19 +4,13 @@
     ViewBag.Title = "Dashboard";
     ViewBag.PageDesc = "This is an overview page for everything.";
 }
+
 <div class="row">
-    <h3>Your menu looks like this.</h3>
-</div>
-<hr />
-<div class="row">
-    <div class="col-md-5 card">
+    <div class="offset-md-3 col-md-5 card">
         <div class="container">
             <br />
             <h3 id="restNamePrev" style="border-bottom:2px solid #EEEEEE; margin-bottom:20px; line-height:2">
                 @firstSeller.SellerName
-                <div class="pull-right">
-                    @*<button class="btn btn-outline-dark" onclick="toggleDarkMode()">Dark Mode</button>*@
-                </div>
             </h3>
 
             <div id="no-content" class="d-none">
@@ -44,6 +38,7 @@
 </div>
 
 @section scripts{
+
     <script src="~/Content/src/assets/scripts/jquery-3.5.1.min.js"></script>
     <script>
     var dev = false;
@@ -56,9 +51,12 @@
 
     var toggleDetail = function () {
         var stamp = $(this).attr("data-stamp");
-        $(".details." + stamp).toggleClass("d-none");
-        $(this).find("em").toggleClass("fa-chevron-right");
-        $(this).find("em").toggleClass("fa-chevron-down");
+        var $details = $(".details." + stamp);
+
+        if ($details[0].innerHTML != "")
+            $details.toggleClass("d-none");
+
+        $(this).find("em").toggleClass("down");
     };
 
     var render = function () {
@@ -73,19 +71,23 @@
 
                 for (var j = 0; j < menu.data.length; j++) {
                     var product = menu.data[j];
-
                     var $item = $("<li class='list-group-item menu-product' data-stamp='" + product.stamp + "'></li>");
                     $item.append("<div class='row product-header'></div>");
-                    $item.find("div.product-header").append("<div style='width:90%; margin-left:15px;'><h5 class='list-group-item-heading'>" + product.productName + "<br /><sub>" + product.price + "</sub><em class='fa pull-right list-arrow fa-chevron-right' style='color: " + sellerJSON.accentColor + ";' data-stamp='" + product.stamp + "'></em></h5></div>");
+                    $item.find("div.product-header").append("<div style='width:90%; margin-left:15px;'><h5 class='list-group-item-heading'><div class='prod-name'>" + product.productName + "<br /><sub>" + product.price + "</sub></div></h5></div>");
+
+                    if (product.description != "" || product.imageUrl != "")
+                        $item.find("div.product-header > div > h5").append("<em class='fa fa-chevron-right rotate' style='color: " + sellerJSON.accentColor + ";' data-stamp='" + product.stamp + "'></em>");
 
                     $item.append("<div class='details d-none " + product.stamp + "'></div>");
 
                     if (product.imageUrl != "") {
-                        if (dev) {
-                            product.imageUrl = product.imageUrl.replace("https://pma.ist/", "https://localhost:44353/");
-                        }
-                        $item.find(".details").append("<img src='" + product.imageUrl + "' class='img-fluid' /><div class='detail-desc desc-border'>" + product.description + "<br /><sub>" + product.price + "</sub></div>");
-                    } else {
+
+                        $item.find(".details").append("<img src='" + product.imageUrl + "' class='img-fluid' />");
+
+                        if (product.description != "")
+                            $item.find(".details").append("<div class='detail-desc'>" + product.description + "</div>");
+
+                    } else if (product.description != "") {
                         $item.find(".details").append("<div class='detail-desc' style='position: initial;background-color: white;'>" + product.description + "</div>");
                     }
 
@@ -108,7 +110,6 @@
 }
 
 @section styles{
-
     <style>
         .footer {
             position: fixed;
@@ -133,8 +134,19 @@
             font-size: 14px;
         }
 
-        .list-arrow {
-            font-size: 20px;
+        .prod-name {
+            max-width: 92%;
         }
+
+        .rotate {
+            font-size: 20px;
+            position: absolute;
+            top: 20px;
+            right: 15px;
+        }
+
+            .rotate.open {
+                top: 10%;
+            }
     </style>
 }
