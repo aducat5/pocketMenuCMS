@@ -65,7 +65,7 @@
                     <div class="col-lg-12">
                         <nav class="navbar navbar-expand-lg">
                             <a class="navbar-brand" href="@Url.Action("Landing","Home")">
-                                <img src="~/Content/src/landing-assets/images/logo.svg" height="60" alt="Logo">
+                                <img src="~/Content/src/landing-assets/images/logo.svg" height="45" alt="Logo">
                             </a>
                             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                                 <span class="toggler-icon"></span>
@@ -129,7 +129,7 @@
     <!--====== HEADER PART ENDS ======-->
     <!--====== BRAMD PART START ======-->
 
-    <div class="brand-area pt-90">
+    @*<div class="brand-area pt-90">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
@@ -153,7 +153,7 @@
                 </div>
             </div>   <!-- row -->
         </div> <!-- container -->
-    </div>
+    </div>*@
 
     <!--====== BRAMD PART ENDS ======-->
     <!--====== SERVICES PART START ======-->
@@ -205,9 +205,9 @@
                             <i class="lni lni-bolt-alt"></i>
                         </div>
                         <div class="services-content mt-30">
-                            <h4 class="services-title"><a href="#">Powerful</a></h4>
-                            <p class="text">Lorem ipsum dolor sit amet,consetetur sadipscing elitr, seddiam nonu eirmod tempor invidunt labore.</p>
-                            <a class="more" href="#">Learn More <i class="lni lni-chevron-right"></i></a>
+                            <h4 class="services-title"><a href="#">Hızlı</a></h4>
+                            <p class="text">Sadece birkaç dakika içinde hızlıca kaydolabilir, restorantınızı oluşturabilir ve menünüzü oluşturabilirsiniz.</p>
+                            @*<a class="more" href="#">Learn More <i class="lni lni-chevron-right"></i></a>*@
                         </div>
                     </div> <!-- single services -->
                 </div>
@@ -225,10 +225,10 @@
                     <div class="about-content mt-50 wow fadeInLeftBig" data-wow-duration="1s" data-wow-delay="0.5s">
                         <div class="section-title">
                             <div class="line"></div>
-                            <h3 class="title">Quick & Easy <span>to Use Bootstrap Template</span></h3>
+                            <h3 class="title">Hızlı & Kolay <span>bir menü aracı ile menünüzü <b>sürekli güncel </b>tutun.</span></h3>
                         </div> <!-- section title -->
-                        <p class="text">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, seiam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing.</p>
-                        <a href="#" class="main-btn">Try it Free</a>
+                        <p class="text">Menünüzde dilediğiniz zaman ekleme-çıkarma, sıralama, düzenleme gibi işlemleri hızlıca yapabileceğiniz menü tasarım aracımızı kullanması da bir o kadar kolaydır. Ayrıca yaptığınız değişiklikler kayıt tuşuna bastığınız anda yayınlandığı için menünüz sürekli olarak güncel kalacaktır.</p>
+                        <a href="@Url.Action("Up", "Sign")" class="main-btn">Ücretsiz olarak kullanmaya başlayın!</a>
                     </div> <!-- about content -->
                 </div>
                 <div class="col-lg-6">
@@ -256,10 +256,10 @@
                     <div class="about-content mt-50 wow fadeInLeftBig" data-wow-duration="1s" data-wow-delay="0.5s">
                         <div class="section-title">
                             <div class="line"></div>
-                            <h3 class="title">Modern design <span> with Essential Features</span></h3>
+                            <h3 class="title">Size özel KareKod <span> ile her yerde olun.</span></h3>
                         </div> <!-- section title -->
-                        <p class="text">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, seiam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing.</p>
-                        <a href="#" class="main-btn">Try it Free</a>
+                        <p class="text">Modern tasarım ilkelerine uygun şekilde tasarlanmış olan web menümüz ve mobil uygulamamız müşterilerinize olabilecek en iyi kullanıcı deneyimini sunmak üzere tasarlandı. Ayrıca size özel hazırlanmış olan kare kodunuzu istediğiniz gibi kullanarak menünüzü masalarınız dışında da olsa istediğiniz yere yerleştirebilirsiniz.</p>
+                        <a href="@Url.Action("Up", "Sign")" class="main-btn">Ücretsiz olarak kullanmaya başlayın!</a>
                     </div> <!-- about content -->
                 </div>
                 <div class="col-lg-6 order-lg-first">
