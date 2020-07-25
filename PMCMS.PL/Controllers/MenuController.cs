@@ -1,5 +1,6 @@
 ﻿using PMCMS.BLL.Repos;
 using PMCMS.BLL.Utility;
+using PMCMS.BSL.Authorization;
 using PMCMS.DAL;
 using System;
 using System.Collections.Generic;
@@ -12,32 +13,47 @@ namespace PMCMS.PL.Controllers
 {
     public class MenuController : Controller
     {
-        // GET: Menu
-        public ActionResult All()
-        {
-            return View();
-        }
+        private readonly SellerRepo sr = new SellerRepo();
 
         public ActionResult Display(int id)
         {
             string machine = HttpContext.Request.UserAgent;
             string ip = HttpContext.Request.UserHostAddress;
             string logMessage = string.Format("{0}|{1}", machine, ip);
-            //Logger.LogAsync(logMessage);
 
             SellerRepo sr = new SellerRepo();
             Seller seller = sr.GetSeller(id);
+
+            Logger.Log(logMessage);
             return View(seller);
         }
 
-        public ActionResult Edit()
+        [UserAuth]
+        public ActionResult Build()
         {
-            return View();
+            User currentUser = Session["user"] as User;
+            List<Seller> sellersOfUser = sr.GetSellersOfUser(currentUser.UserID);
+            if (sellersOfUser.Count > 0)
+                return View(sellersOfUser);
+            else
+                return RedirectToAction("New", "Restaurant");
         }
 
-        public ActionResult New()
+        [UserAuth]
+        public JsonResult Save(string menuData)
         {
-            return View();
+            ApiResponse response = new ApiResponse();
+            User currentUser = Session["user"] as User;
+            List<Seller> sellersOfUser = sr.GetSellersOfUser(currentUser.UserID);
+            Seller firstSeller = sellersOfUser[0];
+
+            firstSeller.SellerJSON = menuData;
+            firstSeller.UpdateDate = DateTime.Now;
+
+            firstSeller = sr.UpdateSeller(firstSeller, out string result);
+            response.Status = firstSeller != null;
+            response.Result = result;
+            return Json(response);
         }
     }
 }

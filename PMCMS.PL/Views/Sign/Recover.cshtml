@@ -14,12 +14,17 @@
     <title>Forgot Password - ArchitectUI HTML Bootstrap 4 Dashboard Template</title>
     <meta name="viewport"
           content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no" />
-    <meta name="description" content="ArchitectUI HTML Bootstrap 4 Dashboard Template">
+    <meta name="description" content="Pocket Menu App Forgot Password Page">
 
     <!-- Disable tap highlight on IE -->
     <meta name="msapplication-tap-highlight" content="no">
 
     <link href="~/Content/src/main.pro.css" rel="stylesheet">
+    <style>
+        .app-logo {
+            background-repeat: round;
+        }
+    </style>
 </head>
 
 <body>
@@ -89,7 +94,7 @@
                                             @Html.ActionLink("Sign in existing account", "In", "Sign", null, new { @class = "text-primary" })
                                         </h6>
                                         <div class="ml-auto">
-                                            <button class="btn btn-primary btn-lg">Recover Password</button>
+                                            @*<button class="btn btn-primary btn-lg">Recover Password</button>*@
                                         </div>
                                     </div>
                                 </form>

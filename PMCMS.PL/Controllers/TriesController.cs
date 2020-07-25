@@ -18,24 +18,24 @@ namespace PMCMS.PL.Controllers
         public ActionResult Index(Menu menu)
         {
             return null;
-            try
-            {
-                menu.IsDeleted = false;
-                menu.CreateDate = DateTime.Now;
-                menu.UpdateDate = DateTime.Now;
+            //try
+            //{
+            //    menu.IsDeleted = false;
+            //    menu.CreateDate = DateTime.Now;
+            //    menu.UpdateDate = DateTime.Now;
 
-                var db = DBTool.GetInstance();
+            //    var db = DBTool.GetInstance();
 
-                db.Menus.Add(menu);
-                db.SaveChanges();
+            //    db.Menus.Add(menu);
+            //    db.SaveChanges();
 
-            }
-            catch (Exception ex)
-            {
+            //}
+            //catch (Exception ex)
+            //{
 
-                throw;
-            }
-            return View();
+            //    throw;
+            //}
+            //return View();
         }
     }
 }

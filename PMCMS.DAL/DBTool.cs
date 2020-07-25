@@ -4,7 +4,6 @@
     {
         private DBTool() { }
 
-
         private static PocketMenuDBEntities _instance;
 
         public static PocketMenuDBEntities GetInstance()
@@ -13,6 +12,12 @@
                 _instance = new PocketMenuDBEntities();
 
             return _instance;
+        }
+        public static PocketMenuDBEntities GetNewInstance()
+        {
+            var db = new PocketMenuDBEntities();
+            db.Configuration.LazyLoadingEnabled = false;
+            return db;
         }
     }
 }

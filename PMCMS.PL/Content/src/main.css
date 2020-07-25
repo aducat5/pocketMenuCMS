@@ -1,13 +1,9 @@
-/*!
- =========================================================
- * ArchitectUI HTML Theme Dashboard - v1.0.0
- =========================================================
- * Product Page: https://dashboardpack.com
- * Copyright 2019 DashboardPack (https://dashboardpack.com)
- * Licensed under MIT (https://github.com/DashboardPack/architectui-html-theme-free/blob/master/LICENSE)
- =========================================================
- * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
- */
+.logo-src {
+    background-repeat: round;
+}
+.app-logo {
+    background-repeat: round;
+}
 
 .section-header-bottomline {
     border-bottom-color: #FF5733;
@@ -19,13 +15,22 @@
     margin-top:15px;
 }
 
-.details{
-
-    background-color: rgba(255, 255, 255, 0.83);
+.detail-desc {
+    background-color: rgba(255, 255, 255, 0.65);
     min-height: 60px;
-    padding-top: 15px;
-    vertical-align:middle;
+    position: absolute;
+    bottom: 0px;
+    width: 100%;
+    padding: 20px;
+}
+
+.desc-border {
     border-top-right-radius: 50px;
+}
+
+.details{
+    position:relative;
+    margin-top:25px;
 }
 
 .menu-product {
@@ -36,6 +41,26 @@
     border-top-right-radius: 0px !important;
     background-color: #fdfdfd !important;
 }
+
+.list-arrow {
+    position: relative;
+    color: #129e00;
+    font-size: 25px;
+    bottom: 5px;
+}
+
+.rotate {
+    -moz-transition: all 0.1s linear;
+    -webkit-transition: all 0.1s linear;
+    transition: all 0.1s linear;
+}
+
+    .rotate.down {
+        -moz-transform: rotate(90deg);
+        -webkit-transform: rotate(90deg);
+        transform: rotate(90deg);
+        /*top:10%;*/
+    }
 
 .border-primary {
     border-color: #3f6ad8;
@@ -10931,6 +10956,15 @@ a.text-secondary:focus {
     color: #494f54 !important;
 }
 
+.text-appcolor {
+    color: #ff5733 !important;
+}
+
+a.text-appcolor:hover,
+a.text-appcolor:focus {
+    color: #ff5733 !important;
+}
+
 .text-success {
     color: #3ac47d !important;
 }
@@ -11129,6 +11163,7 @@ button,
         height: 23px;
         width: 97px;
         background: url(assets/images/logo-inverse.png);
+        background-repeat:round;
     }
 
 .app-header__menu,

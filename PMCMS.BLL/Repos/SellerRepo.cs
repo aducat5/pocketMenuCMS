@@ -8,14 +8,32 @@ namespace PMCMS.BLL.Repos
     public class SellerRepo
     {
         private static PocketMenuDBEntities db = DBTool.GetInstance();
-        public bool CheckSeller(int id) => db.Sellers.Any(seller => seller.SellerID == id);
-        public bool CheckSeller(string name) => db.Sellers.Any(seller => seller.SellerName == name);
+        public bool CheckSeller(int id)
+        {
+            using (var db = DBTool.GetNewInstance())
+            {
+                return db.Sellers.Any(seller => seller.SellerID == id); 
+            }
+        }
+
+        public bool CheckSeller(string name)
+        {
+            return db.Sellers.Any(seller => seller.SellerName == name);
+        }
+
         public Seller GetSeller(int id)
         {
-            Seller seller = null;
-            if (CheckSeller(id)) 
-                seller = db.Sellers.Find(id);
-            return seller;
+            using (var db = DBTool.GetNewInstance())
+            {
+                Seller seller = null;
+                if (CheckSeller(id))
+                {
+                    seller = db.Sellers.Find(id);
+                    seller.Menus = db.Menus.Where(menu => menu.SellerID == seller.SellerID).ToList();
+                }
+
+                return seller; 
+            }
         }
         public Seller InsertSeller(Seller newSeller, out string result)
         {
@@ -75,10 +93,10 @@ namespace PMCMS.BLL.Repos
         {
             if (seller != null)
             {
-                if (CheckSeller(seller.SellerID) && !CheckSeller(seller.SellerName))
+                if (CheckSeller(seller.SellerID))
                 {
                     seller.UpdateDate = DateTime.Now;
-                    db.Entry(GetSeller(seller.SellerID)).CurrentValues.SetValues(seller);
+                    //db.Entry(GetSeller(seller.SellerID)).CurrentValues.SetValues(seller);
                     if (db.SaveChanges() > 0)
                     {
                         result = "Update succeeded.";
@@ -104,6 +122,7 @@ namespace PMCMS.BLL.Repos
         }
         public List<Seller> GetSellersOfUser(int userId)
         {
+            db.Sellers.AsNoTracking();
             return (from s in db.Sellers
                     join e in db.Employees on s.SellerID equals e.SellerID
                     join u in db.Users on e.UserID equals u.UserID

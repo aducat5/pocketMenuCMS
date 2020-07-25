@@ -47,7 +47,7 @@ namespace PMCMS.PL
                         break;
                     case "LogoutRequiredException":
                         logNeeded = false;
-                        Response.Redirect("/Home/Index/");
+                        Response.Redirect("/Home/Dashboard/");
                         break;
                     default:
                         Response.Redirect("/Home/NotFound/");

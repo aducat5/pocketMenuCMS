@@ -1,7 +1,266 @@
-﻿
+﻿@model List<Seller>
 @{
-    ViewBag.Title = "Edit";
+    Seller firstSeller = Model.First();
+    ViewBag.Title = "Do you need an edit?";
+    ViewBag.PageDesc = "You can edit the details of your restaurant from this page.";
 }
+<h2>Edit your restaurant!</h2>
+<hr />
+<div class="row" id="message"></div>
+<div class="row container">
+    <div class="main-card col-md-5 card" style="height:min-content;">
+        <div class="card-body">
+            <div class="col-md-12">
+                <div class="position-relative form-group">
+                    <label for="restName" class="" style="font-size:large">Name of your restaurant.</label>
+                    <input name="restName" value="@firstSeller.SellerName" required id="restName" placeholder="Example Restaurant..." type="text" class="form-control updater">
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="position-relative form-group">
+                    <label for="restDesc" class="" style="font-size:large">Describe your restaurant with a few words.</label>
+                    <textarea class="form-control updater" id="restDesc" placeholder="Example restaurant is a place that you can..."></textarea>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="col-md-5">
+                    <div class="position-relative form-group">
+                        <label for="accentColor" class="" style="font-size:large">Accent Color</label>
+                        <input name="accentColor" id="accentColor" type="color" class="form-control updater" value="#FF5733">
+                    </div>
+                </div>
+                <div class="col-md-5 offset-2">
+                    <div class="position-relative form-group">
+                        <label for="accentColor" class="" style="font-size:large">Done editing?</label>
+                        <button class="btn btn-success form-control" id="btn-save">
+                            Save Restaurant
+                            <em class="fa fa-check"></em>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="main-card col-md-6 card offset-1" id="preview-card" style="padding:5px;">
+        <div class="card-body">
+            <h3 id="restNamePrev" style="border-bottom:2px solid #EEEEEE; margin-bottom:20px; line-height:2">
+                @firstSeller.SellerName
+            </h3>
+            <div class="menu-section">
+                <div class="section-header-bottomline">
+                    <h4>Main Dishes</h4>
+                </div>
+                <ul class="list-group">
+                    <li class="list-group-item menu-product">
+                        <h5 class="list-group-item-heading" style="font-size:18px">
+                            List group item heading
+                            <br />
+                            <sub>25₺</sub>
+                            <em class="fa fa-chevron-right pull-right list-arrow" style="margin:-5px auto auto auto; color:#FF5733; font-size:24px"></em>
+                        </h5>
+                        <div class="card" style="display:none;">
+                            <img src="~/Content/src/assets/images/city.jpg" style="object-fit:cover; width:100%; height:200px; margin-top:5px;" />
+                        </div>
+                    </li>
+                    <li class="list-group-item menu-product">
+                        <h5 class="list-group-item-heading" style="font-size:18px">
+                            List group item heading
+                            <br />
+                            <sub>25₺</sub>
+                            <em class="fa fa-chevron-right pull-right list-arrow" style="margin:-5px auto auto auto; color:#FF5733; font-size:24px"></em>
+                        </h5>
+                        <div class="card" style="display:none;">
+                            <img src="~/Content/src/assets/images/city.jpg" style="object-fit:cover; width:100%; height:200px; margin-top:5px;" />
+                        </div>
+                    </li>
+                    <li class="list-group-item menu-product">
+                        <h5 class="list-group-item-heading" style="font-size:18px">
+                            List group item heading
+                            <br />
+                            <sub>25₺</sub>
+                            <em class="fa fa-chevron-right pull-right list-arrow" style="margin:-5px auto auto auto; color:#FF5733; font-size:24px"></em>
+                        </h5>
+                        <div class="card" style="display:none;">
+                            <img src="~/Content/src/assets/images/city.jpg" style="object-fit:cover; width:100%; height:200px; margin-top:5px;" />
+                        </div>
+                    </li>
+                </ul>
+            </div>
 
-<h2>Edit</h2>
+            <div class="menu-section">
+                <div class="section-header-bottomline">
+                    <h4>Drinks</h4>
+                </div>
+                <ul class="list-group">
+                    <li class="list-group-item menu-product">
+                        <h5 class="list-group-item-heading" style="font-size:18px">
+                            List group item heading
+                            <br />
+                            <sub>25₺</sub>
+                            <em class="fa fa-chevron-right pull-right list-arrow" style="margin:-5px auto auto auto; color:#FF5733; font-size:24px"></em>
+                        </h5>
+                        <div class="card" style="display:none;">
+                            <img src="~/Content/src/assets/images/city.jpg" style="object-fit:cover; width:100%; height:200px; margin-top:5px;" />
+                        </div>
+                    </li>
+                    <li class="list-group-item menu-product">
+                        <h5 class="list-group-item-heading" style="font-size:18px">
+                            List group item heading
+                            <br />
+                            <sub>25₺</sub>
+                            <em class="fa fa-chevron-right pull-right list-arrow" style="margin:-5px auto auto auto; color:#FF5733; font-size:24px"></em>
+                        </h5>
+                        <div class="card" style="display:none;">
+                            <img src="~/Content/src/assets/images/city.jpg" style="object-fit:cover; width:100%; height:200px; margin-top:5px;" />
+                        </div>
+                    </li>
+                </ul>
+            </div>
 
+        </div>
+
+    </div>
+</div>
+
+@section scripts{
+    <script>
+        var restaurant = @Html.Raw(firstSeller.SellerJSON);
+
+        var bind = function () {
+            var updatePreview = function () {
+                updateRestaurant();
+                //var restaurant = getRestValues();
+                document.getElementById("restNamePrev").innerText = restaurant.restaurantName;
+
+                //update bottom border of sectionHeaders
+                var sectionHeaders = document.getElementsByClassName("section-header-bottomline");
+                for (var i = 0; i < sectionHeaders.length; i++) {
+                    var header = sectionHeaders[i];
+                    header.style.borderBottomColor = restaurant.accentColor;
+                }
+
+                //update chevron colors
+                var chevrons = document.getElementsByClassName("fa-chevron-right");
+                for (var i = 0; i < chevrons.length; i++) {
+                    var chevron = chevrons[i];
+                    chevron.style.color = restaurant.accentColor;
+                }
+            };
+
+            var updaters = document.getElementsByClassName("updater");
+            for (var i = 0; i < updaters.length; i++) {
+                var updater = updaters[i];
+                updater.addEventListener("change", updatePreview);
+                updater.addEventListener("keyup", updatePreview);
+                updater.addEventListener("input", updatePreview);
+            }
+
+            document.getElementById("btn-save").addEventListener("click", function () {
+                updateRestaurant();
+                //var restaurant = getRestValues();
+                var request = new XMLHttpRequest();
+
+                var formData = new FormData();
+                formData.append("SellerName", restaurant.restaurantName);
+                formData.append("SellerJSON", JSON.stringify(restaurant));
+
+                request.open("POST", "/Restaurant/Edit", true);
+                request.onload = function (result) {
+                    var response = result.currentTarget.response;
+                    response = JSON.parse(response);
+
+                    if (response.Status) {
+                        window.location.href = "@Url.Action("Dashboard", "Home")?restE=true";
+                    } else {
+                        showAlert(
+                            document.getElementById("message"),
+                            "danger",
+                            response.Result
+                        );
+                    }
+                    console.log(response);
+                };
+
+                request.send(formData);
+            });
+
+            function bindListItems() {
+
+                var items = document.getElementsByClassName("list-group-item");
+                for (var i = 0; i < items.length; i++) {
+                    var item = items[i];
+                    item.addEventListener("click", function () {
+                        updateRestaurant();
+                        //var restaurant = getRestValues();
+                        //toggle image card
+                        var card = this.querySelector(".card");
+                        var listArrow = this.querySelector(".list-arrow");
+
+                        if (card.style.display === "none") {
+                            listArrow.style.color = "#6c757d";
+                            listArrow.classList.remove("fa-chevron-right");
+                            listArrow.classList.add("fa-chevron-down");
+                            card.style.display = "block";
+                        } else {
+                            listArrow.style.color = restaurant.accentColor;
+                            listArrow.classList.add("fa-chevron-right");
+                            listArrow.classList.remove("fa-chevron-down");
+                            card.style.display = "none";
+                        }
+                        //console.log(item);
+                    });
+                }
+
+            }
+
+            bindListItems();
+
+            updatePreview();
+        };
+        
+        var render = function () {
+            
+            var restName = document.getElementById("restName");
+            var restDesc = document.getElementById("restDesc");
+            var accentColor = document.getElementById("accentColor");
+
+            restDesc.value = restaurant.restaurantDesc;
+            accentColor.value = restaurant.accentColor;
+
+            bind();
+        };
+
+        var getRestValues = function () {
+            var restName = document.getElementById("restName");
+            var restDesc = document.getElementById("restDesc");
+            var accentColor = document.getElementById("accentColor");
+
+            return {
+                "restaurantName": restName.value,
+                "restaurantDesc": restDesc.value,
+                "accentColor": accentColor.value
+            };
+        };
+
+        var updateRestaurant = function () {
+            var restName = document.getElementById("restName");
+            var restDesc = document.getElementById("restDesc");
+            var accentColor = document.getElementById("accentColor");
+
+            restaurant.restaurantName = restName.value;
+            restaurant.restaurantDesc = restDesc.value;
+            restaurant.accentColor = accentColor.value;
+        };
+
+        var isRestValid = function (restaurant) {
+            if (!restaurant.restaurantName)
+                return false;
+            if (!restaurant.restaurantDesc)
+                return false;
+
+            return true;
+        };
+
+        render();
+    </script>
+}
