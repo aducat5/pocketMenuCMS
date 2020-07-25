@@ -48,6 +48,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="BCrypt.Net-Next, Version=4.0.0.0, Culture=neutral, PublicKeyToken=1e11be04b6288443, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Bin\BCrypt.Net-Next.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -177,6 +181,7 @@
     <Content Include="Content\src\assets\images\city.jpg" />
     <Content Include="Content\src\assets\images\logo-inverse.png" />
     <Content Include="Content\src\assets\images\logo.png" />
+    <Content Include="Content\src\assets\images\menu\index.txt" />
     <Content Include="Content\src\assets\scripts\custom.js" />
     <Content Include="Content\src\assets\scripts\html5sortable.js" />
     <Content Include="Content\src\assets\scripts\jquery-3.5.1.min.js" />
@@ -261,7 +266,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Content\src\assets\images\menu\" />
     <Folder Include="Helpers\" />
     <Folder Include="Views\Mail\" />
     <Folder Include="Views\Shared\Components\MenuView\" />

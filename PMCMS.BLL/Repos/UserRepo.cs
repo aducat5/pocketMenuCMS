@@ -9,10 +9,7 @@ namespace PMCMS.BLL.Repos
         private static readonly PocketMenuDBEntities db = DBTool.GetInstance();
         public bool CheckUser(int id)
         {
-            using (db)
-            {
-                return db.Users.Any(u => u.UserID == id);
-            }
+            return db.Users.Any(u => u.UserID == id);
         }
 
         public bool CheckUser(string email)
@@ -69,6 +66,33 @@ namespace PMCMS.BLL.Repos
                 return false;
             }
         }
+
+        public bool UpdatePass(string newPass, int userID, out string result)
+        {
+            if (!CheckUser(userID))
+            {
+                result = "Güncellemeye çalıştığınız kullanıcı bulunamadı";
+                return false;
+            }
+            else
+            {
+                User userToUpdate = GetUser(userID);
+                userToUpdate.Password = BCrypt.Net.BCrypt.HashPassword(newPass);
+                userToUpdate.UpdateDate = DateTime.Now;
+                bool sonuc = db.SaveChanges() > 0;
+                if (sonuc)
+                {
+                    result = "Parola başarıyla güncellendi";
+                    return sonuc;
+                }
+                else
+                {
+                    result = "Güncelleme sırasında bir sorun oluştu, lütfen destek ekibi ile iletişime geçin.";
+                    return sonuc;
+                }
+            }
+        }
+
         public bool DeleteUser(int id, out string result)
         {
             bool sonuc = false;
@@ -103,10 +127,15 @@ namespace PMCMS.BLL.Repos
             {
                 if (CheckUser(user.UserID))
                 {
-                    user.Password = BCrypt.Net.BCrypt.HashPassword(user.Password);
-                    user.UpdateDate = DateTime.Now;
+                    User userToUpdate = GetUser(user.UserID);
+                    
+                    userToUpdate.UpdateDate = DateTime.Now;
+                    userToUpdate.FirstName = user.FirstName;
+                    userToUpdate.LastName = user.LastName;
+                    userToUpdate.Email = user.Email;
 
-                    db.Entry(GetUser(user.UserID)).CurrentValues.SetValues(user);
+                    db.Entry(GetUser(user.UserID)).CurrentValues.SetValues(userToUpdate);
+
                     if (db.SaveChanges() > 0)
                         result = "Güncelleme başarılı.";
                     else

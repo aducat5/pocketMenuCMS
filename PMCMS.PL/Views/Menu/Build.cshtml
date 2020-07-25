@@ -6,11 +6,12 @@
         firstSeller = Model[0];
     }
 
-    ViewBag.Title = "Build Menu";
-    ViewBag.PageDesc = "Create your menu by adding sections and products under. You can use the pen icon to rename the sections and products.";
+    ViewBag.Title = "Menü Aracı";
+    ViewBag.PageDesc = "Bu sayfadan menünüzü oluşturabilir, düzenleyebilir, sıralayabilirsiniz.";
+    ViewBag.PageIcon = "pe-7s-note2";
 }
 
-<h2>Menu of: @firstSeller.SellerName</h2>
+<h2>@firstSeller.SellerName</h2>
 
 <hr />
 
@@ -88,7 +89,7 @@
             var $sectionTemp = $(`
             <div class="item" data-sectionstamp="`+ sectionStamp + `">
                 <div class="section-header-bottomline h4" style="border-bottom-color:`+ restData.accentColor + `;" data-toggle="collapse" href="#` + sectionStamp + `" aria-expanded="false">
-    
+
                     <div class="input-group">
                         <div class="input-group-prepend">
                             <button class="btn btn-outline-light">
@@ -196,7 +197,7 @@
             $("input[type=file]").off("change").on("change", uploadFile);
 
             $(".rlabel").find("em").off("click.clearFile").on("click.clearFile", clearUploadedFile);
-            
+
             $("input.item-name").off("keyup.namechange").on("keyup.namechange", function (e) {
                 var stamp = e.target.getAttribute("data-stamp");
                 var $modal = $("div.modal." + stamp);
@@ -397,7 +398,7 @@
 
             return $modalTemp;
         };
-        
+
         var uploadFile = function (event) {
             var stamp = event.target.getAttribute("data-stamp");
 
@@ -475,19 +476,28 @@
                             $modal.find("input.item-name").val(product.productName);
                             $modal.find("textarea.description").val(product.description);
                             $modal.find("input.url").val(product.imageUrl);
+                            
 
-                            var url = product.imageUrl.split("/");
-                            url = url[url.length - 1];
-                            $modal.find("label.custom-file-label").text(url);
-                            $modal.find("span.plabel").addClass("d-none");
-                            $modal.find("span.rlabel").removeClass("d-none");
+                            if (product.imageUrl == "") {
+                                //$modal.find("label.custom-file-label").text(url);
+                                $modal.find("span.plabel").removeClass("d-none");
+                                $modal.find("span.rlabel").addClass("d-none");
+                            } else {
+                                var url = product.imageUrl.split("/");
+                                url = url[url.length - 1];
+                                $modal.find("label.custom-file-label").text(url);
+                                $modal.find("span.plabel").addClass("d-none");
+                                $modal.find("span.rlabel").removeClass("d-none");
+                            }
+
+
 
 
                             $product.insertBefore($section.find(".btn-newitem").parent());
                             $("#modal-container").append($modal);
                         }
                     }
-                    
+
                     $section.insertBefore($("#add-section").parent());
                 }
 
@@ -576,14 +586,14 @@
             cursor: pointer;
         }
 
-        input.section-name{
-            height:auto;
+        input.section-name {
+            height: auto;
         }
-        
+
         .section-icon {
             color: #FF5733;
             font-size: 35px;
-            padding:0px;
+            padding: 0px;
         }
 
         .ph-sub-class {
@@ -597,9 +607,9 @@
 
         .section-header-bottomline {
             border-bottom-width: 1.5px;
-            border-bottom-style:none;
+            border-bottom-style: none;
         }
-        
+
         .trash-list > .item {
             color: white !important;
         }
@@ -607,9 +617,10 @@
         .subitem {
             margin: 20px;
         }
-        label.list-itemname{
-            font-size:smaller;
-            max-width:80%;
+
+        label.list-itemname {
+            font-size: smaller;
+            max-width: 80%;
         }
     </style>
 }

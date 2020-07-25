@@ -1,7 +1,145 @@
-﻿
+﻿@model User
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Profil Yönetimi";
+    ViewBag.PageIcon = "pe-7s-user";
+    ViewBag.PageDesc = "Bu sayfadan kullanıcı profiliniz üzerinde düzenleme yapabilirsiniz.";
 }
 
-<h2>Edit</h2>
+<h2>Profilini Düzenle</h2>
+<hr />
+<div id="message">
+    @if (ViewBag.Response != null)
+    {
+        <div class="alert alert-success alert-dismissible" style="position:absolute; right:10px; top:50px; z-index:4">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            <strong>Tebrikler!</strong> @ViewBag.Response
+        </div>
+    }
+</div>
+<div class="row">
+    <div class="main-card col-md-6 card" style="height:min-content;">
+        <div class="card-body">
+            <div>
+                @using (Html.BeginForm("Edit", "User", FormMethod.Post, new { @class = "form-saveuser", name = "form-saveuser" }))
+                {
+                    <div class="form-row">
+                        <div class="col-md-12">
+                            <div class="position-relative form-group">
+                                <label for="inputEmail" class="">E-Posta</label>
+                                @Html.TextBoxFor(m => m.Email, new { placeholder = "E-Postanız...", type = "email", @class = "form-control", required = "", autofocus = "", id = "inputEmail", value = Model.Email })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col-md-6">
+                            <div class="position-relative form-group">
+                                <label for="inputName" class="">Adınız</label>
+                                @Html.TextBoxFor(m => m.FirstName, new { placeholder = "Adınız...", type = "text", @class = "form-control", required = "", autofocus = "", id = "inputFirstName", value = Model.FirstName })
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="position-relative form-group">
+                                <label for="inputName" class="">Soyadınız</label>
+                                @Html.TextBoxFor(m => m.LastName, new { placeholder = "Soyadınız...", type = "text", @class = "form-control", required = "", autofocus = "", id = "inputLastName", value = Model.LastName })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-4 d-flex align-items-center">
+                        <div class="ml-auto">
+                            <button class="btn btn-success">Kullanıcı Bilgilerini Güncelle</button>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+    <div class="main-card col-md-4 offset-1 card" style="height:min-content;">
+        <div class="card-body">
+            <div>
+                <div class="form-row">
+                    <div class="col-md-12">
+                        <div class="position-relative form-group">
+                            <label for="inputOldPass" class="">Eski Parola</label>
+                            @Html.Password("oldPass", null, new { placeholder = "Eski Parola...", type = "password", @class = "form-control", required = "", id = "inputOldPass" })
+                        </div>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col-md-6">
+                        <div class="position-relative form-group">
+                            <label for="inputNewPass" class="">Yeni Parola</label>
+                            @Html.Password("newPass", null, new { placeholder = "Yeni Parola...", type = "password", @class = "form-control", required = "", id = "inputNewPass" })
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="position-relative form-group">
+                            <label for="inputNewPass" class="">Yeni Parola Tekrarı</label>
+                            @Html.Password("newPassRe", null, new { placeholder = "Yeni Parola Tekrarı...", type = "password", @class = "form-control", required = "", id = "inputNewPassRe" })
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-4 d-flex align-items-center">
+                    <div class="ml-auto">
+                        <button onclick="updatePass()" id="savePass" class="btn btn-success">Parolayı Güncelle</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
+@section scripts{
+    <script src="~/Content/src/assets/scripts/jquery-3.5.1.min.js"></script>
+    <script>
+        var updatePass = function () {
+            $("#savePass").attr("disabled", true);
+            $("#savePass").toggleClass("disabled");
+            $("#savePass").html('<em class="fa fa-spinner fa-spin"></em> Güncelleniyor...');
+            
+            var request = new XMLHttpRequest();
+            var formData = new FormData();
+            formData.append("oldPass", $("#inputOldPass").val());
+            formData.append("newPass", $("#inputNewPass").val());
+            formData.append("newPassRe", $("#inputNewPassRe").val());
+
+            request.open("POST", "/User/Pass", true);
+            request.onload = function (result) {
+                var response = result.currentTarget.response;
+                response = JSON.parse(response);
+
+                if (response.Status) {
+                    $("#savePass").attr("disabled", false);
+                    $("#savePass").toggleClass("disabled");
+                    $("#savePass").html('Parolayı Güncelle');
+                    popup("Tebrikler!", response.Result, "success");
+                } else {
+                    $("#savePass").attr("disabled", false);
+                    $("#savePass").toggleClass("disabled");
+                    $("#savePass").html('Parolayı Güncelle');
+                    popup("Dikkat!", response.Result, "danger");
+                }
+                console.log(response);
+            };
+
+            request.send(formData);
+        };
+
+        var dissmissAlerts = function () {
+            var alerts = document.getElementsByClassName("alert");
+            for (var i = 0; i < alerts.length; i++) {
+                var alert = alerts[i];
+                alert.classList.toggle("d-none");
+            }
+        };
+
+        var popup = function (title, message, alertState) {
+            $("#message").append(`<div class="alert alert-` + alertState +` alert-dismissible" style="position:absolute; right:10px; top:50px; z-index:4">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            <strong>`+ title + `</strong> ` + message +` </div>`);
+            setTimeout(dissmissAlerts, 3000);
+        };
+
+        setTimeout(dissmissAlerts, 3000);
+
+    </script>
+}
