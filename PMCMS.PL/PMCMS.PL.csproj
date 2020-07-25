@@ -146,6 +146,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\MailController.cs" />
     <Compile Include="Controllers\MenuController.cs" />
     <Compile Include="Controllers\RestaurantController.cs" />
     <Compile Include="Controllers\SignController.cs" />
@@ -260,6 +261,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="Content\src\assets\images\menu\" />
     <Folder Include="Helpers\" />
+    <Folder Include="Views\Mail\" />
     <Folder Include="Views\Shared\Components\MenuView\" />
   </ItemGroup>
   <ItemGroup>
