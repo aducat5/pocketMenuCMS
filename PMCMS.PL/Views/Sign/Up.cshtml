@@ -11,7 +11,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta http-equiv="Content-Language" content="en">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Register - PocketMenu</title>
+    <title>Kayıt Ol - PocketMenu İçerik Yönetim Sistemi</title>
     <meta name="viewport"
           content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no" />
     <meta name="description" content="Pocket Menu App Registeration Page">
@@ -25,15 +25,25 @@
             background-repeat: round;
         }
 
-        @@media screen and (max-width: 600px){
-            .hidden-xs{
-                display:none;
+        @@media screen and (max-width: 600px) {
+            .hidden-xs {
+                display: none;
             }
         }
     </style>
 </head>
 
 <body>
+    <div class="" style="position:absolute; left:10px; top:10px; z-index:4">
+        <a href="@Url.Action("Landing", "Home")" class="close">&times;</a>
+    </div>
+    @if (ViewBag.RegState != null)
+    {
+        <div class="@ViewBag.AlertState alert-dismissible" style="position:absolute; right:10px; top:10px; z-index:4">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            <strong>Kayıt Başarısız!</strong> @ViewBag.RegState
+        </div>
+    }
     <div class="app-container app-theme-white body-tabs-shadow">
         <div class="app-container">
             <div class="h-100">
@@ -42,73 +52,91 @@
                         <div class="mx-auto app-login-box col-sm-12 col-md-10 col-lg-9">
                             <div class="app-logo"></div>
                             <h4>
-                                <div>Welcome,</div>
-                                <span>It only takes a <span class="text-success">few seconds</span> to create your account</span>
+                                <div>Hoşgeldiniz!</div>
+                                <span>Yeni hesabınızı oluşturmak yalnızca <span class="text-success">birkaç saniye</span> alacak.</span>
                             </h4>
                             <div>
-                                @using (Html.BeginForm("Up", "Sign", FormMethod.Post, new { @class = "form-signin" }))
+                                @using (Html.BeginForm("Up", "Sign", FormMethod.Post, new { @class = "form-signup", name = "form-signup" }))
                                 {
-                                <div class="form-row">
-                                    <div class="col-md-6">
-                                        <div class="position-relative form-group">
-                                            <label for="inputEmail" class=""><span class="text-danger">*</span> Email</label>
-                                            @Html.TextBoxFor(m => m.Email, new { placeholder = "Email here...", type = "email", @class = "form-control", required = "", autofocus = "", id = "inputEmail" })
+                                    <div class="form-row">
+                                        <div class="col-md-6">
+                                            <div class="position-relative form-group">
+                                                <label for="inputEmail" class=""><span class="text-danger">*</span> E-Posta</label>
+                                                @Html.TextBoxFor(m => m.Email, new { placeholder = "E-Postanız...", type = "email", @class = "form-control", required = "", autofocus = "", id = "inputEmail" })
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="position-relative form-group">
+                                                <label for="inputName" class=""><span class="text-danger">*</span>Adınız</label>
+                                                @Html.TextBoxFor(m => m.FirstName, new { placeholder = "Adınız...", type = "text", @class = "form-control", required = "", autofocus = "", id = "inputFirstName" })
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="position-relative form-group">
+                                                <label for="inputName" class=""><span class="text-danger">*</span>Soyadınız</label>
+                                                @Html.TextBoxFor(m => m.LastName, new { placeholder = "Soyadınız...", type = "text", @class = "form-control", required = "", autofocus = "", id = "inputLastName" })
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="position-relative form-group">
+                                                <label for="inputPassword" class=""><span class="text-danger">*</span> Parolanız</label>
+                                                @Html.PasswordFor(m => m.Password, new { placeholder = "Parolanız...", type = "password", @class = "form-control", required = "", autofocus = "", id = "inputPassword" })
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="position-relative form-group">
+                                                <label for="inputRPasswordAgain" class=""><span class="text-danger">*</span> Parola Tekrarı</label>
+                                                @Html.PasswordFor(m => m.Password, new { placeholder = "...", type = "password", @class = "form-control", required = "", autofocus = "", id = "inputRPasswordAgain" })
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="col-md-3">
-                                        <div class="position-relative form-group">
-                                            <label for="inputName" class=""><span class="text-danger">*</span>First Name</label>
-                                            @Html.TextBoxFor(m => m.FirstName, new { placeholder = "Your first name...", type = "text", @class = "form-control", required = "", autofocus = "", id = "inputFirstName" })
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <div class="position-relative form-group">
-                                            <label for="inputName" class=""><span class="text-danger">*</span>Last Name</label>
-                                            @Html.TextBoxFor(m => m.LastName, new { placeholder = "Your last name...", type = "text", @class = "form-control", required = "", autofocus = "", id = "inputLastName" })
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="position-relative form-group">
-                                            <label for="inputPassword" class=""><span class="text-danger">*</span> Password</label>
-                                            @Html.PasswordFor(m => m.Password, new { placeholder = "Password...", type = "password", @class = "form-control", required = "", autofocus = "", id = "inputPassword" })
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="position-relative form-group">
-                                            <label for="inputRPasswordAgain" class=""><span class="text-danger">*</span> Repeat Password</label>
-                                            @Html.PasswordFor(m => m.Password, new { placeholder = "Repeat Password...", type = "password", @class = "form-control", required = "", autofocus = "", id = "inputRPasswordAgain" })
-                                        </div>
-                                    </div>
-                                </div>
                                     <div class="mt-3 position-relative form-check">
-                                        <label for="exampleCheck" class="form-check-label">You will be accepting our <a href="javascript:void(0);">Terms and Conditions</a> via clicking the button below.</label>
+                                        <label for="exampleCheck" class="form-check-label">Kayıt tuşuna tıklayarak <a href="javascript:void(0);">Kullanıcı Sözleşmesi</a>ni kabul etmiş sayılacaksınız.</label>
                                     </div>
                                     <div class="mt-4 d-flex align-items-center">
                                         <h5 class="mb-0">
-                                            Already have an account?
-                                            @Html.ActionLink("Sign in", "In", "Sign", null, new { @class = "text-primary" })
+                                            Zaten bir hesabınız var mı?
+                                            @Html.ActionLink("Giriş Yapın", "In", "Sign", null, new { @class = "text-primary" })
                                         </h5>
                                         <div class="ml-auto">
-                                            <button class="btn-wide btn-pill btn-shadow btn-hover-shine btn btn-primary btn-lg">Create Account </button>
+                                            <button onclick="toggleLogin()" class="btn-wide btn-pill btn-shadow btn-hover-shine btn btn-primary btn-lg will-load">Hesabımı Oluştur!</button>
                                         </div>
                                     </div>
                                 }
                             </div>
                         </div>
                     </div>
-                    <div class="d-lg-flex col-lg-5 hidden-xs">
+                    <div class="d-none d-lg-block col-lg-5 hidden-xs">
                         <div class="slider-light">
-                            <div class="slick-slider slick-initialized">
+                            <div class="slick-slider">
                                 <div>
-                                    <div class="position-relative h-100 d-flex justify-content-center align-items-center bg-premium-dark"
-                                         tabindex="-1">
-                                        <div class="slide-img-bg"
-                                             style="background-image: url('assets/images/originals/citynights.jpg');"></div>
+                                    <div class="position-relative h-100 d-flex justify-content-center align-items-center bg-plum-plate" tabindex="-1">
+                                        <div class="slide-img-bg" style="background-image: url('assets/images/originals/city.jpg');"></div>
                                         <div class="slider-content">
-                                            <h3>Start using PocketMenu for free in a few seconds!</h3>
+                                            <h3>Restoranınızı Dijitalleştirin!</h3>
                                             <p>
-                                                PocketMenu is free for all and totally ad-free. But if you want to appreciate our work, feel free to contact us or buy us coffee :)
+                                                İşletmenize uygulamamızda bir yerin, güncel fiyatlarınızı, sıralamalarınızı, kampanyalarınızı yönetmenin ne kadar kolay olduğunu görün.
                                             </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="position-relative h-100 d-flex justify-content-center align-items-center bg-premium-dark" tabindex="-1">
+                                        <div class="slide-img-bg" style="background-image: url('assets/images/originals/citynights.jpg');"></div>
+                                        <div class="slider-content">
+                                            <h3>Sizin Renkleriniz ve Sizin Menünüz</h3>
+                                            <p>
+                                                Birkaç dakika içinde renginizi seçiip menünüzü oluşturun, tasarım ve gerikalan işleri bize bırakın.
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="position-relative h-100 d-flex justify-content-center align-items-center bg-sunny-morning" tabindex="-1">
+                                        <div class="slide-img-bg" style="background-image: url('assets/images/originals/citydark.jpg');"></div>
+                                        <div class="slider-content">
+                                            <h3>Menünüzü Paylaşın!</h3>
+                                            <p>Size özel oluşturuduğumuz kare kod ile menünüzü istediğiniz kadar, istediğiniz yerde paylaşabilirsiniz.</p>
                                         </div>
                                     </div>
                                 </div>
@@ -120,6 +148,17 @@
         </div>
     </div>
     <script type="text/javascript" src="~/Content/src/assets/scripts/main.pro.js"></script>
+    <script>
+
+        var toggleLogin = function () {
+            var btn = document.getElementsByClassName("will-load")[0];
+            btn.innerHTML = "<em class='fa fa-spinner fa-spin'></em> Giriş Yapılıyor...";
+            btn.classList.toggle("disabled");
+            btn.setAttribute("disabled", "true");
+
+            document.forms.namedItem("form-signup").submit();
+        };
+    </script>
 </body>
 
 </html>

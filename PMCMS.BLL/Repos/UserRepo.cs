@@ -44,7 +44,7 @@ namespace PMCMS.BLL.Repos
             {
                 if (CheckUser(newUser.Email))
                 {
-                    result = "This email is already in use.";
+                    result = "Bu adres zaten kullanımda.";
                     return false;
                 }
                 else
@@ -58,14 +58,14 @@ namespace PMCMS.BLL.Repos
                     }
                     else
                     {
-                        result = "Something went wrong, please call the support team.";
+                        result = "Bazı şeyler istediğimiz gibi gitmedi, lütfen destek ekibi ile iletişime geçiniz.";
                         return false;
                     }
                 }
             }
             catch (Exception ex)
             {
-                result = "Unhandled exception: " + ex.Message;
+                result = "Bilinmeyen Hata: " + ex.Message;
                 return false;
             }
         }
@@ -84,16 +84,16 @@ namespace PMCMS.BLL.Repos
                     }
 
                     if (sonuc) 
-                        result = "Delete is successful.";
+                        result = "Silme işlemi başarılı.";
                     else
-                        result = "Something went wrong, please call the support team.";
+                        result = "Bazı şeyler istediğimiz gibi gitmedi, lütfen destek ekibi ile iletişime geçiniz.";
                 }
                 catch (Exception ex)
                 {
                     result = ex.Message;
                 }
             }
-            else result = "The user you are trying to delete could not be found.";
+            else result = "Silmeye çalıştığınız kullanıcı bulunamadı.";
             return sonuc;
         }
         public bool UpdateUser(User user, out string result)
@@ -108,9 +108,9 @@ namespace PMCMS.BLL.Repos
 
                     db.Entry(GetUser(user.UserID)).CurrentValues.SetValues(user);
                     if (db.SaveChanges() > 0)
-                        result = "Update is successful";
+                        result = "Güncelleme başarılı.";
                     else
-                        result = "Something went wrong, please call the support team.";
+                        result = "Bazı şeyler istediğimiz gibi gitmedi, lütfen destek ekibi ile iletişime geçiniz.";
                 }
                 else 
                     result = "Kullanıcı Bulunamadı.";

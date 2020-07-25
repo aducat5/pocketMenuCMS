@@ -11,7 +11,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta http-equiv="Content-Language" content="en">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Login - Pocket Menu Content Managament System</title>
+    <title>Giriş Yap - PocketMenu İçerik Yönetim Sistemi</title>
     <meta name="viewport"
           content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no" />
     <meta name="description" content="Pocket Menu Content Managament System">
@@ -21,12 +21,22 @@
 
     <link href="~/Content/src/main.pro.css" rel="stylesheet">
     <style>
-        .app-logo{
+        .app-logo {
             background-repeat: round;
         }
     </style>
 </head>
 <body>
+    <div class="" style="position:absolute; left:10px; top:10px; z-index:4">
+        <a href="@Url.Action("Landing", "Home")" class="close">&times;</a>
+    </div>
+    @if (ViewBag.LoginNote != null)
+    {
+        <div class="alert alert-danger alert-dismissible" style="position:absolute; right:10px; top:10px; z-index:4">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            <strong>Giriş Yapılamadı!</strong> Kullanıcı adı veya parola hatalı, lütfen yeniden deneyiniz.
+        </div>
+    }
     <div class="app-container app-theme-white body-tabs-shadow">
         <div class="app-container">
             <div class="h-100">
@@ -38,9 +48,9 @@
                                     <div class="position-relative h-100 d-flex justify-content-center align-items-center bg-plum-plate" tabindex="-1">
                                         <div class="slide-img-bg" style="background-image: url('assets/images/originals/city.jpg');"></div>
                                         <div class="slider-content">
-                                            <h3>Create Your Restaurant</h3>
+                                            <h3>Restoranınızı Dijitalleştirin!</h3>
                                             <p>
-                                                Give a place to your restaurant in our application.
+                                                İşletmenize uygulamamızda bir yerin, güncel fiyatlarınızı, sıralamalarınızı, kampanyalarınızı yönetmenin ne kadar kolay olduğunu görün.
                                             </p>
                                         </div>
                                     </div>
@@ -49,9 +59,9 @@
                                     <div class="position-relative h-100 d-flex justify-content-center align-items-center bg-premium-dark" tabindex="-1">
                                         <div class="slide-img-bg" style="background-image: url('assets/images/originals/citynights.jpg');"></div>
                                         <div class="slider-content">
-                                            <h3>Build your menu with our style</h3>
+                                            <h3>Sizin Renkleriniz ve Sizin Menünüz</h3>
                                             <p>
-                                                Build a beautiful menu with a little efort. Let us handle the designing and rest.
+                                                Birkaç dakika içinde renginizi seçiip menünüzü oluşturun, tasarım ve gerikalan işleri bize bırakın.
                                             </p>
                                         </div>
                                     </div>
@@ -60,8 +70,8 @@
                                     <div class="position-relative h-100 d-flex justify-content-center align-items-center bg-sunny-morning" tabindex="-1">
                                         <div class="slide-img-bg" style="background-image: url('assets/images/originals/citydark.jpg');"></div>
                                         <div class="slider-content">
-                                            <h3>Share your menu with your customers</h3>
-                                            <p>Share your menu with your customers via the qr code or the link it provides. Everyone can access your menu from web or from our mobile application.</p>
+                                            <h3>Menünüzü Paylaşın!</h3>
+                                            <p>Size özel oluşturuduğumuz kare kod ile menünüzü istediğiniz kadar, istediğiniz yerde paylaşabilirsiniz.</p>
                                         </div>
                                     </div>
                                 </div>
@@ -76,48 +86,51 @@
                                     <div class="row">
                                         <div class="col-md-8">
                                             <div class="alert alert-success">
-                                                <h5>Congratulations!</h5> Your account is ready to use! You can login and start using PocketMenu application.
+                                                <h5>Tebrikler!</h5> Hesabınız oluşturuldu. Şimdi giriş yaparak PocketMenu uygulamasını kullanmaya başlayabilirsiniz.
                                             </div>
                                         </div>
                                     </div>
                                 }
+
+
                             }
                             <div class="app-logo"></div>
                             <h4 class="mb-0">
-                                <span class="d-block">Welcome back,</span>
-                                <span>Please sign in to your account.</span>
+                                <span class="d-block">Tekrar hoşgeldiniz,</span>
+                                <span>Buradan hesabınıza giriş yapabilirsiniz.</span>
                             </h4>
                             <h6 class="mt-3">
-                                No account?
-                                @Html.ActionLink("Sign up now", "Up", "Sign", null, new { @class = "btn-pill btn-shadow btn-hover-shine btn btn-primary" })
+                                Bir hesabınız yok mu?
+                                @Html.ActionLink("Hemen Kaydolun!", "Up", "Sign", null, new { @class = "btn-pill btn-shadow btn-hover-shine btn btn-primary" })
                             </h6>
                             <div class="divider row"></div>
                             <div>
-                                @using (Html.BeginForm("In", "Sign", FormMethod.Post, new { @class = "form-signin" }))
+                                @using (Html.BeginForm("In", "Sign", FormMethod.Post, new { @class = "form-signin", name = "form-signin" }))
                                 {
                                     <div class="form-row">
                                         <div class="col-md-6">
                                             <div class="position-relative form-group">
-                                                <label for="exampleEmail" class="">Email</label>
+                                                <label for="exampleEmail" class="">E-Posta</label>
                                                 <input name="email" id="email" placeholder="Email here..." type="email" class="form-control">
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="position-relative form-group">
-                                                <label for="examplePassword" class="">Password</label>
+                                                <label for="examplePassword" class="">Parola</label>
                                                 <input name="password" id="password" placeholder="Password here..." type="password" class="form-control">
                                             </div>
                                         </div>
                                     </div>
                                     <div class="position-relative form-check">
-                                        <input name="check" id="exampleCheck" type="checkbox" class="form-check-input">
-                                        <label for="exampleCheck" class="form-check-label">Keep me logged in</label>
+                                        <input name="check" id="keepMeLoggedIn" type="checkbox" class="form-check-input">
+                                        <label for="keepMeLoggedIn" class="form-check-label">Oturumu açık tut.</label>
                                     </div>
                                     <div class="divider row"></div>
                                     <div class="d-flex align-items-center">
                                         <div class="ml-auto">
                                             @*@Html.ActionLink("Recover Password", "Recover", "Sign", null, new { @class = "text-primary", style = "margin-right: 15px" })*@
-                                            <button class="btn-wide btn-pill btn-shadow btn-hover-shine btn btn-primary btn-lg">Login to Dashboard</button>
+                                            <button onclick="toggleLogin()" class="btn-wide btn-pill btn-shadow btn-hover-shine btn btn-primary btn-lg will-load">Giriş Yap</button>
+                                            @*<a onclick="toggleLogin()" class="btn-wide btn-pill btn-shadow btn-hover-shine btn btn-primary btn-lg will-load">Toggle Loading</a>*@
                                         </div>
                                     </div>
                                 }
@@ -129,6 +142,26 @@
         </div>
     </div>
     <script type="text/javascript" src="~/Content/src/assets/scripts/main.pro.js"></script>
+    <script>
+        var toggleLogin = function () {
+            var btn = document.getElementsByClassName("will-load")[0];
+            btn.innerHTML = "<em class='fa fa-spinner fa-spin'></em> Giriş Yapılıyor...";
+            btn.classList.toggle("disabled");
+            btn.setAttribute("disabled", "true");
+
+            document.forms.namedItem("form-signin").submit();
+        };
+
+        var dissmissAlerts = function () {
+            var alerts = document.getElementsByClassName("alert");
+            for (var i = 0; i < alerts.length; i++) {
+                var alert = alerts[i];
+                alert.classList.toggle("d-none");
+            }
+        };
+
+        setTimeout(dissmissAlerts, 3000);
+    </script>
 </body>
 
 </html>
