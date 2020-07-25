@@ -84,11 +84,11 @@
                                     <li class="nav-item">
                                         <a class="page-scroll" href="#about">Nedir?</a>
                                     </li>
+                                    @*<li class="nav-item">
+                                            <a class="page-scroll" href="#facts">Neden?</a>
+                                        </li>*@
                                     <li class="nav-item">
-                                        <a class="page-scroll" href="#facts">Neden?</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="page-scroll" href="#blog">İletişim</a>
+                                        <a class="page-scroll" href="#contact">İletişim</a>
                                     </li>
                                 </ul>
                             </div> <!-- navbar collapse -->
@@ -128,32 +128,31 @@
 
     <!--====== HEADER PART ENDS ======-->
     <!--====== BRAMD PART START ======-->
-
     @*<div class="brand-area pt-90">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="brand-logo d-flex align-items-center justify-content-center justify-content-md-between">
-                        <div class="single-logo mt-30 wow fadeIn" data-wow-duration="1s" data-wow-delay="0.2s">
-                            <img src="~/Content/src/landing-assets/images/brand-1.png" alt="brand">
-                        </div> <!-- single logo -->
-                        <div class="single-logo mt-30 wow fadeIn" data-wow-duration="1.5s" data-wow-delay="0.2s">
-                            <img src="~/Content/src/landing-assets/images/brand-2.png" alt="brand">
-                        </div> <!-- single logo -->
-                        <div class="single-logo mt-30 wow fadeIn" data-wow-duration="1.5s" data-wow-delay="0.3s">
-                            <img src="~/Content/src/landing-assets/images/brand-3.png" alt="brand">
-                        </div> <!-- single logo -->
-                        <div class="single-logo mt-30 wow fadeIn" data-wow-duration="1.5s" data-wow-delay="0.4s">
-                            <img src="~/Content/src/landing-assets/images/brand-4.png" alt="brand">
-                        </div> <!-- single logo -->
-                        <div class="single-logo mt-30 wow fadeIn" data-wow-duration="1.5s" data-wow-delay="0.5s">
-                            <img src="~/Content/src/landing-assets/images/brand-5.png" alt="brand">
-                        </div> <!-- single logo -->
-                    </div> <!-- brand logo -->
-                </div>
-            </div>   <!-- row -->
-        </div> <!-- container -->
-    </div>*@
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="brand-logo d-flex align-items-center justify-content-center justify-content-md-between">
+                            <div class="single-logo mt-30 wow fadeIn" data-wow-duration="1s" data-wow-delay="0.2s">
+                                <img src="~/Content/src/landing-assets/images/brand-1.png" alt="brand">
+                            </div> <!-- single logo -->
+                            <div class="single-logo mt-30 wow fadeIn" data-wow-duration="1.5s" data-wow-delay="0.2s">
+                                <img src="~/Content/src/landing-assets/images/brand-2.png" alt="brand">
+                            </div> <!-- single logo -->
+                            <div class="single-logo mt-30 wow fadeIn" data-wow-duration="1.5s" data-wow-delay="0.3s">
+                                <img src="~/Content/src/landing-assets/images/brand-3.png" alt="brand">
+                            </div> <!-- single logo -->
+                            <div class="single-logo mt-30 wow fadeIn" data-wow-duration="1.5s" data-wow-delay="0.4s">
+                                <img src="~/Content/src/landing-assets/images/brand-4.png" alt="brand">
+                            </div> <!-- single logo -->
+                            <div class="single-logo mt-30 wow fadeIn" data-wow-duration="1.5s" data-wow-delay="0.5s">
+                                <img src="~/Content/src/landing-assets/images/brand-5.png" alt="brand">
+                            </div> <!-- single logo -->
+                        </div> <!-- brand logo -->
+                    </div>
+                </div>   <!-- row -->
+            </div> <!-- container -->
+        </div>*@
 
     <!--====== BRAMD PART ENDS ======-->
     <!--====== SERVICES PART START ======-->
@@ -281,10 +280,10 @@
                     <div class="about-content mt-50 wow fadeInLeftBig" data-wow-duration="1s" data-wow-delay="0.5s">
                         <div class="section-title">
                             <div class="line"></div>
-                            <h3 class="title"><span>Crafted for</span> SaaS, App and Software Landing Page</h3>
+                            <h3 class="title"><span>Temas gerektirmeyen </span>olabilecek en hijyenik menü!</h3>
                         </div> <!-- section title -->
-                        <p class="text">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, seiam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing.</p>
-                        <a href="#" class="main-btn">Try it Free</a>
+                        <p class="text">Yeni düzenlemelerde hijyen açısından güvensizlik veren kağıt menülerin kaldırılması ile sizi hem yeni menülerinizi sürekli temizleme masrafından, hem de sürekli menü baskı masraflarından kurtaran PocketMenu, benzer hizmetlerin aksine tamamen ücretsiz olarak kullanılabilir. </p>
+                        <a href="@Url.Action("Up", "Sign")" class="main-btn">Ücretsiz olarak kullanmaya başlayın!</a>
                     </div> <!-- about content -->
                 </div>
                 <div class="col-lg-6">
@@ -302,64 +301,92 @@
     <!--====== ABOUT PART ENDS ======-->
     <!--====== ABOUT PART ENDS ======-->
     <!--====== VIDEO COUNTER PART START ======-->
-
-    <section id="facts" class="video-counter pt-70">
+    @*<section id="facts" class="video-counter pt-70">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="video-content mt-50 wow fadeIn" data-wow-duration="1s" data-wow-delay="0.5s">
+                            <img class="dots" src="~/Content/src/landing-assets/images/dots.svg" alt="dots">
+                            <div class="video-wrapper">
+                                <div class="video-image">
+                                    <img src="~/Content/src/landing-assets/images/video.png" alt="video">
+                                </div>
+                                <div class="video-icon">
+                                    <a href="https://www.youtube.com/watch?v=r44RKWyfcFw" class="video-popup"><i class="lni lni-play"></i></a>
+                                </div>
+                            </div> <!-- video wrapper -->
+                        </div> <!-- video content -->
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="counter-wrapper mt-50 wow fadeIn" data-wow-duration="1s" data-wow-delay="0.8s">
+                            <div class="counter-content">
+                                <div class="section-title">
+                                    <div class="line"></div>
+                                    <h3 class="title">Cool facts <span> about this app</span></h3>
+                                </div> <!-- section title -->
+                                <p class="text">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, seiam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.</p>
+                            </div> <!-- counter content -->
+                            <div class="row no-gutters">
+                                <div class="col-4">
+                                    <div class="single-counter counter-color-1 d-flex align-items-center justify-content-center">
+                                        <div class="counter-items text-center">
+                                            <span class="count"><span class="counter">125</span>K</span>
+                                            <p class="text">Downloads</p>
+                                        </div>
+                                    </div> <!-- single counter -->
+                                </div>
+                                <div class="col-4">
+                                    <div class="single-counter counter-color-2 d-flex align-items-center justify-content-center">
+                                        <div class="counter-items text-center">
+                                            <span class="count"><span class="counter">87</span>K</span>
+                                            <p class="text">Active Users</p>
+                                        </div>
+                                    </div> <!-- single counter -->
+                                </div>
+                                <div class="col-4">
+                                    <div class="single-counter counter-color-3 d-flex align-items-center justify-content-center">
+                                        <div class="counter-items text-center">
+                                            <span class="count"><span class="counter">4.8</span></span>
+                                            <p class="text">User Rating</p>
+                                        </div>
+                                    </div> <!-- single counter -->
+                                </div>
+                            </div> <!-- row -->
+                        </div> <!-- counter wrapper -->
+                    </div>
+                </div> <!-- row -->
+            </div> <!-- container -->
+        </section>*@
+    <section id="contact" class="video-counter pt-70">
         <div class="container">
             <div class="row">
-                <div class="col-lg-6">
-                    <div class="video-content mt-50 wow fadeIn" data-wow-duration="1s" data-wow-delay="0.5s">
-                        <img class="dots" src="~/Content/src/landing-assets/images/dots.svg" alt="dots">
-                        <div class="video-wrapper">
-                            <div class="video-image">
-                                <img src="~/Content/src/landing-assets/images/video.png" alt="video">
-                            </div>
-                            <div class="video-icon">
-                                <a href="https://www.youtube.com/watch?v=r44RKWyfcFw" class="video-popup"><i class="lni lni-play"></i></a>
-                            </div>
-                        </div> <!-- video wrapper -->
-                    </div> <!-- video content -->
+
+                <div class="col-lg-5">
+                    <div class="about-image text-center mt-50 wow fadeInRightBig" data-wow-duration="1s" data-wow-delay="0.5s">
+                        <img src="~/Content/src/landing-assets/images/contact.svg" alt="about">
+                    </div> <!-- about image -->
                 </div>
-                <div class="col-lg-6">
-                    <div class="counter-wrapper mt-50 wow fadeIn" data-wow-duration="1s" data-wow-delay="0.8s">
-                        <div class="counter-content">
-                            <div class="section-title">
-                                <div class="line"></div>
-                                <h3 class="title">Cool facts <span> about this app</span></h3>
-                            </div> <!-- section title -->
-                            <p class="text">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, seiam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.</p>
-                        </div> <!-- counter content -->
-                        <div class="row no-gutters">
-                            <div class="col-4">
-                                <div class="single-counter counter-color-1 d-flex align-items-center justify-content-center">
-                                    <div class="counter-items text-center">
-                                        <span class="count"><span class="counter">125</span>K</span>
-                                        <p class="text">Downloads</p>
-                                    </div>
-                                </div> <!-- single counter -->
-                            </div>
-                            <div class="col-4">
-                                <div class="single-counter counter-color-2 d-flex align-items-center justify-content-center">
-                                    <div class="counter-items text-center">
-                                        <span class="count"><span class="counter">87</span>K</span>
-                                        <p class="text">Active Users</p>
-                                    </div>
-                                </div> <!-- single counter -->
-                            </div>
-                            <div class="col-4">
-                                <div class="single-counter counter-color-3 d-flex align-items-center justify-content-center">
-                                    <div class="counter-items text-center">
-                                        <span class="count"><span class="counter">4.8</span></span>
-                                        <p class="text">User Rating</p>
-                                    </div>
-                                </div> <!-- single counter -->
-                            </div>
-                        </div> <!-- row -->
-                    </div> <!-- counter wrapper -->
+                <div class="col-lg-7">
+                    <div class="contact-content mt-50 wow fadeInLeftBig" data-wow-duration="1s" data-wow-delay="0.5s">
+                        <div class="section-title">
+                            <div class="line"></div>
+                            <h3 class="title">İletişim</h3>
+                        </div> <!-- section title -->
+                        @*<p class="text">Yeni düzenlemelerde hijyen açısından güvensizlik veren kağıt menülerin kaldırılması ile sizi hem yeni menülerinizi sürekli temizleme masrafından, hem de sürekli menü baskı masraflarından kurtaran PocketMenu, benzer hizmetlerin aksine tamamen ücretsiz olarak kullanılabilir. </p>*@
+                        <div class="">
+                            <br />
+                            <form action="#">
+                                <div class="row"><input type="text" class="form-control" placeholder="Adınız..." /></div><br />
+                                <div class="row"><input type="text" class="form-control" placeholder="E-Postanız..." /></div><br />
+                                <div class="row"><textarea class="form-control" placeholder="Mesajınız..."></textarea></div><br />
+                                <div class="row"><button class="main-btn">Gönder</button></div><br />
+                            </form>
+                        </div>
+                    </div> <!-- about content -->
                 </div>
             </div> <!-- row -->
         </div> <!-- container -->
     </section>
-
     <!--====== VIDEO COUNTER PART ENDS ======-->
     <!--====== FOOTER PART START ======-->
 
@@ -369,14 +396,14 @@
                 <div class="row">
                     <div class="col-lg-6">
                         <div class="subscribe-content mt-45">
-                            <h2 class="subscribe-title">Subscribe Our Newsletter <span>get reguler updates</span></h2>
+                            <h2 class="subscribe-title">Güncellemelerimizi <span>takip etmek ister misiniz?</span></h2>
                         </div>
                     </div>
                     <div class="col-lg-6">
                         <div class="subscribe-form mt-50">
                             <form action="#">
-                                <input type="text" placeholder="Enter eamil">
-                                <button class="main-btn">Subscribe</button>
+                                <input type="text" placeholder="örnek@örnek.com">
+                                <button class="main-btn">Abone Ol</button>
                             </form>
                         </div>
                     </div>
@@ -389,53 +416,53 @@
                             <a class="logo" href="#">
                                 <img src="~/Content/src/landing-assets/images/logo.svg" alt="logo">
                             </a>
-                            <p class="text">Lorem ipsum dolor sit amet consetetur sadipscing elitr, sederfs diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam.</p>
-                            <ul class="social">
-                                <li><a href="#"><i class="lni lni-facebook-filled"></i></a></li>
-                                <li><a href="#"><i class="lni lni-twitter-filled"></i></a></li>
-                                <li><a href="#"><i class="lni lni-instagram-filled"></i></a></li>
-                                <li><a href="#"><i class="lni lni-linkedin-original"></i></a></li>
-                            </ul>
+                            <p class="text">PocketMenu App. Kolay ve hızlı bir şekilde birkaç dakikada menünüzü oluşturup yayınlayabileceğiniz en iyi ücretsiz menü aracı.</p>
+                            @*<ul class="social">
+                                    <li><a href="#"><i class="lni lni-facebook-filled"></i></a></li>
+                                    <li><a href="#"><i class="lni lni-twitter-filled"></i></a></li>
+                                    <li><a href="#"><i class="lni lni-instagram-filled"></i></a></li>
+                                    <li><a href="#"><i class="lni lni-linkedin-original"></i></a></li>
+                                </ul>*@
                         </div> <!-- footer about -->
                     </div>
                     <div class="col-lg-5 col-md-7 col-sm-7">
-                        <div class="footer-link d-flex mt-50 justify-content-md-between">
-                            <div class="link-wrapper wow fadeIn" data-wow-duration="1s" data-wow-delay="0.4s">
-                                <div class="footer-title">
-                                    <h4 class="title">Quick Link</h4>
-                                </div>
-                                <ul class="link">
-                                    <li><a href="#">Road Map</a></li>
-                                    <li><a href="#">Privacy Policy</a></li>
-                                    <li><a href="#">Refund Policy</a></li>
-                                    <li><a href="#">Terms of Service</a></li>
-                                    <li><a href="#">Pricing</a></li>
-                                </ul>
-                            </div> <!-- footer wrapper -->
-                            <div class="link-wrapper wow fadeIn" data-wow-duration="1s" data-wow-delay="0.6s">
-                                <div class="footer-title">
-                                    <h4 class="title">Resources</h4>
-                                </div>
-                                <ul class="link">
-                                    <li><a href="#">Home</a></li>
-                                    <li><a href="#">Page</a></li>
-                                    <li><a href="#">Portfolio</a></li>
-                                    <li><a href="#">Blog</a></li>
-                                    <li><a href="#">Contact</a></li>
-                                </ul>
-                            </div> <!-- footer wrapper -->
-                        </div> <!-- footer link -->
+                        @*<div class="footer-link d-flex mt-50 justify-content-md-between">
+                                <div class="link-wrapper wow fadeIn" data-wow-duration="1s" data-wow-delay="0.4s">
+                                    <div class="footer-title">
+                                        <h4 class="title">Kayıt Ol</h4>
+                                    </div>
+                                    <ul class="link">
+                                        <li><a href="#">Road Map</a></li>
+                                        <li><a href="#">Privacy Policy</a></li>
+                                        <li><a href="#">Refund Policy</a></li>
+                                        <li><a href="#">Terms of Service</a></li>
+                                        <li><a href="#">Pricing</a></li>
+                                    </ul>
+                                </div> <!-- footer wrapper -->
+                                <div class="link-wrapper wow fadeIn" data-wow-duration="1s" data-wow-delay="0.6s">
+                                    <div class="footer-title">
+                                        <h4 class="title">Kaynaklar</h4>
+                                    </div>
+                                    <ul class="link">
+                                        <li><a href="#">PocketMenu</a></li>
+                                        <li><a href="#">Nasıl?</a></li>
+                                        <li><a href="#">Nedir?</a></li>
+                                        <li><a href="#">Kayıt Ol</a></li>
+                                        <li><a href="#">Giriş Yap</a></li>
+                                    </ul>
+                                </div> <!-- footer wrapper -->
+                            </div>*@ <!-- footer link -->
                     </div>
                     <div class="col-lg-3 col-md-5 col-sm-5">
                         <div class="footer-contact mt-50 wow fadeIn" data-wow-duration="1s" data-wow-delay="0.8s">
                             <div class="footer-title">
-                                <h4 class="title">Contact Us</h4>
+                                <h4 class="title">İletişim</h4>
                             </div>
                             <ul class="contact">
-                                <li>+809272561823</li>
-                                <li>info@gmail.com</li>
-                                <li>www.yourweb.com</li>
-                                <li>123 Stree New York City , United <br> States Of America 750.</li>
+                                <li>+905439115493</li>
+                                <li>admin@pma.ist</li>
+                                <li>www.pma.ist</li>
+                                @*<li>123 Stree New York City , United <br> States Of America 750.</li>*@
                             </ul>
                         </div> <!-- footer contact -->
                     </div>
@@ -446,7 +473,7 @@
                     <div class="col-lg-12">
                         <div class="copyright d-sm-flex justify-content-between">
                             <div class="copyright-content">
-                                <p class="text">Designed and Developed by <a href="https://uideck.com" rel="nofollow">UIdeck</a></p>
+                                <p class="text"><a href="https://uideck.com" rel="nofollow">SlothDevelopment</a> @DateTime.Now.Year</p>
                             </div> <!-- copyright content -->
                         </div> <!-- copyright -->
                     </div>
