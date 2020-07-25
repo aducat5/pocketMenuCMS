@@ -188,7 +188,11 @@
     <Content Include="Content\src\landing-assets\fonts\LineIcons.woff" />
     <Content Include="Content\src\landing-assets\fonts\LineIcons.woff2" />
     <Content Include="Content\src\landing-assets\images\.DS_Store" />
+    <Content Include="Content\src\landing-assets\images\404.svg" />
+    <Content Include="Content\src\landing-assets\images\404_2.svg" />
+    <Content Include="Content\src\landing-assets\images\404_3.svg" />
     <Content Include="Content\src\landing-assets\images\contact.svg" />
+    <Content Include="Content\src\landing-assets\images\logo-inverse.svg" />
     <Content Include="Content\src\landing-assets\js\.DS_Store" />
     <None Include="Content\src\lang\en.json" />
     <Content Include="Content\src\landing-assets\css\animate.css" />

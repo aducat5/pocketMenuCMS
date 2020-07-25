@@ -24,6 +24,12 @@
         .app-logo {
             background-repeat: round;
         }
+
+        @@media screen and (max-width: 600px){
+            .hidden-xs{
+                display:none;
+            }
+        }
     </style>
 </head>
 
@@ -90,7 +96,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="d-lg-flex d-xs-none col-lg-5">
+                    <div class="d-lg-flex col-lg-5 hidden-xs">
                         <div class="slider-light">
                             <div class="slick-slider slick-initialized">
                                 <div>
