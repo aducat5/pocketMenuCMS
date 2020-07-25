@@ -28,6 +28,12 @@ namespace PMCMS.PL.Controllers
             ApiResponse response = new ApiResponse();
             User current = Session["user"] as User;
 
+            if (string.IsNullOrEmpty(user.Email))
+            {
+                ViewBag.Response = "E-Posta adresi boş olamaz.";
+                return View(current);
+            }
+
             current.FirstName = user.FirstName;
             current.LastName = user.LastName;
             current.Email = user.Email;
@@ -35,6 +41,7 @@ namespace PMCMS.PL.Controllers
             response.Status = ur.UpdateUser(current, out string result);
             response.Result = result;
 
+            ViewBag.Response = response.Result;
             return View(current);
         }
 
