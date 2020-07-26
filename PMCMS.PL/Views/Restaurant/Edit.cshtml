@@ -1,125 +1,132 @@
 ﻿@model List<Seller>
 @{
     Seller firstSeller = Model.First();
-    ViewBag.Title = "Do you need an edit?";
-    ViewBag.PageDesc = "You can edit the details of your restaurant from this page.";
+    ViewBag.Title = "Düzenleme mi lazım?";
+    ViewBag.PageDesc = "Bu sayfadan restoranınız ile ilgili bilgileri güncelleyebilirsiniz.";
+    ViewBag.PageIcon = "pe-7s-diamond";
 }
-<h2>Edit your restaurant!</h2>
+<h2>Restoranınızı Güncelleyin!</h2>
 <hr />
 <div class="row" id="message"></div>
-<div class="row container">
-    <div class="main-card col-md-5 card" style="height:min-content;">
-        <div class="card-body">
-            <div class="col-md-12">
-                <div class="position-relative form-group">
-                    <label for="restName" class="" style="font-size:large">Name of your restaurant.</label>
-                    <input name="restName" value="@firstSeller.SellerName" required id="restName" placeholder="Example Restaurant..." type="text" class="form-control updater">
-                </div>
-            </div>
-            <div class="col-md-12">
-                <div class="position-relative form-group">
-                    <label for="restDesc" class="" style="font-size:large">Describe your restaurant with a few words.</label>
-                    <textarea class="form-control updater" id="restDesc" placeholder="Example restaurant is a place that you can..."></textarea>
-                </div>
-            </div>
-            <div class="form-row">
-                <div class="col-md-5">
+<div class="row">
+    <div class="col-md-6">
+        <div class="main-card card" style="height:min-content;">
+            <div class="card-body">
+                <div class="col-md-12">
                     <div class="position-relative form-group">
-                        <label for="accentColor" class="" style="font-size:large">Accent Color</label>
-                        <input name="accentColor" id="accentColor" type="color" class="form-control updater" value="#FF5733">
+                        <label for="restName" class="" style="font-size:large">Restoranınızın adı.</label>
+                        <input name="restName" value="@firstSeller.SellerName" required id="restName" placeholder="Example Restaurant..." type="text" class="form-control updater">
                     </div>
                 </div>
-                <div class="col-md-5 offset-2">
+                <div class="col-md-12">
                     <div class="position-relative form-group">
-                        <label for="accentColor" class="" style="font-size:large">Done editing?</label>
-                        <button class="btn btn-success form-control" id="btn-save">
-                            Save Restaurant
-                            <em class="fa fa-check"></em>
-                        </button>
+                        <label for="restDesc" class="" style="font-size:large">Bir/birkaç cümle ile restoranınız.</label>
+                        <textarea class="form-control updater" id="restDesc" placeholder="Example restaurant is a place that you can..."></textarea>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col-md-5">
+                        <div class="position-relative form-group">
+                            <label for="accentColor" class="" style="font-size:large">Restoran Rengi</label>
+                            <input name="accentColor" id="accentColor" type="color" class="form-control updater" value="#FF5733">
+                        </div>
+                    </div>
+                    <div class="col-md-5 offset-2">
+                        <div class="position-relative form-group">
+                            <label for="accentColor" class="" style="font-size:large">Tamamladınız mı?</label>
+                            <button class="btn btn-success form-control" id="btn-save">
+                                Restoranı Kaydet
+                                <em class="fa fa-check"></em>
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="main-card col-md-6 card offset-1" id="preview-card" style="padding:5px;">
-        <div class="card-body">
-            <h3 id="restNamePrev" style="border-bottom:2px solid #EEEEEE; margin-bottom:20px; line-height:2">
-                @firstSeller.SellerName
-            </h3>
-            <div class="menu-section">
-                <div class="section-header-bottomline">
-                    <h4>Main Dishes</h4>
+    <div class="col-md-4 offset-1">
+        <div class="main-card card" id="preview-card" style="padding:5px;">
+            <div class="card-body">
+                <h3 id="restNamePrev" style="border-bottom:2px solid #EEEEEE; margin-bottom:20px; line-height:2">
+                    @firstSeller.SellerName
+                </h3>
+                <div class="menu-section">
+                    <div class="section-header-bottomline">
+                        <h4>Ana Yemekler</h4>
+                    </div>
+                    <ul class="list-group">
+                        <li class="list-group-item menu-product">
+                            <h5 class="list-group-item-heading" style="font-size:18px">
+                                Hamburger
+                                <br />
+                                <sub>25₺</sub>
+                                <em class="fa fa-chevron-right pull-right list-arrow" style="margin:-5px auto auto auto; color:#FF5733; font-size:24px"></em>
+                            </h5>
+                            <div class="card" style="display:none;">
+                                <img src="~/Content/src/assets/images/city.jpg" style="object-fit:cover; width:100%; height:200px; margin-top:5px;" />
+                            </div>
+                        </li>
+                        <li class="list-group-item menu-product">
+                            <h5 class="list-group-item-heading" style="font-size:18px">
+                                Pizza
+                                <br />
+                                <sub>25₺</sub>
+                                <em class="fa fa-chevron-right pull-right list-arrow" style="margin:-5px auto auto auto; color:#FF5733; font-size:24px"></em>
+                            </h5>
+                            <div class="card" style="display:none;">
+                                <img src="~/Content/src/assets/images/city.jpg" style="object-fit:cover; width:100%; height:200px; margin-top:5px;" />
+                            </div>
+                        </li>
+                        <li class="list-group-item menu-product">
+                            <h5 class="list-group-item-heading" style="font-size:18px">
+                                Makarna
+                                <br />
+                                <sub>25₺</sub>
+                                <em class="fa fa-chevron-right pull-right list-arrow" style="margin:-5px auto auto auto; color:#FF5733; font-size:24px"></em>
+                            </h5>
+                            <div class="card" style="display:none;">
+                                <img src="~/Content/src/assets/images/city.jpg" style="object-fit:cover; width:100%; height:200px; margin-top:5px;" />
+                            </div>
+                        </li>
+                    </ul>
                 </div>
-                <ul class="list-group">
-                    <li class="list-group-item menu-product">
-                        <h5 class="list-group-item-heading" style="font-size:18px">
-                            List group item heading
-                            <br />
-                            <sub>25₺</sub>
-                            <em class="fa fa-chevron-right pull-right list-arrow" style="margin:-5px auto auto auto; color:#FF5733; font-size:24px"></em>
-                        </h5>
-                        <div class="card" style="display:none;">
-                            <img src="~/Content/src/assets/images/city.jpg" style="object-fit:cover; width:100%; height:200px; margin-top:5px;" />
-                        </div>
-                    </li>
-                    <li class="list-group-item menu-product">
-                        <h5 class="list-group-item-heading" style="font-size:18px">
-                            List group item heading
-                            <br />
-                            <sub>25₺</sub>
-                            <em class="fa fa-chevron-right pull-right list-arrow" style="margin:-5px auto auto auto; color:#FF5733; font-size:24px"></em>
-                        </h5>
-                        <div class="card" style="display:none;">
-                            <img src="~/Content/src/assets/images/city.jpg" style="object-fit:cover; width:100%; height:200px; margin-top:5px;" />
-                        </div>
-                    </li>
-                    <li class="list-group-item menu-product">
-                        <h5 class="list-group-item-heading" style="font-size:18px">
-                            List group item heading
-                            <br />
-                            <sub>25₺</sub>
-                            <em class="fa fa-chevron-right pull-right list-arrow" style="margin:-5px auto auto auto; color:#FF5733; font-size:24px"></em>
-                        </h5>
-                        <div class="card" style="display:none;">
-                            <img src="~/Content/src/assets/images/city.jpg" style="object-fit:cover; width:100%; height:200px; margin-top:5px;" />
-                        </div>
-                    </li>
-                </ul>
-            </div>
 
-            <div class="menu-section">
-                <div class="section-header-bottomline">
-                    <h4>Drinks</h4>
+                <div class="menu-section">
+                    <div class="section-header-bottomline">
+                        <h4>İçecekler</h4>
+                    </div>
+                    <ul class="list-group">
+                        <li class="list-group-item menu-product">
+                            <h5 class="list-group-item-heading" style="font-size:18px">
+                                Limonata
+                                <br />
+                                <sub>25₺</sub>
+                                <em class="fa fa-chevron-right pull-right list-arrow" style="margin:-5px auto auto auto; color:#FF5733; font-size:24px"></em>
+                            </h5>
+                            <div class="card" style="display:none;">
+                                <img src="~/Content/src/assets/images/city.jpg" style="object-fit:cover; width:100%; height:200px; margin-top:5px;" />
+                            </div>
+                        </li>
+                        <li class="list-group-item menu-product">
+                            <h5 class="list-group-item-heading" style="font-size:18px">
+                                Meşrubat
+                                <br />
+                                <sub>25₺</sub>
+                                <em class="fa fa-chevron-right pull-right list-arrow" style="margin:-5px auto auto auto; color:#FF5733; font-size:24px"></em>
+                            </h5>
+                            <div class="card" style="display:none;">
+                                <img src="~/Content/src/assets/images/city.jpg" style="object-fit:cover; width:100%; height:200px; margin-top:5px;" />
+                            </div>
+                        </li>
+                    </ul>
                 </div>
-                <ul class="list-group">
-                    <li class="list-group-item menu-product">
-                        <h5 class="list-group-item-heading" style="font-size:18px">
-                            List group item heading
-                            <br />
-                            <sub>25₺</sub>
-                            <em class="fa fa-chevron-right pull-right list-arrow" style="margin:-5px auto auto auto; color:#FF5733; font-size:24px"></em>
-                        </h5>
-                        <div class="card" style="display:none;">
-                            <img src="~/Content/src/assets/images/city.jpg" style="object-fit:cover; width:100%; height:200px; margin-top:5px;" />
-                        </div>
-                    </li>
-                    <li class="list-group-item menu-product">
-                        <h5 class="list-group-item-heading" style="font-size:18px">
-                            List group item heading
-                            <br />
-                            <sub>25₺</sub>
-                            <em class="fa fa-chevron-right pull-right list-arrow" style="margin:-5px auto auto auto; color:#FF5733; font-size:24px"></em>
-                        </h5>
-                        <div class="card" style="display:none;">
-                            <img src="~/Content/src/assets/images/city.jpg" style="object-fit:cover; width:100%; height:200px; margin-top:5px;" />
-                        </div>
-                    </li>
-                </ul>
+
             </div>
 
         </div>
-
     </div>
+
+
 </div>
 
 @section scripts{
@@ -217,9 +224,9 @@
 
             updatePreview();
         };
-        
+
         var render = function () {
-            
+
             var restName = document.getElementById("restName");
             var restDesc = document.getElementById("restDesc");
             var accentColor = document.getElementById("accentColor");

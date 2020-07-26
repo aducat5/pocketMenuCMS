@@ -1,6 +1,7 @@
 ﻿@{
-    ViewBag.Title = "Welcome to the PocketMenu";
-    ViewBag.PageDesc = "Firstly, you need to set some information about your restaurant.";
+    ViewBag.Title = "PocketMenu'ye Hoşgeldiniz!";
+    ViewBag.PageDesc = "Öncelikle restoranınla ilgili bazı bilgileri ayarlamanız gerekiyor.";
+    ViewBag.PageIcon = "pe-7s-diamond";
 }
 <h2>New Restaurant!</h2>
 <hr />
@@ -10,14 +11,14 @@
         <div class="card-body">
             <div class="col-md-12">
                 <div class="position-relative form-group">
-                    <label for="restName" class="" style="font-size:large">Name of your restaurant.</label>
-                    <input name="restName" value="Restaurant Name" required id="restName" placeholder="Example Restaurant..." type="text" class="form-control updater">
+                    <label for="restName" class="" style="font-size:large">Restoranınızın adı neydi?.</label>
+                    <input name="restName" value="Restaurant Name" required id="restName" placeholder="Örnek Restoran..." type="text" class="form-control updater">
                 </div>
             </div>
             <div class="col-md-12">
                 <div class="position-relative form-group">
-                    <label for="restDesc" class="" style="font-size:large">Describe your restaurant with a few words.</label>
-                    <textarea class="form-control updater" id="restDesc" placeholder="Example restaurant is a place that you can..."></textarea>
+                    <label for="restDesc" class="" style="font-size:large">Bir/birkaç cümle ile restoranınız nasıl bir yer?</label>
+                    <textarea class="form-control updater" id="restDesc" placeholder="Örnek restoranın size sunacağı deneyim..."></textarea>
                 </div>
             </div>
             <div class="form-row">
@@ -29,15 +30,15 @@
                 </div>*@
                 <div class="col-md-5">
                     <div class="position-relative form-group">
-                        <label for="accentColor" class="" style="font-size:large">Accent Color</label>
+                        <label for="accentColor" class="" style="font-size:large">Restoran Rengi</label>
                         <input name="accentColor" id="accentColor" type="color" class="form-control updater" value="#FF5733">
                     </div>
                 </div>
                 <div class="col-md-5 offset-2">
                     <div class="position-relative form-group">
-                        <label for="accentColor" class="">There will be a map soon.</label>
+                        <label for="accentColor" class="">Tamamladınız mı?</label>
                         <button class="btn btn-success form-control" id="btn-save">
-                            Save Restaurant
+                            Restoranı Kaydet
                             <em class="fa fa-check"></em>
                         </button>
                     </div>
@@ -48,16 +49,16 @@
     <div class="main-card col-md-6 card offset-1" id="preview-card" style="padding:5px;">
         <div class="card-body">
             <h3 id="restNamePrev" style="border-bottom:2px solid #EEEEEE; margin-bottom:20px; line-height:2">
-                Restaurant Name
+                Restoran Adı
             </h3>
             <div class="menu-section">
                 <div class="section-header-bottomline">
-                    <h4>Main Dishes</h4>
+                    <h4>Ana Yemekler</h4>
                 </div>
                 <ul class="list-group">
                     <li class="list-group-item menu-product">
                         <h5 class="list-group-item-heading" style="font-size:18px">
-                            List group item heading
+                            Hamburger
                             <br />
                             <sub>25₺</sub>
                             <em class="fa fa-chevron-right pull-right list-arrow" style="margin:-5px auto auto auto; color:#FF5733; font-size:24px"></em>
@@ -68,7 +69,7 @@
                     </li>
                     <li class="list-group-item menu-product">
                         <h5 class="list-group-item-heading" style="font-size:18px">
-                            List group item heading
+                            Pizza
                             <br />
                             <sub>25₺</sub>
                             <em class="fa fa-chevron-right pull-right list-arrow" style="margin:-5px auto auto auto; color:#FF5733; font-size:24px"></em>
@@ -79,7 +80,7 @@
                     </li>
                     <li class="list-group-item menu-product">
                         <h5 class="list-group-item-heading" style="font-size:18px">
-                            List group item heading
+                            Makarna
                             <br />
                             <sub>25₺</sub>
                             <em class="fa fa-chevron-right pull-right list-arrow" style="margin:-5px auto auto auto; color:#FF5733; font-size:24px"></em>
@@ -93,12 +94,12 @@
             
             <div class="menu-section">
                 <div class="section-header-bottomline">
-                    <h4>Drinks</h4>
+                    <h4>İçecekler</h4>
                 </div>
                 <ul class="list-group">
                     <li class="list-group-item menu-product">
                         <h5 class="list-group-item-heading" style="font-size:18px">
-                            List group item heading
+                            Limonata
                             <br />
                             <sub>25₺</sub>
                             <em class="fa fa-chevron-right pull-right list-arrow" style="margin:-5px auto auto auto; color:#FF5733; font-size:24px"></em>
@@ -109,7 +110,7 @@
                     </li>
                     <li class="list-group-item menu-product">
                         <h5 class="list-group-item-heading" style="font-size:18px">
-                            List group item heading
+                            Meşrubat
                             <br />
                             <sub>25₺</sub>
                             <em class="fa fa-chevron-right pull-right list-arrow" style="margin:-5px auto auto auto; color:#FF5733; font-size:24px"></em>

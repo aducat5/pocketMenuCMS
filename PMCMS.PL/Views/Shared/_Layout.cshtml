@@ -170,26 +170,26 @@
                                     <li>
                                         <a href="@Url.Action("Build", "Menu")">
                                             <i class="metismenu-icon"></i>
-                                            Meni Aracı
+                                            Menü Aracı
                                         </a>
                                     </li>
                                 </ul>
                             </li>
                             <li>
-                                <a href="#" class="@{if (ViewBag.Title == "Do you need an edit?" || ViewBag.Title == "Get QrCode for your restaurant") { @activeClass} }">
+                                <a href="#" class="@{if (ViewBag.Title == "Düzenleme mi lazım?" || ViewBag.Title == "Get QrCode for your restaurant") { @activeClass} }">
                                     <i class="metismenu-icon pe-7s-diamond"></i>
                                     Restoran Yönetimi
                                     <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
                                 </a>
                                 <ul>
                                     <li>
-                                        <a href="@Url.Action("Edit", "Restaurant")">
+                                        <a href="@Url.Action("Edit", "Restaurant")" class="@{if (ViewBag.Title == "Düzenleme mi lazım?") { @activeClass} }">
                                             <i class="metismenu-icon"></i>
                                             Restoranı Düzenle
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="@Url.Action("GetQr", "Restaurant")">
+                                        <a href="@Url.Action("GetQr", "Restaurant")" class="@{if (ViewBag.Title == "Get QrCode for your restaurant") { @activeClass} }">
                                             <i class="metismenu-icon"></i>
                                             Kare Kod Oluştur
                                         </a>
