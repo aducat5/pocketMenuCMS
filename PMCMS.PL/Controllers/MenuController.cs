@@ -17,6 +17,16 @@ namespace PMCMS.PL.Controllers
 
         public ActionResult Display(int id)
         {
+            if (id == 1)
+            {
+                string fileName = "etcetera.pdf";
+                string filePath = Server.MapPath("~/Content/src/assets/docs/" + fileName);
+                string mimeType = MimeMapping.GetMimeMapping(filePath);
+
+                byte[] stream = System.IO.File.ReadAllBytes(filePath);
+                return File(stream, mimeType);
+            }
+
             string machine = HttpContext.Request.UserAgent;
             string ip = HttpContext.Request.UserHostAddress;
             string logMessage = string.Format("{0}|{1}", machine, ip);
